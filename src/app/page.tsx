@@ -38,7 +38,7 @@ export default function Home() {
           <p style={{ fontSize: '1.125rem', color: '#bac4e0', maxWidth: '500px', margin: '0 auto 1rem', lineHeight: 1.7 }}>
             See how AI skills connect. Build verified workflows. Share with the world.
           </p>
-          <p style={{ fontSize: '0.875rem', color: '#8ab4e0', marginBottom: '2.5rem', fontStyle: 'italic' }}>
+          <p style={{ fontSize: '0.875rem', color: '#8ab4e0', marginBottom: '2.5rem' }}>
             Skills are ingredients · Runes are recipes · Graph is the map
           </p>
 
@@ -116,7 +116,7 @@ export default function Home() {
               ))}
             </div>
 
-            <p style={{ color: '#7c86b8', fontSize: '0.875rem', marginTop: '1.5rem', marginBottom: 0, fontStyle: 'italic' }}>
+            <p style={{ color: '#7c86b8', fontSize: '0.875rem', marginTop: '1.5rem', marginBottom: 0 }}>
               Think npm for AI workflows — but every package is security-verified.
             </p>
           </div>

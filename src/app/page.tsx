@@ -47,13 +47,13 @@ export default function Home() {
           }}>
             Explore Runes →
           </Link>
-          <Link href="/graph" style={{
+          <Link href="/skills" style={{
             padding: '0.8rem 2rem', background: 'transparent',
             color: '#bb9af7', border: '1px solid rgba(187,154,247,0.4)',
             borderRadius: '8px', textDecoration: 'none', fontWeight: 600,
-            fontSize: '0.95rem', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+            fontSize: '0.95rem', fontFamily: "'JetBrains Mono', monospace",
           }}>
-            View Graph
+            Browse Skills
           </Link>
         </div>
       </section>
@@ -110,10 +110,10 @@ export default function Home() {
 
       {/* ── CTA ── */}
       <section style={{ textAlign: 'center', padding: '4rem 2rem', borderTop: '1px solid #1f2335' }}>
-        <h2 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#c0caf5', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif" }}>Explore the Skill Graph</h2>
-        <p style={{ color: '#7982a9', marginBottom: '2rem', fontSize: '0.9rem' }}>See how {FULL_GRAPH.nodes.length} skills connect across {RUNES.length} Runes</p>
-        <Link href="/graph" style={{ padding: '0.75rem 2rem', background: 'rgba(187,154,247,0.12)', color: '#bb9af7', border: '1px solid rgba(187,154,247,0.35)', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>
-          Open Graph Explorer →
+        <h2 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#c0caf5', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif" }}>Browse the Skills Registry</h2>
+        <p style={{ color: '#7982a9', marginBottom: '2rem', fontSize: '0.9rem' }}>{FULL_GRAPH.nodes.length} real-world skills powering {RUNES.length} Runes</p>
+        <Link href="/skills" style={{ padding: '0.75rem 2rem', background: 'rgba(187,154,247,0.12)', color: '#bb9af7', border: '1px solid rgba(187,154,247,0.35)', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>
+          View All Skills →
         </Link>
       </section>
     </div>

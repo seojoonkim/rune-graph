@@ -21,16 +21,42 @@ export function Navbar() {
       boxShadow: '0 1px 0 #16161e, 0 4px 20px rgba(0,0,0,0.4)',
     }}>
       {/* Logo */}
-      <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
-        <span style={{ fontSize: '1.3rem', animation: 'float 4s ease-in-out infinite' }}>🔮</span>
+      <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', textDecoration: 'none' }}>
+        {/* RuneGraph SVG mark: hexagon + inner graph nodes */}
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="rg-grad" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#c9a8ff"/>
+              <stop offset="100%" stopColor="#8ab4ff"/>
+            </linearGradient>
+          </defs>
+          {/* Hexagon outline */}
+          <polygon
+            points="13,1.5 22.6,7 22.6,19 13,24.5 3.4,19 3.4,7"
+            stroke="url(#rg-grad)" strokeWidth="1.4" fill="none" strokeLinejoin="round"
+          />
+          {/* Inner cross lines (graph / rune feel) */}
+          <line x1="13" y1="1.5"  x2="13" y2="24.5" stroke="#c9a8ff" strokeWidth="0.8" opacity="0.3"/>
+          <line x1="3.4" y1="7"   x2="22.6" y2="19" stroke="#c9a8ff" strokeWidth="0.8" opacity="0.3"/>
+          <line x1="22.6" y1="7"  x2="3.4"  y2="19" stroke="#c9a8ff" strokeWidth="0.8" opacity="0.3"/>
+          {/* Center node */}
+          <circle cx="13" cy="13" r="2.2" fill="url(#rg-grad)"/>
+          {/* Corner nodes */}
+          <circle cx="13"   cy="1.5"  r="1.2" fill="#c9a8ff" opacity="0.7"/>
+          <circle cx="22.6" cy="7"    r="1.2" fill="#8ab4ff" opacity="0.7"/>
+          <circle cx="22.6" cy="19"   r="1.2" fill="#8ab4ff" opacity="0.7"/>
+          <circle cx="13"   cy="24.5" r="1.2" fill="#c9a8ff" opacity="0.7"/>
+          <circle cx="3.4"  cy="19"   r="1.2" fill="#c9a8ff" opacity="0.7"/>
+          <circle cx="3.4"  cy="7"    r="1.2" fill="#c9a8ff" opacity="0.7"/>
+        </svg>
         <span style={{
           fontFamily: "'Cinzel', serif",
           fontWeight: 700,
-          color: '#bb9af7',
-          fontSize: '1.1rem',
-          letterSpacing: '0.12em',
+          color: '#c9a8ff',
+          fontSize: '1.05rem',
+          letterSpacing: '0.14em',
           textTransform: 'uppercase',
-          textShadow: '0 0 20px rgba(187,154,247,0.4)',
+          textShadow: '0 0 18px rgba(201,168,255,0.35)',
         }}>RuneGraph</span>
       </Link>
 

@@ -33,7 +33,7 @@ const byCategory = {
 
 export default function SkillsPage() {
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '3rem 2rem' }}>
+    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '3rem 2rem' }}>
       {/* Header */}
       <div style={{ marginBottom: '2.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>

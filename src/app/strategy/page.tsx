@@ -1,47 +1,81 @@
 export default function StrategyPage() {
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#E2E2E8', marginBottom: '0.5rem' }}>RuneGraph Strategy</h1>
-        <p style={{ color: '#888', marginTop: 0, lineHeight: 1.6 }}>
-          실행 가능한 AI 오케스트레이션을 위한 제품 설계, 커뮤니티 확산, 기술 성장의 3축 전략을 정리합니다.
+    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
+      <div style={{ marginBottom: '2.5rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#E2E2E8', marginBottom: '0.5rem', fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>
+          RuneGraph Strategy
+        </h1>
+        <p style={{ color: '#777', marginTop: 0, lineHeight: 1.7, fontSize: '1rem' }}>
+          A three-axis strategy for product design, community growth, and technical excellence in AI skill orchestration.
         </p>
       </div>
 
-      <section style={{ marginBottom: '1.25rem', background: '#13131A', border: '1px solid #2A2A35', borderRadius: '12px', padding: '1rem' }}>
-        <h2 style={{ color: '#E2E2E8', marginTop: 0 }}>1) Product Strategy</h2>
-        <ul style={{ paddingLeft: '1.2rem', color: '#999', lineHeight: 1.8, marginTop: '0.75rem' }}>
-          <li>런타임보다 그래프 탐색을 먼저 완성해, 사용자가 스킬 간 관계를 직관적으로 이해하도록 설계한다.</li>
-          <li>단일 Rune 템플릿을 공개하고, 실제 사용 사례(이메일, 리서치, 콘텐츠, 인프라 알림) 중심으로 확장한다.</li>
-          <li>그래프 편집기 이전에 "읽기 좋은 보기"와 "복사해 쓰기 좋은 문서"를 함께 제공한다.</li>
-        </ul>
-      </section>
+      {[
+        {
+          title: '1) Product Strategy',
+          items: [
+            'Build the graph explorer before the runtime — let users understand skill relationships intuitively before writing a single line of YAML.',
+            'Launch single Rune templates first, expanding through real-world use cases: email triage, research automation, content generation, infra alerts.',
+            'Provide "easy to read" views and "easy to copy" documentation alongside the graph editor — lower the barrier to first use.',
+          ],
+        },
+        {
+          title: '2) Go-to-Market Strategy',
+          items: [
+            'Maintain open-source principles while offering deployable real-world templates and certified stack guides developers can trust.',
+            'Become the shared language between developers, product teams, and ops — standardize the node dictionary (input/process/output) across all roles.',
+            'Operate an official template registry with search, categorization, and community ratings to surface the highest-quality Runes.',
+          ],
+        },
+        {
+          title: '3) Technical Strategy',
+          items: [
+            'Extend skill schemas to standard JSON-LD format to ensure interoperability across LLMs, APIs, and event schemas.',
+            'Connect execution traces (meta logs) with graph version history to strengthen debugging and audit capabilities.',
+            'Eliminate dark patterns by explicitly documenting each skill\'s responsibilities, input/output contracts, failure modes, and cost estimates.',
+          ],
+        },
+        {
+          title: '4) Community & Ecosystem',
+          items: [
+            'Founding Smiths program — first 100 contributors receive Rune Lord status, permanent recognition, and governance voting rights.',
+            'Mana Points economy — earn MP through skill reviews, Rune publishing, bug reports, and community contributions.',
+            'Monthly Rune Forge challenges — themed community sprints to build and verify Runes in specific domains.',
+          ],
+        },
+      ].map((section, i) => (
+        <section key={i} style={{ marginBottom: '1.25rem', background: '#13131A', border: '1px solid #2A2A35', borderRadius: '12px', padding: '1.25rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+          {/* Corner brackets */}
+          <div style={{ position: 'absolute', top: 6, left: 6, width: 10, height: 10, borderTop: '1.5px solid #8B5CF6', borderLeft: '1.5px solid #8B5CF6', opacity: 0.4 }} />
+          <div style={{ position: 'absolute', top: 6, right: 6, width: 10, height: 10, borderTop: '1.5px solid #8B5CF6', borderRight: '1.5px solid #8B5CF6', opacity: 0.4 }} />
+          <h2 style={{ color: '#E2E2E8', marginTop: 0, fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.03em' }}>{section.title}</h2>
+          <ul style={{ paddingLeft: '1.25rem', color: '#888', lineHeight: 1.85, marginTop: '0.75rem', marginBottom: 0 }}>
+            {section.items.map((item, j) => (
+              <li key={j} style={{ marginBottom: '0.4rem', fontSize: '0.95rem' }}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ))}
 
-      <section style={{ marginBottom: '1.25rem', background: '#13131A', border: '1px solid #2A2A35', borderRadius: '12px', padding: '1rem' }}>
-        <h2 style={{ color: '#E2E2E8', marginTop: 0 }}>2) Go-to-Market Strategy</h2>
-        <ul style={{ paddingLeft: '1.2rem', color: '#999', lineHeight: 1.8, marginTop: '0.75rem' }}>
-          <li>오픈소스 철학을 유지하되, 배포 가능한 실사용 템플릿과 인증된 스택 가이드를 제공한다.</li>
-          <li>개발자-제품팀-운영팀 공통 언어가 되도록 노드(입력/처리/출력) 사전을 단일화한다.</li>
-          <li>공식 템플릿 레지스트리를 운영하여 검색/분류/별점 기반으로 우선순위를 만든다.</li>
-        </ul>
-      </section>
-
-      <section style={{ marginBottom: '1.25rem', background: '#13131A', border: '1px solid #2A2A35', borderRadius: '12px', padding: '1rem' }}>
-        <h2 style={{ color: '#E2E2E8', marginTop: 0 }}>3) Technical Strategy</h2>
-        <ul style={{ paddingLeft: '1.2rem', color: '#999', lineHeight: 1.8, marginTop: '0.75rem' }}>
-          <li>스킬 스키마를 표준 JSON-LD 형태로 확장해 LLM, API, 이벤트 스키마의 상호운용성을 확보한다.</li>
-          <li>실행 트레이스(메타 로그)와 그래프 버전 히스토리를 연결해 디버깅/감사를 강화한다.</li>
-          <li>다크 패턴을 없애기 위해 각 스킬의 책임, 입출력, 장애 모드, 비용 추정치를 명시한다.</li>
-        </ul>
-      </section>
-
-      <section style={{ background: '#13131A', border: '1px solid #2A2A35', borderRadius: '12px', padding: '1rem' }}>
-        <h2 style={{ color: '#E2E2E8', marginTop: 0 }}>Roadmap (90일)</h2>
-        <p style={{ color: '#999', lineHeight: 1.7 }}>
-          Q1: 검색/필터와 사용성 개선, 스킬 태깅 품질 향상<br />
-          Q2: Graph 버전관리, 임포트/익스포트, Team Collaboration<br />
-          Q3: 런북 자동 생성기 + 실행 로그 뷰어 + 템플릿 검증 파이프라인
-        </p>
+      {/* Roadmap */}
+      <section style={{ background: '#13131A', border: '1px solid #2A2A35', borderRadius: '12px', padding: '1.25rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: 6, left: 6, width: 10, height: 10, borderTop: '1.5px solid #F59E0B', borderLeft: '1.5px solid #F59E0B', opacity: 0.4 }} />
+        <div style={{ position: 'absolute', top: 6, right: 6, width: 10, height: 10, borderTop: '1.5px solid #F59E0B', borderRight: '1.5px solid #F59E0B', opacity: 0.4 }} />
+        <h2 style={{ color: '#E2E2E8', marginTop: 0, fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.03em' }}>Roadmap (90 Days)</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '0.75rem' }}>
+          {[
+            { q: 'Q1', color: '#3B82F6', items: ['Search & filter UX', 'Skill tag quality', 'Trust Score v1'] },
+            { q: 'Q2', color: '#8B5CF6', items: ['Graph versioning', 'Import / Export', 'Team collaboration'] },
+            { q: 'Q3', color: '#F59E0B', items: ['Runbook generator', 'Execution log viewer', 'Template validation pipeline'] },
+          ].map(({ q, color, items }) => (
+            <div key={q} style={{ background: '#0F0F15', border: `1px solid ${color}30`, borderRadius: '8px', padding: '1rem' }}>
+              <div style={{ color, fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.6rem', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em' }}>{q}</div>
+              <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#777', fontSize: '0.875rem', lineHeight: 1.7 }}>
+                {items.map(it => <li key={it}>{it}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   )

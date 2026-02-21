@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* ── What is a Rune? ── */}
-      <section style={{ maxWidth: '900px', margin: '0 auto', padding: '5rem 2rem' }}>
+      <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
         <p style={{ textAlign: 'center', fontSize: '0.7rem', color: '#8B5CF6', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: "'Rajdhani', sans-serif" }}>The Core Concept</p>
         <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#E2E2E8', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>What is a Rune?</h2>
         <p style={{ textAlign: 'center', color: '#666', fontSize: '0.9rem', maxWidth: '520px', margin: '0 auto 3rem', lineHeight: 1.7 }}>
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* ── Featured Runes ── */}
-      <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem 5rem' }}>
+      <section style={{ maxWidth: '1300px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#E2E2E8', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Featured Runes</h2>
           <Link href="/runes" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: '0.82rem', fontFamily: "'Rajdhani', sans-serif" }}>View all {RUNES.length} →</Link>

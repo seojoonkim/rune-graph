@@ -41,7 +41,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
   if (!rune) notFound()
 
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
+    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
       {/* Back */}
       <Link href="/runes" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: '0.9rem', fontFamily: "'Rajdhani', sans-serif" }}>← Runes</Link>
 

@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const links = [
-  { href: '/runes',    label: '⚔ Runes' },
-  { href: '/skills',   label: '📦 Skills' },
-  { href: '/strategy', label: '📜 Strategy' },
+  { href: '/runes',    label: 'Runes' },
+  { href: '/skills',   label: 'Skills' },
+  { href: '/strategy', label: 'Strategy' },
 ]
 
 export function Navbar() {

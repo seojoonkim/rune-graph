@@ -104,7 +104,7 @@ export default function Home() {
           <Link href="/runes" style={{ color: '#bb9af7', textDecoration: 'none', fontSize: '0.82rem', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>View all {RUNES.length} →</Link>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
-          {RUNES.slice(0, 6).map(r => <RuneCard key={r.id} rune={r} />)}
+          {RUNES.slice(0, 12).map(r => <RuneCard key={r.id} rune={r} />)}
         </div>
       </section>
 

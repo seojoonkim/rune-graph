@@ -3,9 +3,8 @@ import { notFound } from 'next/navigation'
 import { SKILLS_REGISTRY } from '@/data/skills-registry'
 import { RUNES } from '@/data/runes'
 import OverallScoreCard from '@/components/OverallScoreCard'
-import SafetyDetailPanel from '@/components/SafetyDetailPanel'
 import { StatBar } from '@/components/StatBar'
-import { getOverallScore, getSafetyReasons, getSafetyScore, safetyColor, safetyLabel } from '@/lib/safety'
+import { getOverallScore, getSafetyReasons, getSafetyScore, safetyColor } from '@/lib/safety'
 
 type Params = Promise<{ id: string }>
 
@@ -50,9 +49,6 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
   if (!skill) notFound()
 
   const color = CAT_COLORS[skill.category] || '#bb9af7'
-  const safety = getSafetyScore(skill)
-  const sColor = safetyColor(safety.total)
-  const sLabel = safetyLabel(safety.total)
   const usedInRunes = RUNES.filter(r => r.nodes.some(n => n.id === skill.id))
   const overall = getOverallScore(skill, usedInRunes.length)
   const reasons = getSafetyReasons(skill)
@@ -84,10 +80,6 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '0.68rem', padding: '2px 10px', borderRadius: '4px', background: `${color}15`, color, border: `1px solid ${color}35`, fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{skill.category}</span>
               <span style={{ fontSize: '0.68rem', color: '#7c86b8', fontFamily: "'JetBrains Mono', monospace" }}>{skill.service}</span>
-              {/* Safety badge */}
-              <span style={{ fontSize: '0.68rem', padding: '2px 10px', borderRadius: '4px', background: `${sColor}15`, color: sColor, border: `1px solid ${sColor}35`, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
-                🛡 {sLabel} {safety.total}
-              </span>
             </div>
             <h1 style={{ margin: '0 0 0.4rem', fontSize: '1.75rem', color: '#c0caf5', fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', fontWeight: 700 }}>{skill.label}</h1>
             <p style={{ margin: 0, fontSize: '0.65rem', color: '#7c86b8', fontFamily: "'JetBrains Mono', monospace" }}>{skill.id}</p>
@@ -198,8 +190,7 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
 
         {/* Right col: Overall + Safety + Quick Facts */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <OverallScoreCard overall={overall} />
-          <SafetyDetailPanel safety={safety} reasons={reasons} sColor={sColor} sLabel={sLabel} />
+          <OverallScoreCard overall={overall} reasons={reasons} />
 
           {/* Quick facts */}
           <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem' }}>

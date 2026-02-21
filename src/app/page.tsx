@@ -18,7 +18,7 @@ export default function Home() {
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         {/* Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.3)', borderRadius: '100px', padding: '0.35rem 1.1rem', fontSize: '0.78rem', color: '#8B5CF6', marginBottom: '2rem', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.3)', borderRadius: '100px', padding: '0.35rem 1.1rem', fontSize: '0.78rem', color: '#8B5CF6', marginBottom: '2rem', fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.05em' }}>
           🔮 Open Source · Free Forever
         </div>
 
@@ -32,7 +32,7 @@ export default function Home() {
         <p style={{ fontSize: '1.1rem', color: '#777', maxWidth: '500px', margin: '0 auto 1rem', lineHeight: 1.7 }}>
           See how AI skills connect. Build verified workflows. Share with the world.
         </p>
-        <p style={{ fontSize: '0.85rem', color: '#444', marginBottom: '2.5rem', fontFamily: "'JetBrains Mono', monospace", fontStyle: 'italic' }}>
+        <p style={{ fontSize: '0.85rem', color: '#444', marginBottom: '2.5rem', fontFamily: "'Rajdhani', sans-serif", fontStyle: 'italic' }}>
           Skills are ingredients · Runes are recipes · Graph is the map
         </p>
 
@@ -51,7 +51,7 @@ export default function Home() {
             padding: '0.8rem 2rem', background: 'transparent',
             color: '#8B5CF6', border: '1px solid rgba(139,92,246,0.4)',
             borderRadius: '8px', textDecoration: 'none', fontWeight: 600,
-            fontSize: '0.95rem', fontFamily: "'JetBrains Mono', monospace",
+            fontSize: '0.95rem', fontFamily: "'Rajdhani', sans-serif",
           }}>
             View Graph
           </Link>
@@ -63,14 +63,14 @@ export default function Home() {
         {stats.map(s => (
           <div key={s.label} style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '2rem', fontWeight: 800, color: '#8B5CF6', fontFamily: "'Cinzel', serif" }}>{s.value}</div>
-            <div style={{ fontSize: '0.7rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.12em', fontFamily: "'JetBrains Mono', monospace", marginTop: '0.25rem' }}>{s.label}</div>
+            <div style={{ fontSize: '0.7rem', color: '#555', textTransform: 'uppercase', letterSpacing: '0.12em', fontFamily: "'Rajdhani', sans-serif", marginTop: '0.25rem' }}>{s.label}</div>
           </div>
         ))}
       </section>
 
       {/* ── What is a Rune? ── */}
       <section style={{ maxWidth: '900px', margin: '0 auto', padding: '5rem 2rem' }}>
-        <p style={{ textAlign: 'center', fontSize: '0.7rem', color: '#8B5CF6', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: "'JetBrains Mono', monospace" }}>The Core Concept</p>
+        <p style={{ textAlign: 'center', fontSize: '0.7rem', color: '#8B5CF6', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: "'Rajdhani', sans-serif" }}>The Core Concept</p>
         <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#E2E2E8', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>What is a Rune?</h2>
         <p style={{ textAlign: 'center', color: '#666', fontSize: '0.9rem', maxWidth: '520px', margin: '0 auto 3rem', lineHeight: 1.7 }}>
           A Rune is a verified, composable AI workflow — a recipe that chains multiple skills into one reliable, repeatable action.
@@ -85,14 +85,14 @@ export default function Home() {
           ].map(item => (
             <div key={item.label} style={{ background: '#0D0D15', padding: '2rem 1.75rem' }}>
               <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{item.emoji}</div>
-              <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', color: item.accent, textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{item.label}</div>
+              <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', color: item.accent, textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700, fontFamily: "'Rajdhani', sans-serif" }}>{item.label}</div>
               <div style={{ fontSize: '1rem', fontWeight: 700, color: '#E2E2E8', marginBottom: '0.6rem', fontFamily: "'Cinzel', serif" }}>{item.title}</div>
               <p style={{ color: '#555', fontSize: '0.82rem', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
             </div>
           ))}
         </div>
 
-        <p style={{ textAlign: 'center', color: '#333', fontSize: '0.78rem', marginTop: '2rem', fontStyle: 'italic', fontFamily: "'JetBrains Mono', monospace" }}>
+        <p style={{ textAlign: 'center', color: '#333', fontSize: '0.78rem', marginTop: '2rem', fontStyle: 'italic', fontFamily: "'Rajdhani', sans-serif" }}>
           Think npm for AI workflows — but every package is security-verified before it ships.
         </p>
       </section>
@@ -101,7 +101,7 @@ export default function Home() {
       <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#E2E2E8', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Featured Runes</h2>
-          <Link href="/runes" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: '0.82rem', fontFamily: "'JetBrains Mono', monospace" }}>View all {RUNES.length} →</Link>
+          <Link href="/runes" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: '0.82rem', fontFamily: "'Rajdhani', sans-serif" }}>View all {RUNES.length} →</Link>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
           {RUNES.slice(0, 6).map(r => <RuneCard key={r.id} rune={r} />)}

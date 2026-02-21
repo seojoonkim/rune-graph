@@ -53,7 +53,7 @@ export default function SkillsPage() {
             borderRadius: '10px', background: '#13131A', padding: '1rem',
             boxShadow: `0 0 12px ${CAT_COLORS[cat]}0A`,
           }}>
-            <div style={{ color: CAT_COLORS[cat], fontWeight: 700, fontSize: '0.85rem', fontFamily: "'JetBrains Mono', monospace", marginBottom: '0.5rem' }}>
+            <div style={{ color: CAT_COLORS[cat], fontWeight: 700, fontSize: '0.85rem', fontFamily: "'Rajdhani', sans-serif", marginBottom: '0.5rem' }}>
               {CAT_LABELS[cat]}
             </div>
             <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#E2E2E8' }}>{byCategory[cat].length}</div>
@@ -67,7 +67,7 @@ export default function SkillsPage() {
         <section key={cat} style={{ marginBottom: '2.5rem' }}>
           <h2 style={{
             fontSize: '0.8rem', color: CAT_COLORS[cat], textTransform: 'uppercase',
-            letterSpacing: '0.12em', fontFamily: "'JetBrains Mono', monospace",
+            letterSpacing: '0.12em', fontFamily: "'Rajdhani', sans-serif",
             margin: '0 0 1rem', padding: '0.4rem 0', borderBottom: `1px solid ${CAT_COLORS[cat]}25`,
           }}>{CAT_LABELS[cat]} — {byCategory[cat].length} skills</h2>
 

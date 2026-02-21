@@ -122,61 +122,105 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Live Example Pipeline ── */}
+        {/* ── Live Example: Deep Research ── */}
         <div style={{ marginTop: '3.5rem', background: '#16161e', border: '1px solid #2e3452', borderRadius: '14px', padding: '1.75rem 2rem' }}>
           {/* Header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.75rem', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.75rem', color: '#c9a8ff', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>Live Example</span>
             <span style={{ color: '#2e3452' }}>·</span>
-            <span style={{ fontSize: '1rem', color: '#e2e8ff', fontWeight: 700, fontFamily: "'Cinzel', serif" }}>☀ Morning Brief</span>
-            <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#a8d878', background: 'rgba(168,216,120,0.08)', border: '1px solid rgba(168,216,120,0.25)', padding: '2px 10px', borderRadius: '20px', flexShrink: 0 }}>
-              Trust Score 87
-            </span>
+            <span style={{ fontSize: '1rem', color: '#e2e8ff', fontWeight: 700, fontFamily: "'Cinzel', serif" }}>🔬 Deep Research</span>
+            <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+              <span style={{ fontSize: '0.75rem', color: '#a8d878', background: 'rgba(168,216,120,0.08)', border: '1px solid rgba(168,216,120,0.25)', padding: '2px 10px', borderRadius: '20px' }}>Trust Score 91</span>
+              <span style={{ fontSize: '0.75rem', color: '#9aa4d2', background: 'rgba(154,164,210,0.08)', border: '1px solid rgba(154,164,210,0.2)', padding: '2px 10px', borderRadius: '20px' }}>7 skills</span>
+            </div>
           </div>
 
-          {/* Pipeline */}
-          <div style={{ display: 'flex', alignItems: 'stretch', gap: '0', overflowX: 'auto', paddingBottom: '0.25rem' }}>
-            {[
-              { icon: '📧', name: 'Gmail Fetch',     service: 'Gmail',   cat: 'INPUT',  color: '#8ab4ff', desc: 'Fetch unread emails from last 24h' },
-              { icon: '🧠', name: 'LLM Summarize',   service: 'Claude',  cat: 'LLM',    color: '#c9a8ff', desc: 'Extract key threads & action items' },
-              { icon: '📊', name: 'Sheets Log',       service: 'G Sheets',cat: 'API',    color: '#a8d878', desc: 'Append daily summary to tracker' },
-              { icon: '💬', name: 'Slack Notify',     service: 'Slack',   cat: 'OUTPUT', color: '#ffb07a', desc: 'Post briefing to #daily channel' },
-            ].map((node, i, arr) => (
-              <div key={node.name} style={{ display: 'flex', alignItems: 'center', flex: i < arr.length - 1 ? '1 1 auto' : undefined }}>
-                {/* Node card */}
-                <div style={{
-                  background: '#1e2030',
-                  border: `1px solid ${node.color}30`,
-                  borderRadius: '10px',
-                  padding: '1rem 1.1rem',
-                  minWidth: '140px',
-                  boxShadow: `0 0 18px ${node.color}10`,
-                  flexShrink: 0,
-                }}>
-                  <div style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{node.icon}</div>
-                  <div style={{ fontSize: '0.875rem', color: '#e2e8ff', fontWeight: 700, marginBottom: '0.2rem' }}>{node.name}</div>
-                  <div style={{ fontSize: '0.68rem', color: node.color, textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{node.cat}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#9aa4d2', lineHeight: 1.4 }}>{node.desc}</div>
-                  {/* Service badge */}
-                  <div style={{ marginTop: '0.6rem', display: 'inline-block', fontSize: '0.65rem', color: node.color, background: `${node.color}10`, border: `1px solid ${node.color}25`, padding: '1px 7px', borderRadius: '4px', fontFamily: "'JetBrains Mono', monospace" }}>
-                    {node.service}
-                  </div>
-                </div>
+          {/* SVG Graph */}
+          <div style={{ overflowX: 'auto' }}>
+            <svg width="800" height="490" viewBox="0 0 800 490" style={{ width: '100%', maxWidth: '800px', height: 'auto', display: 'block', margin: '0 auto' }}>
+              <defs>
+                <marker id="arr-blue"   markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#8ab4ff" opacity="0.7"/></marker>
+                <marker id="arr-green"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#a8d878" opacity="0.7"/></marker>
+                <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c9a8ff" opacity="0.7"/></marker>
+                <filter id="glow-purple"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
 
-                {/* Arrow connector (between nodes) */}
-                {i < arr.length - 1 && (
-                  <div style={{ flex: 1, minWidth: '2rem', maxWidth: '3.5rem', display: 'flex', alignItems: 'center', position: 'relative', padding: '0 2px' }}>
-                    <div style={{ width: '100%', height: '1.5px', background: `linear-gradient(90deg, ${node.color}60, ${arr[i+1].color}60)` }} />
-                    <div style={{ position: 'absolute', right: 0, width: 0, height: 0, borderTop: '5px solid transparent', borderBottom: '5px solid transparent', borderLeft: `7px solid ${arr[i+1].color}80` }} />
-                  </div>
-                )}
-              </div>
-            ))}
+              {/* Edges: User Input → 3 APIs */}
+              <path d="M 400 82 C 400 112 165 118 165 147" stroke="#8ab4ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-blue)"/>
+              <path d="M 400 82 L 400 147" stroke="#8ab4ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-blue)"/>
+              <path d="M 400 82 C 400 112 635 118 635 147" stroke="#8ab4ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-blue)"/>
+
+              {/* Edges: 3 APIs → Claude */}
+              <path d="M 165 229 C 165 255 400 250 400 272" stroke="#a8d878" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-green)"/>
+              <path d="M 400 229 L 400 272" stroke="#a8d878" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-green)"/>
+              <path d="M 635 229 C 635 255 400 250 400 272" stroke="#a8d878" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-green)"/>
+
+              {/* Edges: Claude → 2 Outputs */}
+              <path d="M 400 354 C 400 378 280 378 280 395" stroke="#c9a8ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-purple)"/>
+              <path d="M 400 354 C 400 378 520 378 520 395" stroke="#c9a8ff" strokeWidth="1.5" fill="none" strokeOpacity="0.55" strokeDasharray="5 3" markerEnd="url(#arr-purple)"/>
+
+              {/* Node: User Input */}
+              <rect x="330" y="0" width="140" height="82" rx="10" fill="#1e2030" stroke="#8ab4ff" strokeOpacity="0.4" strokeWidth="1.5"/>
+              <text x="400" y="26" textAnchor="middle" fontSize="18">📝</text>
+              <text x="400" y="47" textAnchor="middle" fill="#e2e8ff" fontSize="12" fontWeight="700" fontFamily="Inter, sans-serif">User Input</text>
+              <text x="400" y="63" textAnchor="middle" fill="#8ab4ff" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">INPUT</text>
+              <text x="400" y="77" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">research query</text>
+
+              {/* Node: Perplexity */}
+              <rect x="95" y="147" width="140" height="82" rx="10" fill="#1e2030" stroke="#a8d878" strokeOpacity="0.35" strokeWidth="1.5"/>
+              <text x="165" y="173" textAnchor="middle" fontSize="18">🔍</text>
+              <text x="165" y="194" textAnchor="middle" fill="#e2e8ff" fontSize="12" fontWeight="700" fontFamily="Inter, sans-serif">Perplexity</text>
+              <text x="165" y="210" textAnchor="middle" fill="#a8d878" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">API</text>
+              <text x="165" y="224" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">web search</text>
+
+              {/* Node: arXiv */}
+              <rect x="330" y="147" width="140" height="82" rx="10" fill="#1e2030" stroke="#a8d878" strokeOpacity="0.35" strokeWidth="1.5"/>
+              <text x="400" y="173" textAnchor="middle" fontSize="18">📚</text>
+              <text x="400" y="194" textAnchor="middle" fill="#e2e8ff" fontSize="12" fontWeight="700" fontFamily="Inter, sans-serif">arXiv Search</text>
+              <text x="400" y="210" textAnchor="middle" fill="#a8d878" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">API</text>
+              <text x="400" y="224" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">academic papers</text>
+
+              {/* Node: Exa */}
+              <rect x="565" y="147" width="140" height="82" rx="10" fill="#1e2030" stroke="#a8d878" strokeOpacity="0.35" strokeWidth="1.5"/>
+              <text x="635" y="173" textAnchor="middle" fontSize="18">🌐</text>
+              <text x="635" y="194" textAnchor="middle" fill="#e2e8ff" fontSize="12" fontWeight="700" fontFamily="Inter, sans-serif">Exa Search</text>
+              <text x="635" y="210" textAnchor="middle" fill="#a8d878" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">API</text>
+              <text x="635" y="224" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">semantic search</text>
+
+              {/* Node: Claude Analyze — glowing center */}
+              <g filter="url(#glow-purple)">
+                <rect x="310" y="272" width="180" height="82" rx="10" fill="#1e2030" stroke="#c9a8ff" strokeOpacity="0.65" strokeWidth="2"/>
+                <text x="400" y="298" textAnchor="middle" fontSize="18">🧠</text>
+                <text x="400" y="319" textAnchor="middle" fill="#e2e8ff" fontSize="13" fontWeight="700" fontFamily="Inter, sans-serif">Claude Analyze</text>
+                <text x="400" y="335" textAnchor="middle" fill="#c9a8ff" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">LLM</text>
+                <text x="400" y="349" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">synthesize · rank · cite</text>
+              </g>
+
+              {/* Node: Notion */}
+              <rect x="210" y="395" width="140" height="82" rx="10" fill="#1e2030" stroke="#ffb07a" strokeOpacity="0.35" strokeWidth="1.5"/>
+              <text x="280" y="421" textAnchor="middle" fontSize="18">📓</text>
+              <text x="280" y="442" textAnchor="middle" fill="#e2e8ff" fontSize="12" fontWeight="700" fontFamily="Inter, sans-serif">Notion Page</text>
+              <text x="280" y="458" textAnchor="middle" fill="#ffb07a" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">OUTPUT</text>
+              <text x="280" y="472" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">full research report</text>
+
+              {/* Node: Slack */}
+              <rect x="450" y="395" width="140" height="82" rx="10" fill="#1e2030" stroke="#ffb07a" strokeOpacity="0.35" strokeWidth="1.5"/>
+              <text x="520" y="421" textAnchor="middle" fontSize="18">💬</text>
+              <text x="520" y="442" textAnchor="middle" fill="#e2e8ff" fontSize="12" fontWeight="700" fontFamily="Inter, sans-serif">Slack Notify</text>
+              <text x="520" y="458" textAnchor="middle" fill="#ffb07a" fontSize="9" letterSpacing="1.5" fontFamily="JetBrains Mono, monospace">OUTPUT</text>
+              <text x="520" y="472" textAnchor="middle" fill="#9aa4d2" fontSize="9" fontFamily="Inter, sans-serif">team summary</text>
+
+              {/* Layer labels */}
+              <text x="12" y="45" fill="#9aa4d2" fontSize="9" letterSpacing="1" fontFamily="JetBrains Mono, monospace">TRIGGER</text>
+              <text x="12" y="192" fill="#9aa4d2" fontSize="9" letterSpacing="1" fontFamily="JetBrains Mono, monospace">GATHER</text>
+              <text x="12" y="316" fill="#9aa4d2" fontSize="9" letterSpacing="1" fontFamily="JetBrains Mono, monospace">THINK</text>
+              <text x="12" y="440" fill="#9aa4d2" fontSize="9" letterSpacing="1" fontFamily="JetBrains Mono, monospace">DELIVER</text>
+            </svg>
           </div>
 
           {/* Caption */}
-          <p style={{ margin: '1.25rem 0 0', fontSize: '0.875rem', color: '#9aa4d2', lineHeight: 1.6 }}>
-            Every morning: fetches unread emails → AI extracts key threads & todos → logs summary to Sheets → pings your Slack with the briefing. <span style={{ color: '#c9a8ff' }}>One Rune. Zero manual work.</span>
+          <p style={{ margin: '1rem 0 0', fontSize: '0.875rem', color: '#9aa4d2', lineHeight: 1.65 }}>
+            One query fans out to 3 parallel sources — Perplexity, arXiv, Exa — all funneling into Claude for synthesis, then delivered simultaneously as a full Notion report <span style={{ color: '#c9a8ff' }}>and</span> a Slack team summary.
           </p>
         </div>
       </section>

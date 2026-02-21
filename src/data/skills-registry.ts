@@ -6,20 +6,24 @@ export interface Skill {
   description: string;
   docsUrl: string;
   icon: string;
+  author?: { name: string; url?: string };
+  downloads?: number;
+  stars?: number;
+  version?: string;
 }
 
 export const SKILLS_REGISTRY: Skill[] = [
   // ── Communication (20) ──────────────────────────────────────
-  { id: 'gmail-fetch', label: 'Gmail Fetch Emails', category: 'input', service: 'Gmail', description: 'Fetch emails from a Gmail inbox using label or query filters.', docsUrl: 'https://developers.google.com/gmail/api', icon: '📧' },
-  { id: 'gmail-send', label: 'Gmail Send Email', category: 'output', service: 'Gmail', description: 'Send an email via Gmail SMTP or API.', docsUrl: 'https://developers.google.com/gmail/api', icon: '📧' },
-  { id: 'gmail-label', label: 'Gmail Apply Label', category: 'api', service: 'Gmail', description: 'Apply or remove labels on Gmail messages.', docsUrl: 'https://developers.google.com/gmail/api', icon: '🏷️' },
-  { id: 'outlook-fetch', label: 'Outlook Fetch Emails', category: 'input', service: 'Outlook', description: 'Fetch emails from a Microsoft Outlook mailbox.', docsUrl: 'https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview', icon: '📬' },
-  { id: 'outlook-send', label: 'Outlook Send Email', category: 'output', service: 'Outlook', description: 'Send an email through Microsoft Outlook.', docsUrl: 'https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview', icon: '📬' },
-  { id: 'slack-post', label: 'Slack Post Message', category: 'output', service: 'Slack', description: 'Post a message to a Slack channel or thread.', docsUrl: 'https://api.slack.com/methods/chat.postMessage', icon: '💬' },
-  { id: 'slack-fetch', label: 'Slack Read Channel', category: 'input', service: 'Slack', description: 'Read recent messages from a Slack channel.', docsUrl: 'https://api.slack.com/methods/conversations.history', icon: '💬' },
-  { id: 'discord-post', label: 'Discord Send Message', category: 'output', service: 'Discord', description: 'Send a message to a Discord channel via webhook or bot.', docsUrl: 'https://discord.com/developers/docs/resources/webhook', icon: '🎮' },
-  { id: 'discord-fetch', label: 'Discord Read Channel', category: 'input', service: 'Discord', description: 'Fetch recent messages from a Discord channel.', docsUrl: 'https://discord.com/developers/docs/resources/channel', icon: '🎮' },
-  { id: 'telegram-send', label: 'Telegram Send Message', category: 'output', service: 'Telegram', description: 'Send a message via Telegram Bot API.', docsUrl: 'https://core.telegram.org/bots/api', icon: '✈️' },
+  { id: 'gmail-fetch', label: 'Gmail Fetch Emails', category: 'input', service: 'Gmail', description: 'Fetch emails from a Gmail inbox using label or query filters.', docsUrl: 'https://developers.google.com/gmail/api', icon: '📧', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 125000, stars: 1840 },
+  { id: 'gmail-send', label: 'Gmail Send Email', category: 'output', service: 'Gmail', description: 'Send an email via Gmail SMTP or API.', docsUrl: 'https://developers.google.com/gmail/api', icon: '📧', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 98000, stars: 1450 },
+  { id: 'gmail-label', label: 'Gmail Apply Label', category: 'api', service: 'Gmail', description: 'Apply or remove labels on Gmail messages.', docsUrl: 'https://developers.google.com/gmail/api', icon: '🏷️', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 42000, stars: 780 },
+  { id: 'outlook-fetch', label: 'Outlook Fetch Emails', category: 'input', service: 'Outlook', description: 'Fetch emails from a Microsoft Outlook mailbox.', docsUrl: 'https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview', icon: '📬', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 79000, stars: 980 },
+  { id: 'outlook-send', label: 'Outlook Send Email', category: 'output', service: 'Outlook', description: 'Send an email through Microsoft Outlook.', docsUrl: 'https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview', icon: '📬', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 62000, stars: 860 },
+  { id: 'slack-post', label: 'Slack Post Message', category: 'output', service: 'Slack', description: 'Post a message to a Slack channel or thread.', docsUrl: 'https://api.slack.com/methods/chat.postMessage', icon: '💬', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 54000, stars: 1120 },
+  { id: 'slack-fetch', label: 'Slack Read Channel', category: 'input', service: 'Slack', description: 'Read recent messages from a Slack channel.', docsUrl: 'https://api.slack.com/methods/conversations.history', icon: '💬', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 50000, stars: 980 },
+  { id: 'discord-post', label: 'Discord Send Message', category: 'output', service: 'Discord', description: 'Send a message to a Discord channel via webhook or bot.', docsUrl: 'https://discord.com/developers/docs/resources/webhook', icon: '🎮', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 43000, stars: 920 },
+  { id: 'discord-fetch', label: 'Discord Read Channel', category: 'input', service: 'Discord', description: 'Fetch recent messages from a Discord channel.', docsUrl: 'https://discord.com/developers/docs/resources/channel', icon: '🎮', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 39000, stars: 700 },
+  { id: 'telegram-send', label: 'Telegram Send Message', category: 'output', service: 'Telegram', description: 'Send a message via Telegram Bot API.', docsUrl: 'https://core.telegram.org/bots/api', icon: '✈️', author: { name: 'RuneGraph Team', url: 'https://runegraph.dev' }, version: '1.0.0', downloads: 24000, stars: 610 },
   { id: 'telegram-fetch', label: 'Telegram Get Updates', category: 'input', service: 'Telegram', description: 'Fetch incoming messages from a Telegram bot.', docsUrl: 'https://core.telegram.org/bots/api', icon: '✈️' },
   { id: 'whatsapp-send', label: 'WhatsApp Send Message', category: 'output', service: 'WhatsApp', description: 'Send a message via WhatsApp Business API.', docsUrl: 'https://developers.facebook.com/docs/whatsapp/cloud-api', icon: '📱' },
   { id: 'teams-post', label: 'Teams Post Message', category: 'output', service: 'Microsoft Teams', description: 'Post a message to a Microsoft Teams channel.', docsUrl: 'https://learn.microsoft.com/en-us/graph/api/chatmessage-post', icon: '👥' },

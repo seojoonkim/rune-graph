@@ -2,7 +2,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { SKILLS_REGISTRY } from '@/data/skills-registry'
 import { RUNES } from '@/data/runes'
-import { getSafetyScore, safetyColor, safetyLabel } from '@/lib/safety'
+import OverallScoreCard from '@/components/OverallScoreCard'
+import SafetyDetailPanel from '@/components/SafetyDetailPanel'
+import { StatBar } from '@/components/StatBar'
+import { getOverallScore, getSafetyReasons, getSafetyScore, safetyColor, safetyLabel } from '@/lib/safety'
 
 type Params = Promise<{ id: string }>
 
@@ -41,21 +44,6 @@ function Corner({ pos, color }: { pos: 'tl'|'tr'|'bl'|'br'; color: string }) {
   return <div style={s} />
 }
 
-function StatBar({ label, score, max, color }: { label: string; score: number; max: number; color: string }) {
-  const pct = Math.round((score / max) * 100)
-  return (
-    <div style={{ marginBottom: '0.75rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-        <span style={{ fontSize: '0.78rem', color: '#bac4e0' }}>{label}</span>
-        <span style={{ fontSize: '0.78rem', color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{score}/{max}</span>
-      </div>
-      <div style={{ height: '6px', background: '#1a1b26', borderRadius: '3px', overflow: 'hidden' }}>
-        <div style={{ height: '100%', width: `${pct}%`, background: `linear-gradient(90deg, ${color}88, ${color})`, borderRadius: '3px', boxShadow: `0 0 8px ${color}55`, transition: 'width 0.6s ease-out' }} />
-      </div>
-    </div>
-  )
-}
-
 export default async function SkillDetailPage({ params }: { params: Params }) {
   const { id } = await params
   const skill = SKILLS_REGISTRY.find(s => s.id === id)
@@ -66,6 +54,8 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
   const sColor = safetyColor(safety.total)
   const sLabel = safetyLabel(safety.total)
   const usedInRunes = RUNES.filter(r => r.nodes.some(n => n.id === skill.id))
+  const overall = getOverallScore(skill, usedInRunes.length)
+  const reasons = getSafetyReasons(skill)
   const related = SKILLS_REGISTRY.filter(s => s.category === skill.category && s.id !== skill.id).slice(0, 8)
 
   return (
@@ -104,6 +94,27 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
           </div>
         </div>
         <p style={{ margin: '1.25rem 0 0', color: '#bac4e0', fontSize: '1rem', lineHeight: 1.7, maxWidth: '720px' }}>{skill.description}</p>
+        <a
+          href={skill.docsUrl}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            marginTop: '0.95rem',
+            padding: '0.45rem 1.1rem',
+            borderRadius: '7px',
+            border: `1px solid ${color}30`,
+            background: `${color}15`,
+            color,
+            fontSize: '0.82rem',
+            textDecoration: 'none',
+            fontWeight: 600,
+          }}
+        >
+          📖 Official Documentation ↗
+        </a>
       </div>
 
       {/* Main 2-col layout */}
@@ -129,9 +140,6 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
               <h2 style={{ margin: '0 0 0.75rem', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8ab4e0', fontWeight: 600 }}>Powered By</h2>
               <div style={{ fontWeight: 700, color: '#c0caf5', fontSize: '1rem', marginBottom: '0.5rem' }}>{skill.service}</div>
               <p style={{ margin: '0 0 0.85rem', color: '#b0bcd8', fontSize: '0.82rem', lineHeight: 1.5 }}>Official API documentation and integration reference.</p>
-              <a href={skill.docsUrl} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', padding: '0.35rem 0.9rem', borderRadius: '6px', fontSize: '0.8rem', background: `${color}15`, color, border: `1px solid ${color}35`, textDecoration: 'none', fontWeight: 600 }}>
-                ↗ View Docs
-              </a>
             </section>
           </div>
 
@@ -188,48 +196,55 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
           )}
         </div>
 
-        {/* Right col: Safety Score panel */}
+        {/* Right col: Overall + Safety + Quick Facts */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-
-          {/* Safety score big card */}
-          <section style={{ background: '#1e2030', border: `1px solid ${sColor}30`, borderRadius: '12px', padding: '1.5rem', position: 'relative', overflow: 'hidden' }}>
-            <Corner pos="tl" color={sColor} /><Corner pos="tr" color={sColor} />
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: `linear-gradient(90deg, transparent, ${sColor}, transparent)`, opacity: 0.6 }} />
-            <h2 style={{ margin: '0 0 1.25rem', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8ab4e0', fontWeight: 600 }}>Safety Score</h2>
-
-            {/* Big number */}
-            <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-              <div style={{ fontSize: '3.5rem', fontWeight: 900, color: sColor, fontFamily: "'Cinzel', serif", lineHeight: 1, textShadow: `0 0 30px ${sColor}50` }}>{safety.total}</div>
-              <div style={{ fontSize: '0.78rem', color: sColor, marginTop: '0.35rem', fontWeight: 600, letterSpacing: '0.05em' }}>{sLabel}</div>
-              {/* Arc progress indicator */}
-              <div style={{ marginTop: '0.75rem', height: '6px', background: '#1a1b26', borderRadius: '3px', overflow: 'hidden' }}>
-                <div style={{ height: '100%', width: `${safety.total}%`, background: `linear-gradient(90deg, ${sColor}66, ${sColor})`, borderRadius: '3px', boxShadow: `0 0 10px ${sColor}66` }} />
-              </div>
-            </div>
-
-            {/* Breakdown bars */}
-            <div style={{ borderTop: '1px solid #292e42', paddingTop: '1rem' }}>
-              <StatBar label={safety.providerTrust.label}   score={safety.providerTrust.score}   max={safety.providerTrust.max}   color={sColor} />
-              <StatBar label={safety.actionRisk.label}      score={safety.actionRisk.score}      max={safety.actionRisk.max}      color={sColor} />
-              <StatBar label={safety.dataSensitivity.label} score={safety.dataSensitivity.score} max={safety.dataSensitivity.max} color={sColor} />
-              <StatBar label={safety.reversibility.label}   score={safety.reversibility.score}   max={safety.reversibility.max}   color={sColor} />
-            </div>
-          </section>
+          <OverallScoreCard overall={overall} />
+          <SafetyDetailPanel safety={safety} reasons={reasons} sColor={sColor} sLabel={sLabel} />
 
           {/* Quick facts */}
           <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem' }}>
             <h2 style={{ margin: '0 0 0.85rem', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8ab4e0', fontWeight: 600 }}>Quick Facts</h2>
             {[
-              { label: 'Skill ID',  value: skill.id,              mono: true },
+              { label: 'Skill ID', value: skill.id, mono: true },
               { label: 'Category', value: CAT_LABELS[skill.category], mono: false, col: color },
-              { label: 'Service',  value: skill.service,           mono: false },
-              { label: 'Used in',  value: `${usedInRunes.length} Rune${usedInRunes.length !== 1 ? 's' : ''}`, mono: true },
+              { label: 'Service', value: skill.service, mono: false },
+              { label: 'Used in', value: `${usedInRunes.length} Rune${usedInRunes.length !== 1 ? 's' : ''}`, mono: true },
             ].map(f => (
               <div key={f.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
                 <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>{f.label}</span>
                 <span style={{ fontSize: '0.78rem', color: f.col || '#a9b1d6', fontFamily: f.mono ? "'JetBrains Mono', monospace" : 'inherit', fontWeight: 500 }}>{f.value}</span>
               </div>
             ))}
+            {skill.author && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
+                <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>Author</span>
+                <span style={{ fontSize: '0.78rem', color: '#a9b1d6', fontWeight: 500, fontFamily: "'JetBrains Mono', monospace" }}>
+                  {skill.author.url ? (
+                    <a href={skill.author.url} target="_blank" rel="noreferrer" style={{ color: '#a8b8dc', textDecoration: 'underline' }}>
+                      {skill.author.name}
+                    </a>
+                  ) : (
+                    skill.author.name
+                  )}
+                </span>
+              </div>
+            )}
+            {skill.version && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
+                <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>Version</span>
+                <span style={{ fontSize: '0.78rem', color: '#a9b1d6', fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
+                  {skill.version}
+                </span>
+              </div>
+            )}
+            {skill.downloads !== undefined && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
+                <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>Downloads</span>
+                <span style={{ fontSize: '0.78rem', color: '#a9b1d6', fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
+                  {skill.downloads.toLocaleString()}
+                </span>
+              </div>
+            )}
           </section>
         </div>
       </div>

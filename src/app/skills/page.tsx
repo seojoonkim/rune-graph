@@ -54,7 +54,7 @@ export default function SkillsPage() {
           <span style={{ fontSize: '1.5rem' }}>📦</span>
           <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#c0caf5', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Skills Registry</h1>
         </div>
-        <p style={{ color: '#565f89', fontSize: '0.95rem', margin: 0 }}>
+        <p style={{ color: '#7aa2c8', fontSize: '0.95rem', margin: 0 }}>
           {SKILLS_REGISTRY.length} real-world skills across 4 categories
         </p>
       </div>
@@ -83,7 +83,7 @@ export default function SkillsPage() {
 
         {/* Search */}
         <div style={{ marginLeft: 'auto', position: 'relative' }}>
-          <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#565f89', fontSize: '0.85rem' }}>🔍</span>
+          <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#7aa2c8', fontSize: '0.85rem' }}>🔍</span>
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -99,7 +99,7 @@ export default function SkillsPage() {
       </div>
 
       {/* Results count */}
-      <p style={{ color: '#414868', fontSize: '0.8rem', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace" }}>
+      <p style={{ color: '#6272a4', fontSize: '0.8rem', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace" }}>
         {filtered.length} skill{filtered.length !== 1 ? 's' : ''} found
       </p>
 
@@ -139,7 +139,7 @@ export default function SkillsPage() {
                     <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{skill.icon}</span>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ color: '#c0caf5', fontWeight: 600, fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{skill.label}</div>
-                      <div style={{ color: '#414868', fontSize: '0.68rem', fontFamily: "'JetBrains Mono', monospace", marginTop: '1px' }}>{skill.id}</div>
+                      <div style={{ color: '#6272a4', fontSize: '0.68rem', fontFamily: "'JetBrains Mono', monospace", marginTop: '1px' }}>{skill.id}</div>
                     </div>
                   </div>
 
@@ -155,8 +155,8 @@ export default function SkillsPage() {
                   </div>
                 </div>
 
-                <p style={{ margin: '0.6rem 0 0.4rem', color: '#7982a9', fontSize: '0.8rem', lineHeight: 1.5 }}>{skill.description}</p>
-                <div style={{ fontSize: '0.68rem', color: '#414868', fontFamily: "'JetBrains Mono', monospace' " }}>{skill.service}</div>
+                <p style={{ margin: '0.6rem 0 0.4rem', color: '#9aa5ce', fontSize: '0.8rem', lineHeight: 1.5 }}>{skill.description}</p>
+                <div style={{ fontSize: '0.68rem', color: '#6272a4', fontFamily: "'JetBrains Mono', monospace' " }}>{skill.service}</div>
               </div>
             </Link>
           )
@@ -164,7 +164,7 @@ export default function SkillsPage() {
       </div>
 
       {filtered.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '4rem 2rem', color: '#414868' }}>
+        <div style={{ textAlign: 'center', padding: '4rem 2rem', color: '#6272a4' }}>
           <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>🔍</div>
           <p style={{ fontFamily: "'JetBrains Mono', monospace" }}>No skills found for "{search}"</p>
         </div>

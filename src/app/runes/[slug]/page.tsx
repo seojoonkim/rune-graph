@@ -75,7 +75,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
           </div>
         </div>
         <h1 style={{ margin: 0, fontSize: '2rem', color: '#c0caf5', lineHeight: 1.2, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em' }}>{rune.name}</h1>
-        <p style={{ color: '#7982a9', marginTop: '0.6rem', marginBottom: 0, maxWidth: '760px', lineHeight: 1.6, fontSize: '0.95rem' }}>{rune.purpose}</p>
+        <p style={{ color: '#9aa5ce', marginTop: '0.6rem', marginBottom: 0, maxWidth: '760px', lineHeight: 1.6, fontSize: '0.95rem' }}>{rune.purpose}</p>
       </div>
 
       {/* 3 info cards */}
@@ -83,13 +83,13 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
         <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
           <h2 style={{ marginTop: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>Use Case</h2>
-          <p style={{ margin: 0, color: '#7982a9', lineHeight: 1.65, fontSize: '0.875rem' }}>{rune.useCase}</p>
+          <p style={{ margin: 0, color: '#9aa5ce', lineHeight: 1.65, fontSize: '0.875rem' }}>{rune.useCase}</p>
         </section>
 
         <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
           <h2 style={{ marginTop: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>
-            Skill Pipeline <span style={{ color: '#565f89', fontSize: '0.72rem', fontWeight: 400 }}>({rune.nodes.length} nodes)</span>
+            Skill Pipeline <span style={{ color: '#7aa2c8', fontSize: '0.72rem', fontWeight: 400 }}>({rune.nodes.length} nodes)</span>
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {rune.nodes.map((node, i) => (
@@ -106,15 +106,15 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
         <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
           <h2 style={{ marginTop: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>
-            Dependencies <span style={{ color: '#565f89', fontSize: '0.72rem', fontWeight: 400 }}>({rune.edges.length})</span>
+            Dependencies <span style={{ color: '#7aa2c8', fontSize: '0.72rem', fontWeight: 400 }}>({rune.edges.length})</span>
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {rune.edges.map((e, i) => (
-              <div key={`${e.source}-${e.target}-${i}`} style={{ fontSize: '0.78rem', color: '#7982a9', lineHeight: 1.4 }}>
+              <div key={`${e.source}-${e.target}-${i}`} style={{ fontSize: '0.78rem', color: '#9aa5ce', lineHeight: 1.4 }}>
                 <span style={{ color: '#7aa2f7', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem' }}>{e.source}</span>
-                <span style={{ margin: '0 0.3rem', color: '#565f89' }}>→</span>
+                <span style={{ margin: '0 0.3rem', color: '#7aa2c8' }}>→</span>
                 <span style={{ color: '#ff9e64', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem' }}>{e.target}</span>
-                <span style={{ marginLeft: '0.3rem', color: '#414868', fontSize: '0.7rem' }}>· {e.label}</span>
+                <span style={{ marginLeft: '0.3rem', color: '#6272a4', fontSize: '0.7rem' }}>· {e.label}</span>
               </div>
             ))}
           </div>
@@ -137,7 +137,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
           </h2>
           {/* Avg safety */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '0.72rem', color: '#565f89' }}>Avg Safety</span>
+            <span style={{ fontSize: '0.72rem', color: '#7aa2c8' }}>Avg Safety</span>
             <span style={{ fontSize: '0.82rem', color: tColor, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{trustScore}/100</span>
           </div>
         </div>
@@ -161,12 +161,12 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
                         {CATEGORY_LABELS[category]}
                       </span>
                       {reg && (
-                        <span style={{ fontSize: '0.62rem', color: '#414868', fontFamily: "'JetBrains Mono', monospace' "}}>{reg.service}</span>
+                        <span style={{ fontSize: '0.62rem', color: '#6272a4', fontFamily: "'JetBrains Mono', monospace"}}>{reg.service}</span>
                       )}
                     </div>
-                    <div style={{ color: '#414868', fontSize: '0.65rem', fontFamily: "'JetBrains Mono', monospace", marginBottom: '0.4rem' }}>{id}</div>
+                    <div style={{ color: '#6272a4', fontSize: '0.65rem', fontFamily: "'JetBrains Mono', monospace", marginBottom: '0.4rem' }}>{id}</div>
                     {reg && (
-                      <p style={{ margin: 0, color: '#7982a9', fontSize: '0.8rem', lineHeight: 1.5 }}>{reg.description}</p>
+                      <p style={{ margin: 0, color: '#9aa5ce', fontSize: '0.8rem', lineHeight: 1.5 }}>{reg.description}</p>
                     )}
                   </div>
 
@@ -179,7 +179,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
                       <div style={{ height: '100%', width: `${sScore}%`, background: `linear-gradient(90deg, ${sColor2}77, ${sColor2})`, borderRadius: '2px' }} />
                     </div>
                     {reg && (
-                      <a href={reg.docsUrl} target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: '0.5rem', fontSize: '0.65rem', color: '#565f89', textDecoration: 'none' }}>↗ Docs</a>
+                      <a href={reg.docsUrl} target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: '0.5rem', fontSize: '0.65rem', color: '#7aa2c8', textDecoration: 'none' }}>↗ Docs</a>
                     )}
                   </div>
                 </div>
@@ -191,13 +191,13 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
         {/* Overall pipeline safety summary */}
         <div style={{ marginTop: '1.25rem', padding: '1rem', background: `${tColor}08`, border: `1px solid ${tColor}25`, borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ fontSize: '0.68rem', color: '#565f89', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.2rem' }}>Pipeline Safety Score</div>
+            <div style={{ fontSize: '0.68rem', color: '#7aa2c8', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.2rem' }}>Pipeline Safety Score</div>
             <div style={{ fontSize: '1.25rem', fontWeight: 800, color: tColor, fontFamily: "'Cinzel', serif" }}>{trustScore}/100 — {tLabel}</div>
           </div>
           <div style={{ flex: 1, height: '8px', background: '#1a1b26', borderRadius: '4px', overflow: 'hidden', minWidth: '120px' }}>
             <div style={{ height: '100%', width: `${trustScore}%`, background: `linear-gradient(90deg, ${tColor}66, ${tColor})`, borderRadius: '4px', boxShadow: `0 0 12px ${tColor}55` }} />
           </div>
-          <div style={{ fontSize: '0.78rem', color: '#7982a9' }}>{rune.nodes.length} skills analyzed</div>
+          <div style={{ fontSize: '0.78rem', color: '#9aa5ce' }}>{rune.nodes.length} skills analyzed</div>
         </div>
       </section>
     </div>

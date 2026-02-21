@@ -72,7 +72,7 @@ export function FullGraph() {
       {/* Sidebar */}
       <div style={{ width: 200, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <div style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '8px', padding: '1rem' }}>
-          <div style={{ fontSize: '0.7rem', color: '#565f89', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>Filter</div>
+          <div style={{ fontSize: '0.7rem', color: '#7aa2c8', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>Filter</div>
           {Object.entries(CAT_LABELS).map(([cat, label]) => (
             <label key={cat} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', marginBottom: '0.5rem' }}>
               <input type="checkbox" checked={activeCategories.has(cat)} onChange={() => toggleCat(cat)} style={{ accentColor: CATEGORY_COLORS[cat as SkillCategory] }} />
@@ -92,7 +92,7 @@ export function FullGraph() {
             <div style={{ fontSize: '0.7rem', color: '#bb9af7', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Used In</div>
             {usedInRunes.length ? usedInRunes.map(r => (
               <div key={r} style={{ fontSize: '0.75rem', color: '#c0caf5', marginBottom: '0.25rem' }}>· {r}</div>
-            )) : <div style={{ fontSize: '0.75rem', color: '#565f89' }}>No Runes</div>}
+            )) : <div style={{ fontSize: '0.75rem', color: '#7aa2c8' }}>No Runes</div>}
           </div>
         )}
       </div>

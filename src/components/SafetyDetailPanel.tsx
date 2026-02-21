@@ -51,10 +51,10 @@ export default function SafetyDetailPanel({ safety, reasons, sColor, sLabel }: S
       <h2 style={{ margin: '0 0 1.25rem', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8ab4e0', fontWeight: 600 }}>Safety Score</h2>
 
       <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-        <div style={{ fontSize: '3.5rem', fontWeight: 900, color: sColor, fontFamily: "'Cinzel', serif", lineHeight: 1, textShadow: `0 0 30px ${sColor}50` }}>
+        <div style={{ fontSize: '3.5rem', fontWeight: 900, color: sColor, fontFamily: "'Outfit', sans-serif", lineHeight: 1, textShadow: `0 0 30px ${sColor}50` }}>
           {safety.total}
         </div>
-        <div style={{ fontSize: '0.78rem', color: sColor, marginTop: '0.35rem', fontWeight: 600, letterSpacing: '0.05em' }}>{sLabel}</div>
+        <div style={{ fontSize: '0.78rem', color: sColor, marginTop: '0.35rem', fontWeight: 600, letterSpacing: '-0.01em' }}>{sLabel}</div>
         <div style={{ marginTop: '0.75rem', height: '6px', background: '#1a1b26', borderRadius: '3px', overflow: 'hidden' }}>
           <div style={{ height: '100%', width: `${safety.total}%`, background: `linear-gradient(90deg, ${sColor}66, ${sColor})`, borderRadius: '3px', boxShadow: `0 0 10px ${sColor}66` }} />
         </div>

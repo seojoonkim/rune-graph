@@ -18,13 +18,13 @@ export default function RunesPage() {
   })
 
   return (
-    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '3rem 2rem' }}>
+    <div className="rg-page">
 
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
           <span style={{ fontSize: '1.5rem' }}>🔮</span>
-          <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Rune Catalog</h1>
+          <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', margin: 0, fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>Rune Catalog</h1>
         </div>
         <p style={{ color: '#8ab4e0', fontSize: '0.95rem', margin: 0 }}>
           {RUNES.length} verified skill orchestration workflows · Open Source

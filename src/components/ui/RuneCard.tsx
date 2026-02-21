@@ -71,20 +71,20 @@ export function RuneCard({ rune }: { rune: Rune }) {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem' }}>
             <span style={{ fontSize: '0.65rem', background: 'rgba(187,154,247,0.15)', color: '#bb9af7', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(187,154,247,0.3)', fontFamily: "'JetBrains Mono', monospace" }}>{rune.category}</span>
             {/* Grade badge */}
-            <span style={{ fontSize: '0.6rem', color: grade.color, border: `1px solid ${grade.color}55`, padding: '1px 6px', borderRadius: '3px', fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>{grade.label}</span>
+            <span style={{ fontSize: '0.6rem', color: grade.color, border: `1px solid ${grade.color}55`, padding: '1px 6px', borderRadius: '3px', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>{grade.label}</span>
           </div>
         </div>
 
         {/* Name + purpose */}
         <div>
-          <div style={{ fontWeight: 700, color: '#dde4fc', marginBottom: '0.35rem', fontSize: '1rem', fontFamily: "'Cinzel', serif", letterSpacing: '0.03em' }}>{rune.name}</div>
+          <div style={{ fontWeight: 700, color: '#dde4fc', marginBottom: '0.35rem', fontSize: '1rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>{rune.name}</div>
           <div style={{ fontSize: '0.78rem', color: '#ccd4ee', lineHeight: 1.5 }}>{rune.purpose}</div>
         </div>
 
         {/* Trust score bar */}
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-            <span style={{ fontSize: '0.62rem', color: '#8ab4e0', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em', textTransform: 'uppercase' }}>Trust Score</span>
+            <span style={{ fontSize: '0.62rem', color: '#8ab4e0', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '-0.01em', textTransform: 'uppercase' }}>Trust Score</span>
             <span style={{ fontSize: '0.62rem', color: trustColor, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{trust}</span>
           </div>
           <div style={{ height: '4px', background: '#1f2335', borderRadius: '2px', overflow: 'hidden' }}>
@@ -107,7 +107,7 @@ export function RuneCard({ rune }: { rune: Rune }) {
               background: `${CAT_COLORS[cat] || '#ccd4ee'}18`,
               color: CAT_COLORS[cat] || '#ccd4ee',
               border: `1px solid ${CAT_COLORS[cat] || '#ccd4ee'}40`,
-              fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em',
+              fontWeight: 600, textTransform: 'uppercase', letterSpacing: '-0.01em',
               fontFamily: "'JetBrains Mono', monospace",
             }}>{cat}</span>
           ))}

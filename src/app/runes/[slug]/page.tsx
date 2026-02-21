@@ -57,7 +57,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
   })
 
   return (
-    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
+    <div className="rg-page" style={{ maxWidth: '1300px', margin: '0 auto' }}>
       {/* Back */}
       <Link href="/runes" style={{ color: '#bb9af7', textDecoration: 'none', fontSize: '0.85rem', fontFamily: "'JetBrains Mono', monospace" }}>← Runes</Link>
 
@@ -74,7 +74,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
             </span>
           </div>
         </div>
-        <h1 style={{ margin: 0, fontSize: '2rem', color: '#dde4fc', lineHeight: 1.2, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em' }}>{rune.name}</h1>
+        <h1 style={{ margin: 0, fontSize: '2rem', color: '#dde4fc', lineHeight: 1.2, fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>{rune.name}</h1>
         <p style={{ color: '#c8d2ec', marginTop: '0.6rem', marginBottom: 0, maxWidth: '760px', lineHeight: 1.6, fontSize: '0.95rem' }}>{rune.purpose}</p>
       </div>
 
@@ -154,10 +154,10 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
                       <span style={{ fontSize: '1rem' }}>{reg?.icon || '⚙️'}</span>
-                      <Link href={`/skills/${id}`} style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.92rem', textDecoration: 'none', fontFamily: "'Cinzel', serif" }}>
+                      <Link href={`/skills/${id}`} style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.92rem', textDecoration: 'none', fontFamily: "'Outfit', sans-serif" }}>
                         {label}
                       </Link>
-                      <span style={{ fontSize: '0.6rem', padding: '1px 7px', borderRadius: '3px', background: `${cColor}15`, color: cColor, border: `1px solid ${cColor}35`, fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      <span style={{ fontSize: '0.6rem', padding: '1px 7px', borderRadius: '3px', background: `${cColor}15`, color: cColor, border: `1px solid ${cColor}35`, fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '-0.01em' }}>
                         {CATEGORY_LABELS[category]}
                       </span>
                       {reg && (
@@ -172,8 +172,8 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
 
                   {/* Right: safety */}
                   <div style={{ minWidth: '120px', textAlign: 'right' }}>
-                    <div style={{ fontSize: '1.6rem', fontWeight: 800, color: sColor2, fontFamily: "'Cinzel', serif", lineHeight: 1 }}>{sScore}</div>
-                    <div style={{ fontSize: '0.6rem', color: sColor2, letterSpacing: '0.05em', marginBottom: '0.4rem', fontWeight: 600 }}>{safetyLabel(sScore)}</div>
+                    <div style={{ fontSize: '1.6rem', fontWeight: 800, color: sColor2, fontFamily: "'Outfit', sans-serif", lineHeight: 1 }}>{sScore}</div>
+                    <div style={{ fontSize: '0.6rem', color: sColor2, letterSpacing: '-0.01em', marginBottom: '0.4rem', fontWeight: 600 }}>{safetyLabel(sScore)}</div>
                     {/* mini bar */}
                     <div style={{ height: '4px', background: '#1a1b26', borderRadius: '2px', overflow: 'hidden', width: '80px', marginLeft: 'auto' }}>
                       <div style={{ height: '100%', width: `${sScore}%`, background: `linear-gradient(90deg, ${sColor2}77, ${sColor2})`, borderRadius: '2px' }} />
@@ -192,7 +192,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
         <div style={{ marginTop: '1.25rem', padding: '1rem', background: `${tColor}08`, border: `1px solid ${tColor}25`, borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <div>
             <div style={{ fontSize: '0.68rem', color: '#8ab4e0', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.2rem' }}>Pipeline Safety Score</div>
-            <div style={{ fontSize: '1.25rem', fontWeight: 800, color: tColor, fontFamily: "'Cinzel', serif" }}>{trustScore}/100 — {tLabel}</div>
+            <div style={{ fontSize: '1.25rem', fontWeight: 800, color: tColor, fontFamily: "'Outfit', sans-serif" }}>{trustScore}/100 — {tLabel}</div>
           </div>
           <div style={{ flex: 1, height: '8px', background: '#1a1b26', borderRadius: '4px', overflow: 'hidden', minWidth: '120px' }}>
             <div style={{ height: '100%', width: `${trustScore}%`, background: `linear-gradient(90deg, ${tColor}66, ${tColor})`, borderRadius: '4px', boxShadow: `0 0 12px ${tColor}55` }} />

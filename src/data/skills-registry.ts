@@ -1,8 +1,12 @@
-export interface Skill {
+// ─────────────────────────────────────────────────────────────────────────────
+// LAYER 1: Action — a single, atomic API operation within a Skill
+// (previously called "Skill" — renamed to align with OpenClaw/ClawHub conventions)
+// ─────────────────────────────────────────────────────────────────────────────
+export interface Action {
   id: string;
   label: string;
   category: 'input' | 'api' | 'llm' | 'output';
-  service: string;
+  service: string;        // which Skill Package this action belongs to
   description: string;
   docsUrl: string;
   icon: string;
@@ -11,6 +15,658 @@ export interface Skill {
   stars?: number;
   version?: string;
 }
+
+// Backwards-compatible alias so existing code that imports `Skill` still compiles
+export type Skill = Action;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LAYER 2: SkillPackage — a service-level capability module (installable unit)
+// Matches what OpenClaw/ClawHub mean by "Skill":
+//   a curated, documented bundle of actions for a specific service,
+//   with usage instructions for the agent (SKILL.md equivalent)
+// Install: `clawhub install <id>`
+// ─────────────────────────────────────────────────────────────────────────────
+export type SkillCategory =
+  | 'ai'             // LLM providers, AI models
+  | 'communication'  // email, chat, messaging
+  | 'productivity'   // calendar, notes, docs, tasks
+  | 'dev'            // version control, CI/CD, code review
+  | 'data'           // spreadsheets, databases, analytics
+  | 'finance'        // payments, banking, crypto
+  | 'marketing'      // ads, CRM, social media
+  | 'iot'            // hardware, sensors, smart home
+  | 'media'          // audio, video, images
+  | 'utility';       // scrapers, parsers, webhooks
+
+export interface SkillPackage {
+  id: string;           // slug used in clawhub install (e.g. "gmail")
+  name: string;         // display name (e.g. "Gmail")
+  vendor: string;       // company / project (e.g. "Google")
+  emoji: string;
+  tagline: string;      // one-line description
+  description: string;  // longer description
+  category: SkillCategory;
+  installCmd: string;   // e.g. "clawhub install gmail"
+  docsUrl: string;
+  actionIds: string[];  // Action ids from SKILLS_REGISTRY
+  downloads?: number;
+  stars?: number;
+  version?: string;
+  verified?: boolean;   // official RuneGraph team package
+}
+
+export const SKILL_PACKAGES: SkillPackage[] = [
+  // ── AI Models ──────────────────────────────────────────────────────────────
+  {
+    id: 'claude', name: 'Claude', vendor: 'Anthropic', emoji: '🧠',
+    tagline: 'Summarize, analyze, draft, classify and reason over any text.',
+    description: 'Access Anthropic\'s Claude models for text generation, summarization, classification, data extraction, and complex reasoning. The most widely used LLM skill in the RuneGraph ecosystem.',
+    category: 'ai', installCmd: 'clawhub install claude',
+    docsUrl: 'https://docs.anthropic.com/en/docs/about-claude/models',
+    actionIds: ['claude-summarize', 'claude-analyze', 'claude-draft', 'claude-classify', 'claude-extract'],
+    downloads: 284000, stars: 4820, version: '3.0.0', verified: true,
+  },
+  {
+    id: 'openai', name: 'OpenAI', vendor: 'OpenAI', emoji: '🤖',
+    tagline: 'GPT-4o text & vision, Whisper transcription, DALL-E image generation.',
+    description: 'Full OpenAI API coverage — GPT-4o for multimodal reasoning, Whisper for audio transcription, DALL-E 3 for image generation, and text embeddings.',
+    category: 'ai', installCmd: 'clawhub install openai',
+    docsUrl: 'https://platform.openai.com/docs/overview',
+    actionIds: ['gpt4o-vision', 'whisper-transcribe', 'dalle3-generate'],
+    downloads: 195000, stars: 3650, version: '2.1.0', verified: true,
+  },
+  {
+    id: 'google-gemini', name: 'Gemini', vendor: 'Google', emoji: '✨',
+    tagline: 'Google\'s multimodal AI for text, vision, and code tasks.',
+    description: 'Use Google Gemini for multimodal generation, code assistance, and long-context reasoning with up to 1M token context windows.',
+    category: 'ai', installCmd: 'clawhub install google-gemini',
+    docsUrl: 'https://ai.google.dev/docs',
+    actionIds: ['gemini-generate', 'gemini-vision'],
+    downloads: 87000, stars: 1920, version: '1.5.0', verified: true,
+  },
+  {
+    id: 'perplexity', name: 'Perplexity', vendor: 'Perplexity AI', emoji: '🔮',
+    tagline: 'Real-time web-grounded search and answer synthesis.',
+    description: 'Use Perplexity\'s online models to get up-to-date, web-grounded answers with citations. Ideal for research pipelines that require current information.',
+    category: 'ai', installCmd: 'clawhub install perplexity',
+    docsUrl: 'https://docs.perplexity.ai/',
+    actionIds: ['perplexity-search', 'perplexity-ask'],
+    downloads: 64000, stars: 1340, version: '1.2.0',
+  },
+  {
+    id: 'elevenlabs', name: 'ElevenLabs', vendor: 'ElevenLabs', emoji: '🔊',
+    tagline: 'Hyper-realistic text-to-speech and voice cloning.',
+    description: 'Convert text to natural-sounding speech with ElevenLabs. Supports voice cloning, multilingual output, and real-time streaming audio.',
+    category: 'ai', installCmd: 'clawhub install elevenlabs',
+    docsUrl: 'https://docs.elevenlabs.io/',
+    actionIds: ['elevenlabs-tts'],
+    downloads: 42000, stars: 980, version: '1.0.0',
+  },
+
+  // ── Communication ──────────────────────────────────────────────────────────
+  {
+    id: 'gmail', name: 'Gmail', vendor: 'Google', emoji: '📧',
+    tagline: 'Fetch, send, and label emails via the Gmail API.',
+    description: 'Full Gmail integration — read inbox with query filters, send transactional emails, and manage labels. Requires Google OAuth.',
+    category: 'communication', installCmd: 'clawhub install gmail',
+    docsUrl: 'https://developers.google.com/gmail/api',
+    actionIds: ['gmail-fetch', 'gmail-send', 'gmail-label'],
+    downloads: 265000, stars: 4070, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'slack', name: 'Slack', vendor: 'Slack', emoji: '💬',
+    tagline: 'Post messages, read channels, and reply in threads.',
+    description: 'Post messages to Slack channels, read recent messages, reply in threads, and send DMs. The most common output action in RuneGraph Runes.',
+    category: 'communication', installCmd: 'clawhub install slack',
+    docsUrl: 'https://api.slack.com/',
+    actionIds: ['slack-post', 'slack-fetch', 'slack-thread-reply'],
+    downloads: 147000, stars: 3010, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'telegram', name: 'Telegram', vendor: 'Telegram', emoji: '✈️',
+    tagline: 'Send and receive messages via Telegram Bot API.',
+    description: 'Integrate with Telegram bots — send messages, receive updates, and build conversational interfaces for Rune notifications.',
+    category: 'communication', installCmd: 'clawhub install telegram',
+    docsUrl: 'https://core.telegram.org/bots/api',
+    actionIds: ['telegram-send', 'telegram-fetch'],
+    downloads: 63000, stars: 1580, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'discord', name: 'Discord', vendor: 'Discord', emoji: '🎮',
+    tagline: 'Send and read messages in Discord channels via bot or webhook.',
+    description: 'Post messages to Discord channels via webhook or bot, and read channel history. Great for dev teams and community notifications.',
+    category: 'communication', installCmd: 'clawhub install discord',
+    docsUrl: 'https://discord.com/developers/docs/intro',
+    actionIds: ['discord-post', 'discord-fetch'],
+    downloads: 82000, stars: 1920, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'outlook', name: 'Outlook', vendor: 'Microsoft', emoji: '📬',
+    tagline: 'Fetch and send emails via Microsoft Outlook / Exchange.',
+    description: 'Microsoft 365 email integration — read inbox, send email, and manage folders via Microsoft Graph API.',
+    category: 'communication', installCmd: 'clawhub install outlook',
+    docsUrl: 'https://learn.microsoft.com/en-us/graph/api/resources/mail-api-overview',
+    actionIds: ['outlook-fetch', 'outlook-send'],
+    downloads: 141000, stars: 1840, version: '1.0.0', verified: true,
+  },
+
+  // ── Productivity ───────────────────────────────────────────────────────────
+  {
+    id: 'google-calendar', name: 'Google Calendar', vendor: 'Google', emoji: '📅',
+    tagline: 'List events, create new ones, and query free/busy slots.',
+    description: 'Read and write Google Calendar — list upcoming events, create new appointments, and check availability across multiple calendars.',
+    category: 'productivity', installCmd: 'clawhub install google-calendar',
+    docsUrl: 'https://developers.google.com/calendar/api',
+    actionIds: ['gcal-list-events', 'gcal-create-event', 'gcal-find-free'],
+    downloads: 98000, stars: 2100, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'notion', name: 'Notion', vendor: 'Notion', emoji: '📓',
+    tagline: 'Read pages, create content, and query databases in Notion.',
+    description: 'Full Notion integration — read page content, create new pages, and query databases with filters. Popular for storing Rune outputs as structured knowledge.',
+    category: 'productivity', installCmd: 'clawhub install notion',
+    docsUrl: 'https://developers.notion.com/',
+    actionIds: ['notion-read', 'notion-write', 'notion-db-query'],
+    downloads: 112000, stars: 2840, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'google-sheets', name: 'Google Sheets', vendor: 'Google', emoji: '📊',
+    tagline: 'Read and write spreadsheet data via the Sheets API.',
+    description: 'Read rows from and append data to Google Sheets. Commonly used for logging Rune outputs, analytics dashboards, and lightweight databases.',
+    category: 'productivity', installCmd: 'clawhub install google-sheets',
+    docsUrl: 'https://developers.google.com/sheets/api',
+    actionIds: ['gsheets-read', 'gsheets-write'],
+    downloads: 87000, stars: 1760, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'linear', name: 'Linear', vendor: 'Linear', emoji: '📐',
+    tagline: 'Create and fetch issues in Linear project management.',
+    description: 'Integrate with Linear for issue tracking — create new issues with labels and priorities, and fetch existing issues with filters for Rune-based automations.',
+    category: 'productivity', installCmd: 'clawhub install linear',
+    docsUrl: 'https://developers.linear.app/docs/',
+    actionIds: ['linear-create-issue', 'linear-fetch-issues'],
+    downloads: 45000, stars: 1020, version: '1.0.0',
+  },
+
+  // ── Dev ────────────────────────────────────────────────────────────────────
+  {
+    id: 'github', name: 'GitHub', vendor: 'GitHub (Microsoft)', emoji: '🐙',
+    tagline: 'List PRs, get diffs, post comments, and create issues.',
+    description: 'Comprehensive GitHub automation — list and review pull requests, fetch code diffs, post PR comments, create issues, and monitor releases. Essential for DevOps Runes.',
+    category: 'dev', installCmd: 'clawhub install github',
+    docsUrl: 'https://docs.github.com/en/rest',
+    actionIds: ['github-list-prs', 'github-get-diff', 'github-post-comment', 'github-create-issue', 'github-list-releases', 'github-scan-repo'],
+    downloads: 178000, stars: 3940, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'gitlab', name: 'GitLab', vendor: 'GitLab', emoji: '🦊',
+    tagline: 'Create MRs, manage pipelines, and post comments in GitLab.',
+    description: 'GitLab CI/CD and issue management — create merge requests, trigger pipelines, and post review comments via the GitLab REST API.',
+    category: 'dev', installCmd: 'clawhub install gitlab',
+    docsUrl: 'https://docs.gitlab.com/ee/api/',
+    actionIds: ['gitlab-create-mr', 'gitlab-get-pipeline'],
+    downloads: 52000, stars: 870, version: '1.0.0',
+  },
+  {
+    id: 'jira', name: 'Jira', vendor: 'Atlassian', emoji: '🔷',
+    tagline: 'Create and fetch Jira tickets and update sprint boards.',
+    description: 'Jira Software integration — create issues, update statuses, query sprint boards, and link issues to PRs in DevOps pipelines.',
+    category: 'dev', installCmd: 'clawhub install jira',
+    docsUrl: 'https://developer.atlassian.com/cloud/jira/platform/rest/v3/',
+    actionIds: ['jira-create-issue', 'jira-fetch-issues'],
+    downloads: 68000, stars: 1120, version: '1.1.0',
+  },
+
+  // ── Data ───────────────────────────────────────────────────────────────────
+  {
+    id: 'brave-search', name: 'Brave Search', vendor: 'Brave', emoji: '🦁',
+    tagline: 'Privacy-first web search API with no tracking.',
+    description: 'Search the web with Brave\'s independent index — no tracking, no filter bubbles. Returns clean results ideal for LLM research pipelines.',
+    category: 'data', installCmd: 'clawhub install brave-search',
+    docsUrl: 'https://brave.com/search/api/',
+    actionIds: ['brave-search'],
+    downloads: 93000, stars: 2180, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'firecrawl', name: 'Firecrawl', vendor: 'Firecrawl', emoji: '🔥',
+    tagline: 'Scrape any web page into clean Markdown for LLMs.',
+    description: 'Convert any URL into clean, structured Markdown or JSON — handles JavaScript-heavy sites, bypasses bot protection, and extracts structured data.',
+    category: 'data', installCmd: 'clawhub install firecrawl',
+    docsUrl: 'https://docs.firecrawl.dev/',
+    actionIds: ['firecrawl-scrape', 'firecrawl-crawl'],
+    downloads: 71000, stars: 1860, version: '1.3.0',
+  },
+  {
+    id: 'exa', name: 'Exa', vendor: 'Exa.ai', emoji: '🌐',
+    tagline: 'Neural search engine for semantic and similarity-based retrieval.',
+    description: 'Exa\'s neural search finds semantically similar content — better than keyword search for LLM research pipelines. Returns full-page content.',
+    category: 'data', installCmd: 'clawhub install exa',
+    docsUrl: 'https://docs.exa.ai/',
+    actionIds: ['exa-search'],
+    downloads: 38000, stars: 940, version: '1.0.0',
+  },
+  {
+    id: 'openweather', name: 'OpenWeatherMap', vendor: 'OpenWeather', emoji: '⛅',
+    tagline: 'Current weather conditions and forecasts for any location.',
+    description: 'Real-time and forecast weather data for any city or coordinates — temperature, precipitation, wind, UV index. No-friction API with generous free tier.',
+    category: 'data', installCmd: 'clawhub install openweather',
+    docsUrl: 'https://openweathermap.org/api',
+    actionIds: ['openweather-fetch'],
+    downloads: 84000, stars: 1420, version: '1.0.0', verified: true,
+  },
+
+  // ── Finance ────────────────────────────────────────────────────────────────
+  {
+    id: 'stripe', name: 'Stripe', vendor: 'Stripe', emoji: '💳',
+    tagline: 'Query revenue, subscriptions, invoices, and customers.',
+    description: 'Read-only Stripe data access — pull MRR, subscription metrics, customer data, and invoice history for financial analytics Runes.',
+    category: 'finance', installCmd: 'clawhub install stripe',
+    docsUrl: 'https://docs.stripe.com/api',
+    actionIds: ['stripe-get-mrr', 'stripe-list-customers', 'stripe-get-invoice', 'stripe-list-charges'],
+    downloads: 76000, stars: 1640, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'coingecko', name: 'CoinGecko', vendor: 'CoinGecko', emoji: '🦎',
+    tagline: 'Real-time and historical cryptocurrency price data.',
+    description: 'Free crypto market data — current prices, market caps, volume, and historical OHLCV for thousands of tokens across all chains.',
+    category: 'finance', installCmd: 'clawhub install coingecko',
+    docsUrl: 'https://www.coingecko.com/api/documentation',
+    actionIds: ['coingecko-price', 'coingecko-market-chart'],
+    downloads: 47000, stars: 1090, version: '1.0.0',
+  },
+
+  // ── Marketing / CRM ────────────────────────────────────────────────────────
+  {
+    id: 'hubspot', name: 'HubSpot', vendor: 'HubSpot', emoji: '🤝',
+    tagline: 'Create contacts, update deals, and log CRM activity.',
+    description: 'HubSpot CRM automation — create and update contacts, manage deals and pipelines, log activities, and sync lead data from other Rune inputs.',
+    category: 'marketing', installCmd: 'clawhub install hubspot',
+    docsUrl: 'https://developers.hubspot.com/docs/api/overview',
+    actionIds: ['hubspot-create-contact', 'hubspot-update-deal'],
+    downloads: 58000, stars: 1110, version: '1.0.0',
+  },
+  {
+    id: 'twitter-x', name: 'Twitter / X', vendor: 'X Corp', emoji: '𝕏',
+    tagline: 'Search tweets, post updates, and monitor brand mentions.',
+    description: 'Twitter/X API v2 integration — search by query or hashtag, post tweets, and fetch user timelines for social monitoring Runes.',
+    category: 'marketing', installCmd: 'clawhub install twitter-x',
+    docsUrl: 'https://developer.twitter.com/en/docs/twitter-api',
+    actionIds: ['twitter-search', 'twitter-post', 'twitter-user-tweets'],
+    downloads: 61000, stars: 1280, version: '1.0.0',
+  },
+
+  // ── IoT / Home ─────────────────────────────────────────────────────────────
+  {
+    id: 'home-assistant', name: 'Home Assistant', vendor: 'Home Assistant', emoji: '🏠',
+    tagline: 'Read sensor states and control smart home devices.',
+    description: 'Connect to a local Home Assistant instance — read entity states (temperature, motion, energy), trigger automations, and control smart home devices.',
+    category: 'iot', installCmd: 'clawhub install home-assistant',
+    docsUrl: 'https://developers.home-assistant.io/docs/api/rest/',
+    actionIds: ['homeassistant-states', 'homeassistant-call-service'],
+    downloads: 29000, stars: 780, version: '1.0.0',
+  },
+
+  // ── Media ──────────────────────────────────────────────────────────────────
+  {
+    id: 'youtube', name: 'YouTube', vendor: 'Google', emoji: '▶️',
+    tagline: 'Fetch video metadata, transcripts, and channel data.',
+    description: 'YouTube Data API — fetch video details, channel statistics, search results, and captions for media monitoring and content analysis Runes.',
+    category: 'media', installCmd: 'clawhub install youtube',
+    docsUrl: 'https://developers.google.com/youtube/v3',
+    actionIds: ['youtube-fetch-video', 'youtube-list-channel'],
+    downloads: 53000, stars: 1120, version: '1.0.0',
+  },
+
+  // ── Utility ────────────────────────────────────────────────────────────────
+  {
+    id: 'firecrawl-pdf', name: 'PDF Parser', vendor: 'Open Source', emoji: '📄',
+    tagline: 'Extract clean text and metadata from PDF documents.',
+    description: 'Parse PDF files to extract readable text, tables, and metadata. Essential utility for document processing Runes working with contracts, reports, and whitepapers.',
+    category: 'utility', installCmd: 'clawhub install pdf-parser',
+    docsUrl: 'https://www.npmjs.com/package/pdf-parse',
+    actionIds: ['pdf-parse'],
+    downloads: 38000, stars: 640, version: '1.0.0',
+  },
+  {
+    id: 'webhook', name: 'Webhook', vendor: 'Open Standard', emoji: '🔗',
+    tagline: 'Trigger Runes from incoming HTTP webhooks.',
+    description: 'Accept incoming HTTP POST requests to trigger Rune pipelines. Supports any event source — GitHub webhooks, Stripe events, Typeform submissions, etc.',
+    category: 'utility', installCmd: 'clawhub install webhook',
+    docsUrl: 'https://en.wikipedia.org/wiki/Webhook',
+    actionIds: ['webhook-trigger'],
+    downloads: 94000, stars: 1680, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'cohere', name: 'Cohere Command', vendor: 'Cohere', emoji: '🌊', tagline: 'Enterprise-grade LLM for search, summarization, and classification.', description: 'Cohere Command and Embed models for enterprise NLP tasks — text generation, semantic search, and classification at scale.', category: 'ai', installCmd: 'clawhub install cohere', docsUrl: 'https://docs.cohere.com', actionIds: ['cohere-generate', 'cohere-embed', 'cohere-classify', 'cohere-rerank'], downloads: 52000, stars: 980, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'mistral', name: 'Mistral AI', vendor: 'Mistral AI', emoji: '💨', tagline: 'Fast, open-weight LLMs — Mistral 7B to Mixtral 8x22B.', description: 'Mistral AI models including Mistral 7B, Mixtral MoE, and Mistral Large for efficient, high-quality text generation.', category: 'ai', installCmd: 'clawhub install mistral', docsUrl: 'https://docs.mistral.ai', actionIds: ['mistral-generate', 'mistral-chat', 'mistral-embed'], downloads: 41000, stars: 860, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'groq', name: 'Groq', vendor: 'Groq', emoji: '⚡', tagline: 'Blazing-fast LLM inference — 500+ tokens/second.', description: 'Groq LPU inference engine for ultra-fast Llama and Mixtral inference. Ideal for latency-sensitive AI pipelines.', category: 'ai', installCmd: 'clawhub install groq', docsUrl: 'https://console.groq.com/docs', actionIds: ['groq-chat', 'groq-stream'], downloads: 38000, stars: 720, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'deepseek', name: 'DeepSeek', vendor: 'DeepSeek', emoji: '🔭', tagline: 'Powerful open-source LLMs for code and reasoning.', description: 'DeepSeek models including DeepSeek Coder and DeepSeek V2 for code generation, math reasoning, and general tasks.', category: 'ai', installCmd: 'clawhub install deepseek', docsUrl: 'https://platform.deepseek.com/docs', actionIds: ['deepseek-chat', 'deepseek-coder'], downloads: 29000, stars: 640, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'ollama', name: 'Ollama', vendor: 'Ollama', emoji: '🦙', tagline: 'Run LLMs locally — Llama, Mistral, Phi, Gemma.', description: 'Run open-source large language models locally with Ollama. Supports Llama 3, Mistral, Phi-3, Gemma, and 100+ models.', category: 'ai', installCmd: 'clawhub install ollama', docsUrl: 'https://ollama.com/docs', actionIds: ['ollama-generate', 'ollama-chat', 'ollama-pull'], downloads: 67000, stars: 1540, version: '2.0.0', verified: false,
+  },
+  {
+    id: 'replicate', name: 'Replicate', vendor: 'Replicate', emoji: '🎨', tagline: 'Run AI models in the cloud — images, video, audio.', description: 'Run thousands of open-source AI models via API — Stable Diffusion, ControlNet, LLaVA, Whisper, and more.', category: 'ai', installCmd: 'clawhub install replicate', docsUrl: 'https://replicate.com/docs', actionIds: ['replicate-image-gen', 'replicate-video-gen', 'replicate-upscale'], downloads: 44000, stars: 1120, version: '1.3.0', verified: true,
+  },
+  {
+    id: 'stability-ai', name: 'Stable Diffusion', vendor: 'Stability AI', emoji: '🖼️', tagline: 'State-of-the-art image generation via Stability API.', description: 'Stability AI API for image generation, inpainting, upscaling, and control with Stable Diffusion XL and SD3.', category: 'ai', installCmd: 'clawhub install stability-ai', docsUrl: 'https://platform.stability.ai/docs', actionIds: ['sd-text-to-image', 'sd-image-to-image', 'sd-inpaint', 'sd-upscale'], downloads: 36000, stars: 890, version: '2.1.0', verified: true,
+  },
+  {
+    id: 'together-ai', name: 'Together AI', vendor: 'Together AI', emoji: '🤝', tagline: 'Run and fine-tune open-source models at scale.', description: 'Together AI platform for running 100+ open-source models with fast inference, fine-tuning, and embeddings.', category: 'ai', installCmd: 'clawhub install together-ai', docsUrl: 'https://docs.together.ai', actionIds: ['together-chat', 'together-embed', 'together-finetune'], downloads: 18000, stars: 430, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'fireworks-ai', name: 'Fireworks AI', vendor: 'Fireworks AI', emoji: '🎆', tagline: 'Fastest open-model inference for production AI.', description: 'Fireworks AI delivers the fastest inference for Llama, Mixtral, and other open models with compound AI system support.', category: 'ai', installCmd: 'clawhub install fireworks-ai', docsUrl: 'https://docs.fireworks.ai', actionIds: ['fireworks-chat', 'fireworks-function-call'], downloads: 14000, stars: 310, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'zoom', name: 'Zoom', vendor: 'Zoom', emoji: '📹', tagline: 'Create meetings, get transcripts, and manage participants.', description: 'Zoom Meetings API for scheduling meetings, getting recordings, transcripts, and managing participants programmatically.', category: 'communication', installCmd: 'clawhub install zoom', docsUrl: 'https://developers.zoom.us/docs', actionIds: ['zoom-create-meeting', 'zoom-get-recording', 'zoom-get-transcript'], downloads: 31000, stars: 620, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'microsoft-teams', name: 'Microsoft Teams', vendor: 'Microsoft', emoji: '💼', tagline: 'Post messages, create channels, and manage meetings.', description: 'Microsoft Teams API for sending messages to channels, creating meetings, posting cards, and managing team workflows.', category: 'communication', installCmd: 'clawhub install microsoft-teams', docsUrl: 'https://learn.microsoft.com/en-us/microsoftteams/platform', actionIds: ['teams-send-message', 'teams-create-meeting', 'teams-post-card'], downloads: 28000, stars: 540, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'whatsapp-business', name: 'WhatsApp Business', vendor: 'Meta', emoji: '💬', tagline: 'Send templates, media, and interactive messages via WhatsApp.', description: 'WhatsApp Business API for sending approved template messages, images, documents, and interactive buttons to customers.', category: 'communication', installCmd: 'clawhub install whatsapp-business', docsUrl: 'https://developers.facebook.com/docs/whatsapp', actionIds: ['whatsapp-send-text', 'whatsapp-send-template', 'whatsapp-send-media'], downloads: 24000, stars: 480, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'intercom', name: 'Intercom', vendor: 'Intercom', emoji: '💭', tagline: 'Create conversations, send messages, and manage users.', description: 'Intercom customer messaging platform API for creating conversations, sending messages, managing contacts, and tagging users.', category: 'communication', installCmd: 'clawhub install intercom', docsUrl: 'https://developers.intercom.com', actionIds: ['intercom-create-conversation', 'intercom-send-message', 'intercom-tag-user'], downloads: 19000, stars: 380, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'zendesk', name: 'Zendesk', vendor: 'Zendesk', emoji: '🎫', tagline: 'Create tickets, update status, and manage support queues.', description: 'Zendesk Support API for creating tickets, updating status, adding comments, and routing support conversations.', category: 'communication', installCmd: 'clawhub install zendesk', docsUrl: 'https://developer.zendesk.com/api-reference', actionIds: ['zendesk-create-ticket', 'zendesk-update-ticket', 'zendesk-get-ticket', 'zendesk-add-comment'], downloads: 26000, stars: 510, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'freshdesk', name: 'Freshdesk', vendor: 'Freshworks', emoji: '🌿', tagline: 'Manage support tickets and customer conversations.', description: 'Freshdesk API for creating and updating support tickets, adding notes, managing agents, and automating workflows.', category: 'communication', installCmd: 'clawhub install freshdesk', docsUrl: 'https://developers.freshdesk.com/api', actionIds: ['freshdesk-create-ticket', 'freshdesk-update-ticket', 'freshdesk-reply'], downloads: 14000, stars: 290, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'twilio', name: 'Twilio', vendor: 'Twilio', emoji: '📞', tagline: 'Send SMS, make calls, and manage phone numbers.', description: 'Twilio Communications API for sending SMS, making voice calls, WhatsApp messages, and managing phone numbers.', category: 'communication', installCmd: 'clawhub install twilio', docsUrl: 'https://www.twilio.com/docs', actionIds: ['twilio-sms', 'twilio-call', 'twilio-whatsapp'], downloads: 72000, stars: 1380, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'sendgrid', name: 'SendGrid', vendor: 'Twilio', emoji: '📤', tagline: 'Send transactional and marketing emails at scale.', description: 'SendGrid email API for transactional emails, marketing campaigns, email templates, and delivery analytics.', category: 'communication', installCmd: 'clawhub install sendgrid', docsUrl: 'https://docs.sendgrid.com', actionIds: ['sendgrid-send', 'sendgrid-template', 'sendgrid-track'], downloads: 58000, stars: 1100, version: '1.5.0', verified: true,
+  },
+  {
+    id: 'mailchimp', name: 'Mailchimp', vendor: 'Intuit', emoji: '🐒', tagline: 'Send campaigns, manage lists, and track email performance.', description: 'Mailchimp API for managing subscriber lists, sending email campaigns, creating automations, and tracking performance.', category: 'communication', installCmd: 'clawhub install mailchimp', docsUrl: 'https://mailchimp.com/developer', actionIds: ['mailchimp-send-campaign', 'mailchimp-add-subscriber', 'mailchimp-get-stats'], downloads: 35000, stars: 670, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'brevo', name: 'Brevo', vendor: 'Brevo', emoji: '🟢', tagline: 'Email, SMS, and WhatsApp marketing automation.', description: 'Brevo (formerly Sendinblue) API for transactional email, SMS marketing, WhatsApp campaigns, and contact management.', category: 'communication', installCmd: 'clawhub install brevo', docsUrl: 'https://developers.brevo.com', actionIds: ['brevo-send-email', 'brevo-send-sms', 'brevo-add-contact'], downloads: 21000, stars: 420, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'line', name: 'Line', vendor: 'LY Corporation', emoji: '💚', tagline: 'Send messages and rich content via Line Messaging API.', description: 'Line Messaging API for sending text, images, buttons, carousels, and flex messages to users and groups.', category: 'communication', installCmd: 'clawhub install line', docsUrl: 'https://developers.line.biz/en/docs', actionIds: ['line-send-message', 'line-push', 'line-multicast'], downloads: 11000, stars: 220, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'airtable', name: 'Airtable', vendor: 'Airtable', emoji: '📋', tagline: 'Read, create, and update records in Airtable bases.', description: 'Airtable API for creating and updating records, querying views, managing linked records, and building database-driven automations.', category: 'productivity', installCmd: 'clawhub install airtable', docsUrl: 'https://airtable.com/developers/web/api/introduction', actionIds: ['airtable-get-record', 'airtable-create-record', 'airtable-update-record', 'airtable-list-records'], downloads: 48000, stars: 960, version: '1.3.0', verified: true,
+  },
+  {
+    id: 'asana', name: 'Asana', vendor: 'Asana', emoji: '🦋', tagline: 'Create tasks, update projects, and track deadlines.', description: 'Asana project management API for creating tasks, assigning owners, updating statuses, and tracking project progress.', category: 'productivity', installCmd: 'clawhub install asana', docsUrl: 'https://developers.asana.com/docs', actionIds: ['asana-create-task', 'asana-update-task', 'asana-get-project'], downloads: 32000, stars: 640, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'monday', name: 'Monday.com', vendor: 'Monday.com', emoji: '📅', tagline: 'Manage boards, items, and automations in Monday.com.', description: 'Monday.com API for creating and updating board items, managing columns, triggering automations, and tracking work progress.', category: 'productivity', installCmd: 'clawhub install monday', docsUrl: 'https://developer.monday.com', actionIds: ['monday-create-item', 'monday-update-item', 'monday-get-board'], downloads: 27000, stars: 530, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'trello', name: 'Trello', vendor: 'Atlassian', emoji: '📌', tagline: 'Create cards, move lists, and manage Trello boards.', description: 'Trello API for creating cards, moving items across lists, adding labels, and managing board workflows.', category: 'productivity', installCmd: 'clawhub install trello', docsUrl: 'https://developer.atlassian.com/cloud/trello', actionIds: ['trello-create-card', 'trello-move-card', 'trello-add-label'], downloads: 29000, stars: 580, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'clickup', name: 'ClickUp', vendor: 'ClickUp', emoji: '✅', tagline: 'Create tasks, update statuses, and manage ClickUp spaces.', description: 'ClickUp API for creating tasks with rich properties, managing sprints, updating statuses, and syncing across tools.', category: 'productivity', installCmd: 'clawhub install clickup', docsUrl: 'https://clickup.com/api', actionIds: ['clickup-create-task', 'clickup-update-status', 'clickup-get-list'], downloads: 22000, stars: 440, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'todoist', name: 'Todoist', vendor: 'Doist', emoji: '✔️', tagline: 'Add tasks, set priorities, and sync with Todoist.', description: 'Todoist API for adding tasks with due dates and priorities, completing tasks, and managing projects.', category: 'productivity', installCmd: 'clawhub install todoist', docsUrl: 'https://developer.todoist.com/rest/v2', actionIds: ['todoist-add-task', 'todoist-complete-task', 'todoist-get-tasks'], downloads: 18000, stars: 360, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'confluence', name: 'Confluence', vendor: 'Atlassian', emoji: '📖', tagline: 'Create and update Confluence pages and spaces.', description: 'Atlassian Confluence API for creating pages, updating content, searching spaces, and managing documentation.', category: 'productivity', installCmd: 'clawhub install confluence', docsUrl: 'https://developer.atlassian.com/cloud/confluence', actionIds: ['confluence-create-page', 'confluence-update-page', 'confluence-search'], downloads: 24000, stars: 480, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'miro', name: 'Miro', vendor: 'Miro', emoji: '🗺️', tagline: 'Create boards, sticky notes, and connectors in Miro.', description: 'Miro collaboration board API for creating boards, adding sticky notes, shapes, connectors, and managing team workshops.', category: 'productivity', installCmd: 'clawhub install miro', docsUrl: 'https://developers.miro.com', actionIds: ['miro-create-board', 'miro-add-sticky', 'miro-add-shape'], downloads: 16000, stars: 320, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'figma', name: 'Figma', vendor: 'Figma', emoji: '🎨', tagline: 'Fetch designs, export assets, and comment on Figma files.', description: 'Figma API for retrieving design files, exporting assets as PNG/SVG, reading component properties, and posting comments.', category: 'productivity', installCmd: 'clawhub install figma', docsUrl: 'https://www.figma.com/developers/api', actionIds: ['figma-get-file', 'figma-export-asset', 'figma-post-comment'], downloads: 20000, stars: 400, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'google-docs', name: 'Google Docs', vendor: 'Google', emoji: '📝', tagline: 'Create, read, and update Google Docs documents.', description: 'Google Docs API for creating documents, inserting text, reading content, and formatting document sections.', category: 'productivity', installCmd: 'clawhub install google-docs', docsUrl: 'https://developers.google.com/docs/api', actionIds: ['gdocs-create', 'gdocs-insert-text', 'gdocs-read'], downloads: 41000, stars: 820, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'vercel', name: 'Vercel', vendor: 'Vercel', emoji: '▲', tagline: 'Deploy projects, manage domains, and check build status.', description: 'Vercel API for triggering deployments, managing project environment variables, checking build status, and managing domains.', category: 'dev', installCmd: 'clawhub install vercel', docsUrl: 'https://vercel.com/docs/rest-api', actionIds: ['vercel-deploy', 'vercel-get-deployment', 'vercel-set-env'], downloads: 44000, stars: 880, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'railway', name: 'Railway', vendor: 'Railway', emoji: '🚂', tagline: 'Deploy apps, manage services, and monitor Railway projects.', description: 'Railway API for deploying applications, managing services, setting environment variables, and viewing deployment logs.', category: 'dev', installCmd: 'clawhub install railway', docsUrl: 'https://docs.railway.app/reference/public-api', actionIds: ['railway-deploy', 'railway-get-service', 'railway-set-variable'], downloads: 21000, stars: 430, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'cloudflare', name: 'Cloudflare', vendor: 'Cloudflare', emoji: '🔶', tagline: 'Manage DNS, Workers, KV, and Pages deployments.', description: 'Cloudflare API for managing DNS records, deploying Workers, using KV/D1/R2 storage, and managing Pages projects.', category: 'dev', installCmd: 'clawhub install cloudflare', docsUrl: 'https://developers.cloudflare.com/api', actionIds: ['cf-dns-update', 'cf-worker-deploy', 'cf-kv-put', 'cf-purge-cache'], downloads: 38000, stars: 760, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'aws-s3', name: 'AWS S3', vendor: 'Amazon', emoji: '🪣', tagline: 'Upload, download, and manage files in AWS S3 buckets.', description: 'AWS S3 API for uploading objects, generating presigned URLs, listing buckets, and managing file lifecycle policies.', category: 'dev', installCmd: 'clawhub install aws-s3', docsUrl: 'https://docs.aws.amazon.com/s3', actionIds: ['s3-upload', 's3-download', 's3-presign', 's3-list'], downloads: 92000, stars: 1840, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'aws-lambda', name: 'AWS Lambda', vendor: 'Amazon', emoji: 'λ', tagline: 'Invoke and manage AWS Lambda functions.', description: 'AWS Lambda API for invoking functions, managing event source mappings, and monitoring function execution.', category: 'dev', installCmd: 'clawhub install aws-lambda', docsUrl: 'https://docs.aws.amazon.com/lambda', actionIds: ['lambda-invoke', 'lambda-update-code', 'lambda-get-logs'], downloads: 68000, stars: 1360, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'docker-hub', name: 'Docker Hub', vendor: 'Docker', emoji: '🐋', tagline: 'Pull images, push builds, and manage repositories.', description: 'Docker Hub API for searching images, managing repositories, pulling manifests, and triggering automated builds.', category: 'dev', installCmd: 'clawhub install docker-hub', docsUrl: 'https://docs.docker.com/docker-hub/api/latest', actionIds: ['docker-pull', 'docker-push', 'docker-tag'], downloads: 54000, stars: 1080, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'circleci', name: 'CircleCI', vendor: 'CircleCI', emoji: '⭕', tagline: 'Trigger pipelines and monitor build status.', description: 'CircleCI API for triggering pipelines, checking workflow status, rerunning failed jobs, and fetching build artifacts.', category: 'dev', installCmd: 'clawhub install circleci', docsUrl: 'https://circleci.com/docs/api/v2', actionIds: ['circleci-trigger', 'circleci-get-workflow', 'circleci-rerun'], downloads: 22000, stars: 440, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'datadog', name: 'Datadog', vendor: 'Datadog', emoji: '🐕', tagline: 'Query metrics, send events, and manage monitors.', description: 'Datadog API for querying time-series metrics, sending custom events, creating monitors, and managing dashboards.', category: 'dev', installCmd: 'clawhub install datadog', docsUrl: 'https://docs.datadoghq.com/api', actionIds: ['datadog-query-metric', 'datadog-send-event', 'datadog-create-monitor'], downloads: 34000, stars: 680, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'sentry', name: 'Sentry', vendor: 'Sentry', emoji: '🔍', tagline: 'Fetch issues, manage alerts, and track error rates.', description: 'Sentry error tracking API for fetching issues, managing alert rules, resolving errors, and tracking release health.', category: 'dev', installCmd: 'clawhub install sentry', docsUrl: 'https://docs.sentry.io/api', actionIds: ['sentry-get-issues', 'sentry-resolve-issue', 'sentry-create-alert'], downloads: 41000, stars: 820, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'pagerduty', name: 'PagerDuty', vendor: 'PagerDuty', emoji: '🚨', tagline: 'Trigger incidents, escalate, and manage on-call schedules.', description: 'PagerDuty API for creating and resolving incidents, managing escalation policies, and viewing on-call schedules.', category: 'dev', installCmd: 'clawhub install pagerduty', docsUrl: 'https://developer.pagerduty.com/api-reference', actionIds: ['pagerduty-trigger', 'pagerduty-resolve', 'pagerduty-get-oncall'], downloads: 28000, stars: 560, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'grafana', name: 'Grafana', vendor: 'Grafana Labs', emoji: '📊', tagline: 'Query panels, annotate graphs, and manage dashboards.', description: 'Grafana API for querying dashboard panels, creating annotations, managing data sources, and alerting.', category: 'dev', installCmd: 'clawhub install grafana', docsUrl: 'https://grafana.com/docs/grafana/latest/developers/http_api', actionIds: ['grafana-query', 'grafana-annotate', 'grafana-alert'], downloads: 26000, stars: 520, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'new-relic', name: 'New Relic', vendor: 'New Relic', emoji: '🔵', tagline: 'Query APM metrics, create alerts, and manage dashboards.', description: 'New Relic observability platform API for querying NRQL data, creating alert conditions, and managing dashboards.', category: 'dev', installCmd: 'clawhub install new-relic', docsUrl: 'https://docs.newrelic.com/docs/apis', actionIds: ['newrelic-query', 'newrelic-alert', 'newrelic-deploy'], downloads: 19000, stars: 380, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'postgresql', name: 'PostgreSQL', vendor: 'PostgreSQL Global Group', emoji: '🐘', tagline: 'Execute queries, insert rows, and manage schemas.', description: 'PostgreSQL database skill for executing SQL queries, inserting and updating rows, managing schemas, and running transactions.', category: 'data', installCmd: 'clawhub install postgresql', docsUrl: 'https://www.postgresql.org/docs', actionIds: ['pg-query', 'pg-insert', 'pg-update', 'pg-transaction'], downloads: 86000, stars: 1720, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'mysql', name: 'MySQL', vendor: 'Oracle', emoji: '🐬', tagline: 'Run SQL queries and manage MySQL databases.', description: 'MySQL connector for executing SELECT, INSERT, UPDATE, DELETE queries, managing schemas, and running stored procedures.', category: 'data', installCmd: 'clawhub install mysql', docsUrl: 'https://dev.mysql.com/doc', actionIds: ['mysql-query', 'mysql-insert', 'mysql-update'], downloads: 74000, stars: 1480, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'mongodb', name: 'MongoDB', vendor: 'MongoDB Inc.', emoji: '🍃', tagline: 'Query documents, aggregate data, and manage collections.', description: 'MongoDB Atlas API for querying documents, inserting records, running aggregation pipelines, and managing collections.', category: 'data', installCmd: 'clawhub install mongodb', docsUrl: 'https://www.mongodb.com/docs/drivers', actionIds: ['mongo-find', 'mongo-insert', 'mongo-aggregate', 'mongo-update'], downloads: 79000, stars: 1580, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'redis', name: 'Redis', vendor: 'Redis Ltd.', emoji: '♦️', tagline: 'Get/set keys, manage queues, and pub/sub messaging.', description: 'Redis skill for get/set/del operations, pub/sub messaging, stream processing, sorted sets, and cache management.', category: 'data', installCmd: 'clawhub install redis', docsUrl: 'https://redis.io/docs', actionIds: ['redis-get', 'redis-set', 'redis-publish', 'redis-lpush'], downloads: 81000, stars: 1620, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'supabase', name: 'Supabase', vendor: 'Supabase', emoji: '⚡', tagline: 'Query Postgres, use auth, and subscribe to realtime changes.', description: 'Supabase API for querying Postgres tables, managing users with Auth, uploading to Storage, and listening to realtime changes.', category: 'data', installCmd: 'clawhub install supabase', docsUrl: 'https://supabase.com/docs', actionIds: ['supabase-select', 'supabase-insert', 'supabase-auth', 'supabase-storage-upload'], downloads: 53000, stars: 1060, version: '1.3.0', verified: true,
+  },
+  {
+    id: 'pinecone', name: 'Pinecone', vendor: 'Pinecone', emoji: '🌲', tagline: 'Upsert and query vectors for semantic search and RAG.', description: 'Pinecone vector database for upserting embeddings, querying by similarity, and building retrieval-augmented generation pipelines.', category: 'data', installCmd: 'clawhub install pinecone', docsUrl: 'https://docs.pinecone.io', actionIds: ['pinecone-upsert', 'pinecone-query', 'pinecone-delete'], downloads: 39000, stars: 780, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'weaviate', name: 'Weaviate', vendor: 'Weaviate B.V.', emoji: '🔮', tagline: 'Store objects with vectors and run GraphQL semantic queries.', description: 'Weaviate open-source vector database for storing objects with embeddings, running semantic queries, and building RAG pipelines.', category: 'data', installCmd: 'clawhub install weaviate', docsUrl: 'https://weaviate.io/developers/weaviate', actionIds: ['weaviate-add', 'weaviate-query', 'weaviate-near-text'], downloads: 21000, stars: 420, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'qdrant', name: 'Qdrant', vendor: 'Qdrant', emoji: '🎯', tagline: 'High-performance vector search with filtering.', description: 'Qdrant vector database for high-performance similarity search, filtered queries, and embedding-based retrieval.', category: 'data', installCmd: 'clawhub install qdrant', docsUrl: 'https://qdrant.tech/documentation', actionIds: ['qdrant-upsert', 'qdrant-search', 'qdrant-filter'], downloads: 17000, stars: 340, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'dropbox', name: 'Dropbox', vendor: 'Dropbox', emoji: '📦', tagline: 'Upload, download, share, and manage Dropbox files.', description: 'Dropbox API for uploading and downloading files, creating shared links, managing folders, and syncing file metadata.', category: 'data', installCmd: 'clawhub install dropbox', docsUrl: 'https://www.dropbox.com/developers/documentation', actionIds: ['dropbox-upload', 'dropbox-download', 'dropbox-share', 'dropbox-list'], downloads: 36000, stars: 720, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'google-drive', name: 'Google Drive', vendor: 'Google', emoji: '🗂️', tagline: 'Upload, download, share, and manage Drive files.', description: 'Google Drive API for uploading and downloading files, managing permissions, creating folders, and searching Drive content.', category: 'data', installCmd: 'clawhub install google-drive', docsUrl: 'https://developers.google.com/drive', actionIds: ['gdrive-upload', 'gdrive-download', 'gdrive-share', 'gdrive-list'], downloads: 52000, stars: 1040, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'cloudinary', name: 'Cloudinary', vendor: 'Cloudinary', emoji: '☁️', tagline: 'Upload, transform, and deliver images and videos.', description: 'Cloudinary media management API for uploading assets, applying transformations, optimizing images, and managing CDN delivery.', category: 'data', installCmd: 'clawhub install cloudinary', docsUrl: 'https://cloudinary.com/documentation', actionIds: ['cloudinary-upload', 'cloudinary-transform', 'cloudinary-optimize'], downloads: 44000, stars: 880, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'paypal', name: 'PayPal', vendor: 'PayPal', emoji: '🅿️', tagline: 'Create payments, capture orders, and manage refunds.', description: 'PayPal REST API for creating payment orders, capturing charges, processing refunds, and managing subscriptions.', category: 'finance', installCmd: 'clawhub install paypal', docsUrl: 'https://developer.paypal.com/api/rest', actionIds: ['paypal-create-order', 'paypal-capture', 'paypal-refund'], downloads: 47000, stars: 940, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'square', name: 'Square', vendor: 'Block Inc.', emoji: '⬛', tagline: 'Process payments, manage inventory, and access orders.', description: 'Square API for processing card payments, managing catalog inventory, creating orders, and accessing customer data.', category: 'finance', installCmd: 'clawhub install square', docsUrl: 'https://developer.squareup.com/docs', actionIds: ['square-charge', 'square-refund', 'square-catalog'], downloads: 31000, stars: 620, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'quickbooks', name: 'QuickBooks', vendor: 'Intuit', emoji: '📒', tagline: 'Sync invoices, expenses, and accounting data.', description: 'QuickBooks Online API for creating invoices, recording expenses, managing customers, and syncing accounting data.', category: 'finance', installCmd: 'clawhub install quickbooks', docsUrl: 'https://developer.intuit.com/app/developer/qbo/docs', actionIds: ['qb-create-invoice', 'qb-record-expense', 'qb-get-report'], downloads: 26000, stars: 520, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'xero', name: 'Xero', vendor: 'Xero', emoji: '🟦', tagline: 'Create invoices, sync bank feeds, and manage accounts.', description: 'Xero accounting API for creating invoices, reconciling bank transactions, managing contacts, and generating financial reports.', category: 'finance', installCmd: 'clawhub install xero', docsUrl: 'https://developer.xero.com/documentation', actionIds: ['xero-invoice', 'xero-bank-sync', 'xero-contact'], downloads: 19000, stars: 380, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'plaid', name: 'Plaid', vendor: 'Plaid', emoji: '🏦', tagline: 'Link bank accounts and access transaction data.', description: 'Plaid financial data API for linking bank accounts, fetching transaction history, checking balances, and verifying account ownership.', category: 'finance', installCmd: 'clawhub install plaid', docsUrl: 'https://plaid.com/docs', actionIds: ['plaid-link', 'plaid-transactions', 'plaid-balance'], downloads: 33000, stars: 660, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'wise', name: 'Wise', vendor: 'Wise', emoji: '💸', tagline: 'Send international transfers and check exchange rates.', description: 'Wise (formerly TransferWise) API for creating multi-currency transfers, checking exchange rates, and managing recipient accounts.', category: 'finance', installCmd: 'clawhub install wise', docsUrl: 'https://docs.wise.com/api-docs', actionIds: ['wise-transfer', 'wise-rate', 'wise-account'], downloads: 16000, stars: 320, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'salesforce', name: 'Salesforce', vendor: 'Salesforce', emoji: '☁️', tagline: 'Query, create, and update Salesforce CRM records.', description: 'Salesforce CRM API for querying with SOQL, creating leads and opportunities, updating account data, and managing workflows.', category: 'marketing', installCmd: 'clawhub install salesforce', docsUrl: 'https://developer.salesforce.com/docs/apis', actionIds: ['sf-query', 'sf-create-lead', 'sf-update-record', 'sf-create-opportunity'], downloads: 58000, stars: 1160, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'pipedrive', name: 'Pipedrive', vendor: 'Pipedrive', emoji: '🔁', tagline: 'Manage deals, contacts, and pipeline stages.', description: 'Pipedrive CRM API for creating deals, updating pipeline stages, managing contacts, and tracking sales activities.', category: 'marketing', installCmd: 'clawhub install pipedrive', docsUrl: 'https://developers.pipedrive.com/docs/api/v1', actionIds: ['pipedrive-deal', 'pipedrive-contact', 'pipedrive-activity'], downloads: 22000, stars: 440, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'zoho-crm', name: 'Zoho CRM', vendor: 'Zoho', emoji: '🐘', tagline: 'Manage leads, contacts, and deals in Zoho CRM.', description: 'Zoho CRM API for creating leads, converting to contacts, managing deals, and running module-specific operations.', category: 'marketing', installCmd: 'clawhub install zoho-crm', docsUrl: 'https://www.zoho.com/crm/developer/docs', actionIds: ['zoho-create-lead', 'zoho-update-deal', 'zoho-get-contact'], downloads: 17000, stars: 340, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'attio', name: 'Attio', vendor: 'Attio', emoji: '🔮', tagline: 'Manage CRM records, notes, and tasks in Attio.', description: 'Attio next-gen CRM API for managing records, creating notes, handling tasks, and building data-driven relationship workflows.', category: 'marketing', installCmd: 'clawhub install attio', docsUrl: 'https://developers.attio.com/reference', actionIds: ['attio-create-record', 'attio-add-note', 'attio-update-attribute'], downloads: 9000, stars: 180, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'convertkit', name: 'Kit (ConvertKit)', vendor: 'ConvertKit', emoji: '✉️', tagline: 'Manage subscribers, sequences, and email broadcasts.', description: 'ConvertKit email marketing API for managing subscribers, creating sequences, sending broadcasts, and tracking conversions.', category: 'marketing', installCmd: 'clawhub install convertkit', docsUrl: 'https://developers.kit.com/docs', actionIds: ['ck-add-subscriber', 'ck-tag-subscriber', 'ck-broadcast'], downloads: 14000, stars: 280, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'klaviyo', name: 'Klaviyo', vendor: 'Klaviyo', emoji: '📧', tagline: 'Send flows, manage lists, and track e-commerce events.', description: 'Klaviyo email and SMS marketing API for managing lists, triggering flows, sending campaigns, and tracking e-commerce purchase events.', category: 'marketing', installCmd: 'clawhub install klaviyo', docsUrl: 'https://developers.klaviyo.com', actionIds: ['klaviyo-track', 'klaviyo-add-to-list', 'klaviyo-send-campaign'], downloads: 26000, stars: 520, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'activecampaign', name: 'ActiveCampaign', vendor: 'ActiveCampaign', emoji: '⚡', tagline: 'Add contacts, trigger automations, and send emails.', description: 'ActiveCampaign API for creating contacts, triggering automation workflows, sending campaigns, and managing deals.', category: 'marketing', installCmd: 'clawhub install activecampaign', docsUrl: 'https://developers.activecampaign.com/reference', actionIds: ['ac-add-contact', 'ac-trigger-automation', 'ac-send-email'], downloads: 18000, stars: 360, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'instagram', name: 'Instagram', vendor: 'Meta', emoji: '📸', tagline: 'Publish posts, fetch insights, and manage comments.', description: 'Instagram Graph API for publishing photos and reels, fetching account insights, managing comments, and monitoring hashtags.', category: 'marketing', installCmd: 'clawhub install instagram', docsUrl: 'https://developers.facebook.com/docs/instagram-api', actionIds: ['instagram-post', 'instagram-insights', 'instagram-comments'], downloads: 36000, stars: 720, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'facebook', name: 'Facebook', vendor: 'Meta', emoji: '👤', tagline: 'Post to pages, fetch insights, and manage ads.', description: 'Facebook Graph API for posting to Pages, fetching post insights, managing ads, and reading Page analytics.', category: 'marketing', installCmd: 'clawhub install facebook', docsUrl: 'https://developers.facebook.com/docs/graph-api', actionIds: ['fb-page-post', 'fb-insights', 'fb-ad-create'], downloads: 42000, stars: 840, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'tiktok', name: 'TikTok', vendor: 'ByteDance', emoji: '🎵', tagline: 'Post videos, fetch analytics, and manage TikTok content.', description: 'TikTok Business API for uploading videos, fetching account analytics, managing creator content, and tracking performance.', category: 'marketing', installCmd: 'clawhub install tiktok', docsUrl: 'https://developers.tiktok.com', actionIds: ['tiktok-post', 'tiktok-analytics', 'tiktok-comments'], downloads: 24000, stars: 480, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'linkedin', name: 'LinkedIn', vendor: 'Microsoft', emoji: '💼', tagline: 'Post updates, fetch profile data, and manage company pages.', description: 'LinkedIn API for posting articles and updates, fetching profile data, managing company page content, and tracking engagement.', category: 'marketing', installCmd: 'clawhub install linkedin', docsUrl: 'https://learn.microsoft.com/en-us/linkedin', actionIds: ['linkedin-post', 'linkedin-profile', 'linkedin-company'], downloads: 31000, stars: 620, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'reddit', name: 'Reddit', vendor: 'Reddit Inc.', emoji: '🔴', tagline: 'Submit posts, fetch top threads, and manage subreddits.', description: 'Reddit API for submitting posts and comments, fetching top threads, searching subreddits, and moderating content.', category: 'marketing', installCmd: 'clawhub install reddit', docsUrl: 'https://www.reddit.com/dev/api', actionIds: ['reddit-submit', 'reddit-fetch-top', 'reddit-search'], downloads: 21000, stars: 420, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'bluesky', name: 'Bluesky', vendor: 'Bluesky PBLLC', emoji: '🦋', tagline: 'Post to Bluesky and fetch AT Protocol data.', description: 'Bluesky AT Protocol API for posting to the social network, fetching feeds, managing follows, and building decentralized social workflows.', category: 'marketing', installCmd: 'clawhub install bluesky', docsUrl: 'https://docs.bsky.app', actionIds: ['bsky-post', 'bsky-fetch-feed', 'bsky-follow'], downloads: 11000, stars: 220, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'bamboo-hr', name: 'BambooHR', vendor: 'BambooHR', emoji: '🎋', tagline: 'Get employee data, track time off, and manage onboarding.', description: 'BambooHR API for fetching employee profiles, tracking time-off requests, managing onboarding tasks, and syncing HR data.', category: 'productivity', installCmd: 'clawhub install bamboo-hr', docsUrl: 'https://documentation.bamboohr.com/docs', actionIds: ['bamboo-get-employee', 'bamboo-time-off', 'bamboo-onboarding'], downloads: 13000, stars: 260, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'gusto', name: 'Gusto', vendor: 'Gusto', emoji: '💰', tagline: 'Run payroll, manage employees, and sync compensation data.', description: 'Gusto payroll API for running payroll, managing employee compensation, tracking benefits, and syncing HR records.', category: 'productivity', installCmd: 'clawhub install gusto', docsUrl: 'https://docs.gusto.com', actionIds: ['gusto-run-payroll', 'gusto-employee', 'gusto-benefits'], downloads: 11000, stars: 220, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'greenhouse', name: 'Greenhouse', vendor: 'Greenhouse Software', emoji: '🌱', tagline: 'Manage job postings, candidates, and hiring stages.', description: 'Greenhouse ATS API for creating job postings, managing candidate pipelines, scheduling interviews, and tracking hiring metrics.', category: 'productivity', installCmd: 'clawhub install greenhouse', docsUrl: 'https://developers.greenhouse.io', actionIds: ['greenhouse-job', 'greenhouse-candidate', 'greenhouse-interview'], downloads: 10000, stars: 200, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'auth0', name: 'Auth0', vendor: 'Okta', emoji: '🔐', tagline: 'Manage users, tokens, and authentication flows.', description: 'Auth0 identity platform API for managing users, issuing tokens, configuring MFA, and managing authentication rules.', category: 'dev', installCmd: 'clawhub install auth0', docsUrl: 'https://auth0.com/docs/api', actionIds: ['auth0-create-user', 'auth0-get-token', 'auth0-reset-password'], downloads: 46000, stars: 920, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'okta', name: 'Okta', vendor: 'Okta', emoji: '🔑', tagline: 'Provision users, manage groups, and control SSO.', description: 'Okta identity management API for provisioning users, managing groups, configuring SSO applications, and auditing sign-ins.', category: 'dev', installCmd: 'clawhub install okta', docsUrl: 'https://developer.okta.com/docs/reference', actionIds: ['okta-create-user', 'okta-assign-group', 'okta-deactivate-user'], downloads: 34000, stars: 680, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'google-analytics', name: 'Google Analytics', vendor: 'Google', emoji: '📈', tagline: 'Fetch traffic reports, events, and conversion data.', description: 'Google Analytics 4 API for fetching traffic reports, custom event data, user behavior, and e-commerce conversion metrics.', category: 'data', installCmd: 'clawhub install google-analytics', docsUrl: 'https://developers.google.com/analytics/devguides/reporting', actionIds: ['ga-report', 'ga-event', 'ga-audience'], downloads: 61000, stars: 1220, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'mixpanel', name: 'Mixpanel', vendor: 'Mixpanel', emoji: '🔀', tagline: 'Track events, build funnels, and analyze user behavior.', description: 'Mixpanel analytics API for tracking user events, building conversion funnels, analyzing retention, and segmenting cohorts.', category: 'data', installCmd: 'clawhub install mixpanel', docsUrl: 'https://developer.mixpanel.com/reference', actionIds: ['mixpanel-track', 'mixpanel-funnel', 'mixpanel-retention'], downloads: 33000, stars: 660, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'amplitude', name: 'Amplitude', vendor: 'Amplitude', emoji: '📉', tagline: 'Track user actions, analyze funnels, and measure retention.', description: 'Amplitude product analytics API for tracking user events, building behavioral funnels, and measuring product engagement.', category: 'data', installCmd: 'clawhub install amplitude', docsUrl: 'https://www.docs.developers.amplitude.com', actionIds: ['amplitude-track', 'amplitude-identify', 'amplitude-chart'], downloads: 27000, stars: 540, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'posthog', name: 'PostHog', vendor: 'PostHog', emoji: '🦔', tagline: 'Open-source analytics — events, feature flags, session replay.', description: 'PostHog product analytics for capturing events, managing feature flags, session recordings, and A/B testing.', category: 'data', installCmd: 'clawhub install posthog', docsUrl: 'https://posthog.com/docs/api', actionIds: ['posthog-capture', 'posthog-feature-flag', 'posthog-identify'], downloads: 19000, stars: 380, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'google-maps', name: 'Google Maps', vendor: 'Google', emoji: '🗺️', tagline: 'Geocode addresses, get directions, and search nearby places.', description: 'Google Maps Platform API for geocoding, reverse geocoding, directions, distance matrix, and places search.', category: 'utility', installCmd: 'clawhub install google-maps', docsUrl: 'https://developers.google.com/maps', actionIds: ['gmaps-geocode', 'gmaps-directions', 'gmaps-places', 'gmaps-distance'], downloads: 73000, stars: 1460, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'mapbox', name: 'Mapbox', vendor: 'Mapbox', emoji: '📍', tagline: 'Geocode locations, get directions, and build custom maps.', description: 'Mapbox API for geocoding addresses, generating directions, isochrones, and creating custom map styles.', category: 'utility', installCmd: 'clawhub install mapbox', docsUrl: 'https://docs.mapbox.com/api', actionIds: ['mapbox-geocode', 'mapbox-directions', 'mapbox-isochrone'], downloads: 31000, stars: 620, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'calendly', name: 'Calendly', vendor: 'Calendly', emoji: '📆', tagline: 'Create scheduling links and fetch booked meetings.', description: 'Calendly scheduling API for creating event type links, fetching scheduled meetings, managing availability, and canceling bookings.', category: 'productivity', installCmd: 'clawhub install calendly', docsUrl: 'https://developer.calendly.com', actionIds: ['calendly-get-events', 'calendly-cancel', 'calendly-create-link'], downloads: 23000, stars: 460, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'cal-com', name: 'Cal.com', vendor: 'Cal.com', emoji: '📅', tagline: 'Open-source scheduling — book, reschedule, cancel meetings.', description: 'Cal.com open-source scheduling API for creating booking links, fetching meetings, managing event types, and handling reschedules.', category: 'productivity', installCmd: 'clawhub install cal-com', docsUrl: 'https://cal.com/docs/api-reference', actionIds: ['calcom-book', 'calcom-cancel', 'calcom-availability'], downloads: 16000, stars: 320, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'docusign', name: 'DocuSign', vendor: 'DocuSign', emoji: '✍️', tagline: 'Send envelopes for signature and track signing status.', description: 'DocuSign eSignature API for creating and sending envelopes, tracking signing status, downloading signed documents, and managing templates.', category: 'utility', installCmd: 'clawhub install docusign', docsUrl: 'https://developers.docusign.com/docs', actionIds: ['docusign-send', 'docusign-status', 'docusign-download'], downloads: 28000, stars: 560, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'deepl', name: 'DeepL', vendor: 'DeepL SE', emoji: '🌍', tagline: 'Translate text into 30+ languages with high accuracy.', description: 'DeepL Translation API for translating text and documents into 30+ languages with industry-leading accuracy.', category: 'utility', installCmd: 'clawhub install deepl', docsUrl: 'https://www.deepl.com/docs-api', actionIds: ['deepl-translate', 'deepl-detect', 'deepl-document'], downloads: 44000, stars: 880, version: '1.2.0', verified: true,
+  },
+  {
+    id: 'google-translate', name: 'Google Translate', vendor: 'Google', emoji: '🌐', tagline: 'Translate text and detect language with Google NMT.', description: 'Google Cloud Translation API for translating text between 100+ languages and auto-detecting source language.', category: 'utility', installCmd: 'clawhub install google-translate', docsUrl: 'https://cloud.google.com/translate/docs', actionIds: ['gtranslate-text', 'gtranslate-detect', 'gtranslate-batch'], downloads: 57000, stars: 1140, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'arxiv', name: 'arXiv', vendor: 'Cornell University', emoji: '📚', tagline: 'Search and fetch research papers from arXiv.', description: 'arXiv API for searching academic papers by keyword, category, or author, and fetching abstracts and PDF links.', category: 'utility', installCmd: 'clawhub install arxiv', docsUrl: 'https://arxiv.org/help/api', actionIds: ['arxiv-search', 'arxiv-fetch', 'arxiv-category'], downloads: 21000, stars: 420, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'pubmed', name: 'PubMed', vendor: 'NCBI / NIH', emoji: '🔬', tagline: 'Search biomedical literature from the PubMed database.', description: 'PubMed Entrez API for searching biomedical research papers, fetching abstracts, and retrieving MeSH metadata.', category: 'utility', installCmd: 'clawhub install pubmed', docsUrl: 'https://www.ncbi.nlm.nih.gov/home/develop/api.shtml', actionIds: ['pubmed-search', 'pubmed-fetch', 'pubmed-citations'], downloads: 14000, stars: 280, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'semantic-scholar', name: 'Semantic Scholar', vendor: 'Allen Institute for AI', emoji: '🎓', tagline: 'Search AI research papers with citation context.', description: 'Semantic Scholar API for searching academic papers, fetching citation data, author profiles, and related research.', category: 'utility', installCmd: 'clawhub install semantic-scholar', docsUrl: 'https://api.semanticscholar.org', actionIds: ['s2-search', 's2-paper', 's2-citations'], downloads: 12000, stars: 240, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'news-api', name: 'NewsAPI', vendor: 'NewsAPI.org', emoji: '📰', tagline: 'Fetch top headlines and search news articles worldwide.', description: 'NewsAPI for fetching top headlines, searching articles by keyword, filtering by source/country, and tracking news topics.', category: 'utility', installCmd: 'clawhub install news-api', docsUrl: 'https://newsapi.org/docs', actionIds: ['news-top-headlines', 'news-search', 'news-sources'], downloads: 37000, stars: 740, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'ethereum', name: 'Ethereum', vendor: 'Ethereum Foundation', emoji: '💎', tagline: 'Read on-chain data, send transactions, and call contracts.', description: 'Ethereum JSON-RPC API for reading balances, fetching transactions, calling smart contracts, and monitoring events.', category: 'finance', installCmd: 'clawhub install ethereum', docsUrl: 'https://ethereum.org/en/developers/docs/apis/json-rpc', actionIds: ['eth-balance', 'eth-transaction', 'eth-contract-call'], downloads: 44000, stars: 880, version: '2.0.0', verified: false,
+  },
+  {
+    id: 'solana', name: 'Solana', vendor: 'Solana Foundation', emoji: '◎', tagline: 'Read accounts, send SOL, and interact with Solana programs.', description: 'Solana Web3.js API for reading account data, sending SOL transfers, interacting with programs, and monitoring transactions.', category: 'finance', installCmd: 'clawhub install solana', docsUrl: 'https://solana.com/docs/rpc', actionIds: ['sol-balance', 'sol-transfer', 'sol-program'], downloads: 32000, stars: 640, version: '1.1.0', verified: false,
+  },
+  {
+    id: 'alchemy', name: 'Alchemy', vendor: 'Alchemy', emoji: '⚗️', tagline: 'Enhanced Ethereum/Polygon APIs with NFT and webhook support.', description: 'Alchemy Web3 platform for enhanced Ethereum APIs, NFT data, mempool monitoring, and blockchain webhooks.', category: 'finance', installCmd: 'clawhub install alchemy', docsUrl: 'https://docs.alchemy.com', actionIds: ['alchemy-nft', 'alchemy-transfers', 'alchemy-webhook'], downloads: 21000, stars: 420, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'shopify', name: 'Shopify', vendor: 'Shopify Inc.', emoji: '🛍️', tagline: 'Manage products, orders, and customers in Shopify.', description: 'Shopify Admin API for managing products, processing orders, updating inventory, managing customers, and syncing store data.', category: 'marketing', installCmd: 'clawhub install shopify', docsUrl: 'https://shopify.dev/docs/api/admin-rest', actionIds: ['shopify-product', 'shopify-order', 'shopify-customer', 'shopify-inventory'], downloads: 54000, stars: 1080, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'woocommerce', name: 'WooCommerce', vendor: 'Automattic', emoji: '🛒', tagline: 'Manage WordPress store products, orders, and customers.', description: 'WooCommerce REST API for managing products, processing orders, updating inventory, and managing customer accounts.', category: 'marketing', installCmd: 'clawhub install woocommerce', docsUrl: 'https://woocommerce.github.io/woocommerce-rest-api-docs', actionIds: ['woo-product', 'woo-order', 'woo-customer'], downloads: 38000, stars: 760, version: '1.1.0', verified: false,
+  },
+  {
+    id: 'qr-code', name: 'QR Code', vendor: 'QRServer.com', emoji: '🔲', tagline: 'Generate QR codes from URLs, text, or data.', description: 'QR code generation API for creating scannable QR codes from URLs, text, and binary data with customizable styling.', category: 'utility', installCmd: 'clawhub install qr-code', docsUrl: 'https://goqr.me/api', actionIds: ['qr-generate', 'qr-from-url', 'qr-custom'], downloads: 28000, stars: 560, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'ip-geolocation', name: 'IP Geolocation', vendor: 'ipapi.co', emoji: '📍', tagline: 'Lookup location, timezone, and ASN from an IP address.', description: 'IP geolocation API for getting country, city, timezone, ISP, and ASN data from any IP address.', category: 'utility', installCmd: 'clawhub install ip-geolocation', docsUrl: 'https://ipapi.co/api', actionIds: ['ip-lookup', 'ip-bulk', 'ip-reverse'], downloads: 22000, stars: 440, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'currency-api', name: 'Currency Exchange', vendor: 'exchangerate-api.com', emoji: '💱', tagline: 'Get live exchange rates for 170+ currencies.', description: 'Currency exchange rate API for live rates, historical data, and currency conversion across 170+ currencies.', category: 'utility', installCmd: 'clawhub install currency-api', docsUrl: 'https://www.exchangerate-api.com/docs', actionIds: ['currency-rate', 'currency-convert', 'currency-history'], downloads: 31000, stars: 620, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'google-places', name: 'Google Places', vendor: 'Google', emoji: '📌', tagline: 'Search places, fetch details, and get reviews.', description: 'Google Places API for searching nearby places, fetching business details, reviews, hours, and geocoding.', category: 'utility', installCmd: 'clawhub install google-places', docsUrl: 'https://developers.google.com/maps/documentation/places', actionIds: ['places-search', 'places-details', 'places-reviews'], downloads: 49000, stars: 980, version: '2.0.0', verified: true,
+  },
+  {
+    id: 'yelp', name: 'Yelp', vendor: 'Yelp', emoji: '⭐', tagline: 'Search businesses and fetch reviews from Yelp.', description: 'Yelp Fusion API for searching businesses by category and location, fetching reviews, and getting business details.', category: 'utility', installCmd: 'clawhub install yelp', docsUrl: 'https://docs.developer.yelp.com', actionIds: ['yelp-search', 'yelp-reviews', 'yelp-details'], downloads: 26000, stars: 520, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'twitch', name: 'Twitch', vendor: 'Amazon/Twitch', emoji: '💜', tagline: 'Get streams, clips, and channel data from Twitch.', description: 'Twitch Helix API for fetching live streams, getting top games, managing channel info, and subscribing to EventSub webhooks.', category: 'media', installCmd: 'clawhub install twitch', docsUrl: 'https://dev.twitch.tv/docs/api', actionIds: ['twitch-streams', 'twitch-clips', 'twitch-eventsub'], downloads: 20000, stars: 400, version: '1.0.0', verified: true,
+  },
+  {
+    id: 'spotify', name: 'Spotify', vendor: 'Spotify', emoji: '🎧', tagline: 'Fetch tracks, control playback, and manage playlists.', description: 'Spotify Web API for searching tracks, fetching audio features, controlling playback, and managing user playlists.', category: 'media', installCmd: 'clawhub install spotify', docsUrl: 'https://developer.spotify.com/documentation/web-api', actionIds: ['spotify-search', 'spotify-play', 'spotify-playlist'], downloads: 39000, stars: 780, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'mux', name: 'Mux', vendor: 'Mux', emoji: '🎬', tagline: 'Manage video assets, streams, and playback.', description: 'Mux video API for uploading video assets, creating live streams, generating thumbnails, and managing playback.', category: 'media', installCmd: 'clawhub install mux', docsUrl: 'https://docs.mux.com', actionIds: ['mux-upload', 'mux-stream', 'mux-thumbnail'], downloads: 17000, stars: 340, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'loom', name: 'Loom', vendor: 'Atlassian', emoji: '🎥', tagline: 'Fetch recordings, generate transcripts, and share links.', description: 'Loom video messaging API for fetching recordings, generating transcripts, getting shareable links, and managing workspaces.', category: 'media', installCmd: 'clawhub install loom', docsUrl: 'https://support.loom.com/hc/en-us/articles/360002208537', actionIds: ['loom-get-video', 'loom-transcript', 'loom-share'], downloads: 14000, stars: 280, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'notion-ai', name: 'Notion AI', vendor: 'Notion', emoji: '✨', tagline: 'Use Notion AI to summarize, translate, and improve pages.', description: 'Notion AI capabilities via API for summarizing page content, translating to other languages, and improving writing quality.', category: 'ai', installCmd: 'clawhub install notion-ai', docsUrl: 'https://developers.notion.com', actionIds: ['notion-ai-summarize', 'notion-ai-translate', 'notion-ai-improve'], downloads: 22000, stars: 440, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'segment', name: 'Segment', vendor: 'Twilio', emoji: '🧩', tagline: 'Track events and manage customer data pipelines.', description: 'Segment CDP for tracking user events, managing customer data, syncing to destinations, and building data pipelines.', category: 'data', installCmd: 'clawhub install segment', docsUrl: 'https://segment.com/docs/connections/sources/catalog/libraries/server', actionIds: ['segment-track', 'segment-identify', 'segment-group'], downloads: 28000, stars: 560, version: '1.1.0', verified: true,
+  },
+  {
+    id: 'shopify-storefront', name: 'Shopify Storefront', vendor: 'Shopify Inc.', emoji: '🏪', tagline: 'Query products and checkout via Shopify Storefront API.', description: 'Shopify Storefront GraphQL API for querying products, managing carts, and building headless commerce experiences.', category: 'marketing', installCmd: 'clawhub install shopify-storefront', docsUrl: 'https://shopify.dev/docs/api/storefront', actionIds: ['storefront-products', 'storefront-cart', 'storefront-checkout'], downloads: 21000, stars: 420, version: '1.0.0', verified: false,
+  },
+  {
+    id: 'braintree', name: 'Braintree', vendor: 'PayPal', emoji: '🌿', tagline: 'Process payments and manage subscriptions via Braintree.', description: 'Braintree payment gateway for processing credit cards, managing recurring subscriptions, and handling payment disputes.', category: 'finance', installCmd: 'clawhub install braintree', docsUrl: 'https://developer.paypal.com/braintree/docs', actionIds: ['braintree-charge', 'braintree-subscription', 'braintree-refund'], downloads: 19000, stars: 380, version: '1.0.0', verified: false,
+  },
+];
 
 export const SKILLS_REGISTRY: Skill[] = [
   // ── Communication (20) ──────────────────────────────────────

@@ -43,10 +43,10 @@ export default function OverallScoreCard({ overall, reasons }: OverallScoreCardP
 
       {/* Big number */}
       <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
-        <div style={{ fontSize: '3.4rem', fontWeight: 900, color, fontFamily: "'Cinzel', serif", lineHeight: 1, textShadow: `0 0 30px ${color}50` }}>
+        <div style={{ fontSize: '3.4rem', fontWeight: 900, color, fontFamily: "'Outfit', sans-serif", lineHeight: 1, textShadow: `0 0 30px ${color}50` }}>
           {overall.total}
         </div>
-        <div style={{ fontSize: '0.78rem', color, marginTop: '0.35rem', fontWeight: 600, letterSpacing: '0.05em' }}>{label}</div>
+        <div style={{ fontSize: '0.78rem', color, marginTop: '0.35rem', fontWeight: 600, letterSpacing: '-0.01em' }}>{label}</div>
         <div style={{ marginTop: '0.75rem', height: '6px', background: '#1a1b26', borderRadius: '3px', overflow: 'hidden' }}>
           <div style={{ height: '100%', width: `${overall.total}%`, background: `linear-gradient(90deg, ${color}66, ${color})`, borderRadius: '3px', boxShadow: `0 0 10px ${color}66` }} />
         </div>

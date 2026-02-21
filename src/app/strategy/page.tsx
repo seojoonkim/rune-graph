@@ -1,8 +1,8 @@
 export default function StrategyPage() {
   return (
-    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
+    <div className="rg-page" style={{ maxWidth: '1300px', margin: '0 auto' }}>
       <div style={{ marginBottom: '2.5rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', marginBottom: '0.5rem', fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', marginBottom: '0.5rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>
           RuneGraph Strategy
         </h1>
         <p style={{ color: '#c8d2ec', marginTop: 0, lineHeight: 1.7, fontSize: '1rem' }}>
@@ -48,7 +48,7 @@ export default function StrategyPage() {
           {/* Corner brackets */}
           <div style={{ position: 'absolute', top: 6, left: 6, width: 10, height: 10, borderTop: '1.5px solid #bb9af7', borderLeft: '1.5px solid #bb9af7', opacity: 0.4 }} />
           <div style={{ position: 'absolute', top: 6, right: 6, width: 10, height: 10, borderTop: '1.5px solid #bb9af7', borderRight: '1.5px solid #bb9af7', opacity: 0.4 }} />
-          <h2 style={{ color: '#dde4fc', marginTop: 0, fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.03em' }}>{section.title}</h2>
+          <h2 style={{ color: '#dde4fc', marginTop: 0, fontFamily: "'Outfit', sans-serif", fontSize: '1.1rem', letterSpacing: '-0.01em' }}>{section.title}</h2>
           <ul style={{ paddingLeft: '1.25rem', color: '#ccd4ee', lineHeight: 1.85, marginTop: '0.75rem', marginBottom: 0 }}>
             {section.items.map((item, j) => (
               <li key={j} style={{ marginBottom: '0.4rem', fontSize: '0.95rem' }}>{item}</li>
@@ -61,7 +61,7 @@ export default function StrategyPage() {
       <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '12px', padding: '1.25rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: 6, left: 6, width: 10, height: 10, borderTop: '1.5px solid #ff9e64', borderLeft: '1.5px solid #ff9e64', opacity: 0.4 }} />
         <div style={{ position: 'absolute', top: 6, right: 6, width: 10, height: 10, borderTop: '1.5px solid #ff9e64', borderRight: '1.5px solid #ff9e64', opacity: 0.4 }} />
-        <h2 style={{ color: '#dde4fc', marginTop: 0, fontFamily: "'Cinzel', serif", fontSize: '1.1rem', letterSpacing: '0.03em' }}>Roadmap (90 Days)</h2>
+        <h2 style={{ color: '#dde4fc', marginTop: 0, fontFamily: "'Outfit', sans-serif", fontSize: '1.1rem', letterSpacing: '-0.01em' }}>Roadmap (90 Days)</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '0.75rem' }}>
           {[
             { q: 'Q1', color: '#7aa2f7', items: ['Search & filter UX', 'Skill tag quality', 'Trust Score v1'] },

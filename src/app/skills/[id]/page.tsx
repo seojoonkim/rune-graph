@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { SKILLS_REGISTRY } from '@/data/skills-registry'
+import { SKILLS_REGISTRY, SKILL_PACKAGES } from '@/data/skills-registry'
 import { RUNES } from '@/data/runes'
 import OverallScoreCard from '@/components/OverallScoreCard'
 import { StatBar } from '@/components/StatBar'
@@ -53,18 +53,53 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
   const overall = getOverallScore(skill, usedInRunes.length)
   const reasons = getSafetyReasons(skill)
   const related = SKILLS_REGISTRY.filter(s => s.category === skill.category && s.id !== skill.id).slice(0, 8)
+  const parentSkill = SKILL_PACKAGES.find(p => p.actionIds.includes(skill.id))
 
   return (
-    <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
+    <div className="rg-page" style={{ maxWidth: '1300px', margin: '0 auto' }}>
 
       {/* Breadcrumb */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.75rem', fontSize: '0.82rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace" }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.75rem', fontSize: '0.82rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace", flexWrap: 'wrap' }}>
         <Link href="/skills" style={{ color: '#bb9af7', textDecoration: 'none' }}>Skills</Link>
         <span>›</span>
+        {parentSkill && (
+          <>
+            <span style={{ color: '#a78bfa' }}>{parentSkill.emoji} {parentSkill.name}</span>
+            <span>›</span>
+          </>
+        )}
         <span style={{ color }}>{CAT_LABELS[skill.category]}</span>
         <span>›</span>
         <span style={{ color: '#c8d2ec' }}>{skill.id}</span>
+        {/* Layer badge */}
+        <span style={{
+          marginLeft: '0.25rem', fontSize: '0.62rem',
+          background: '#748ab820', color: '#748ab8',
+          border: '1px solid #748ab840', borderRadius: '4px',
+          padding: '1px 6px', letterSpacing: '0.5px',
+        }}>LAYER 1 · ACTION</span>
       </div>
+
+      {/* Parent skill install banner */}
+      {parentSkill && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '0.75rem',
+          background: '#13141f', border: '1px solid #a78bfa30',
+          borderRadius: '8px', padding: '0.7rem 1rem',
+          marginBottom: '1.25rem', flexWrap: 'wrap',
+        }}>
+          <span style={{ fontSize: '0.72rem', color: '#a78bfa', fontFamily: "'JetBrains Mono', monospace" }}>
+            Part of <strong style={{ color: '#c9a8ff' }}>{parentSkill.name}</strong> skill
+          </span>
+          <span style={{ color: '#2e3452', fontSize: '0.8rem' }}>·</span>
+          <code style={{ fontSize: '0.72rem', color: '#a8d878', fontFamily: "'JetBrains Mono', monospace", background: '#0d0e17', borderRadius: '4px', padding: '2px 8px', border: '1px solid #1f2335' }}>
+            {parentSkill.installCmd}
+          </code>
+          <span style={{ fontSize: '0.7rem', color: '#748ab8' }}>
+            {parentSkill.actionIds.length} actions in this skill
+          </span>
+        </div>
+      )}
 
       {/* Hero */}
       <div style={{ background: '#1e2030', border: `1px solid ${color}30`, borderRadius: '14px', padding: '2rem', marginBottom: '1.25rem', position: 'relative', overflow: 'hidden' }}>
@@ -81,7 +116,7 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
               <span style={{ fontSize: '0.68rem', padding: '2px 10px', borderRadius: '4px', background: `${color}15`, color, border: `1px solid ${color}35`, fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{skill.category}</span>
               <span style={{ fontSize: '0.68rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace" }}>{skill.service}</span>
             </div>
-            <h1 style={{ margin: '0 0 0.4rem', fontSize: '1.75rem', color: '#dde4fc', fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', fontWeight: 700 }}>{skill.label}</h1>
+            <h1 style={{ margin: '0 0 0.4rem', fontSize: '1.75rem', color: '#dde4fc', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em', fontWeight: 700 }}>{skill.label}</h1>
             <p style={{ margin: 0, fontSize: '0.65rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace" }}>{skill.id}</p>
           </div>
         </div>
@@ -110,13 +145,13 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
       </div>
 
       {/* Main 2-col layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '1.25rem', marginBottom: '1.25rem' }}>
+      <div className="rg-detail-main">
 
         {/* Left col: Details */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
           {/* Type + Service */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="rg-detail-pair">
             <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
               <Corner pos="tl" color="#292e42" /><Corner pos="br" color="#292e42" />
               <h2 style={{ margin: '0 0 0.75rem', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8ab4e0', fontWeight: 600 }}>Skill Type</h2>
@@ -148,7 +183,7 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
                     <div style={{ background: '#16161e', border: '1px solid #1f2335', borderRadius: '8px', padding: '0.85rem 1rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
                         <span>{rune.emoji}</span>
-                        <span style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.88rem', fontFamily: "'Cinzel', serif" }}>{rune.name}</span>
+                        <span style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.88rem', fontFamily: "'Outfit', sans-serif" }}>{rune.name}</span>
                         <span style={{ marginLeft: 'auto', fontSize: '0.6rem', color: '#bb9af7', background: 'rgba(187,154,247,0.1)', border: '1px solid rgba(187,154,247,0.2)', padding: '1px 6px', borderRadius: '3px', fontFamily: "'JetBrains Mono', monospace", flexShrink: 0 }}>{rune.category}</span>
                       </div>
                       <p style={{ margin: 0, color: '#8ab4e0', fontSize: '0.76rem', lineHeight: 1.5 }}>{rune.purpose}</p>

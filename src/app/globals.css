@@ -70,6 +70,207 @@ a { text-underline-offset: 3px; }
   50% { opacity: 0.9; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE UTILITIES
+   Breakpoints: sm=480  md=768  lg=1024
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Page container ── */
+.rg-page { max-width: 1300px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+@media (max-width: 768px) { .rg-page { padding: 2rem 1.25rem 4rem; } }
+@media (max-width: 480px) { .rg-page { padding: 1.5rem 1rem 3rem; } }
+
+/* ── Hero section ── */
+.rg-hero {
+  padding: 7rem 2rem 5rem;
+  min-height: 580px;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+@media (max-width: 768px) { .rg-hero { padding: 5rem 1.5rem 3.5rem; min-height: 420px; } }
+@media (max-width: 480px) { .rg-hero { padding: 3.5rem 1rem 2.5rem; min-height: 320px; } }
+
+/* ── Hero title ── */
+.rg-hero-title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #e2e8ff;
+  margin: 0 0 1.25rem;
+}
+@media (max-width: 900px) { .rg-hero-title { font-size: 3.2rem; } }
+@media (max-width: 600px) { .rg-hero-title { font-size: 2.4rem; } }
+@media (max-width: 400px) { .rg-hero-title { font-size: 2rem; } }
+
+/* ── What is a Rune — 2-col grid ── */
+.rg-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: center;
+}
+@media (max-width: 900px)  { .rg-two-col { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* ── Hero image circle ── */
+.rg-hero-circle {
+  width: 340px; height: 340px;
+  border-radius: 50%; overflow: hidden;
+  border: 2px solid rgba(187,154,247,0.3);
+  box-shadow: 0 0 60px rgba(187,154,247,0.18), 0 0 120px rgba(187,154,247,0.07);
+  flex-shrink: 0;
+}
+@media (max-width: 900px) { .rg-hero-circle { width: 240px; height: 240px; margin: 0 auto; } }
+@media (max-width: 480px) { .rg-hero-circle { width: 180px; height: 180px; } }
+
+/* ── Graph horizontal scroll ── */
+.rg-graph-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ── Featured runes / main section padding ── */
+.rg-section { max-width: 1300px; margin: 0 auto; padding: 0 2rem 5rem; }
+@media (max-width: 768px) { .rg-section { padding: 0 1.25rem 3rem; } }
+@media (max-width: 480px) { .rg-section { padding: 0 1rem 2.5rem; } }
+
+/* ── CTA section ── */
+.rg-cta { text-align: center; padding: 5rem 2rem; position: relative; overflow: hidden; }
+@media (max-width: 768px) { .rg-cta { padding: 3rem 1.25rem; } }
+
+/* ── Skill / Rune detail — main 2-col (content + sidebar) ── */
+.rg-detail-main {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 900px) { .rg-detail-main { grid-template-columns: 1fr; } }
+
+/* ── Skill detail — stat pair (2 equal cols) ── */
+.rg-detail-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) { .rg-detail-pair { grid-template-columns: 1fr; } }
+
+/* ── Skills/Runes list heading row ── */
+.rg-list-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ── Navbar ── */
+.rg-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #292e42;
+  background: rgba(10,10,15,0.97);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 1px 0 #16161e, 0 4px 20px rgba(0,0,0,0.4);
+}
+@media (max-width: 600px) { .rg-navbar { padding: 0.85rem 1.1rem; } }
+
+/* Nav links desktop */
+.rg-nav-links { display: flex; gap: 0.25rem; }
+
+/* Hamburger button — hidden on desktop */
+.rg-hamburger {
+  display: none;
+  background: transparent;
+  border: 1px solid #292e42;
+  border-radius: 6px;
+  padding: 6px 9px;
+  cursor: pointer;
+  color: #9aa4d2;
+  font-size: 1.1rem;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  .rg-hamburger { display: flex; }
+  .rg-nav-links { display: none; }
+  .rg-nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: rgba(13,14,23,0.98);
+    border-bottom: 1px solid #292e42;
+    padding: 0.75rem;
+    gap: 0.35rem;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .rg-nav-links.open a { width: 100%; padding: 0.6rem 1rem !important; }
+  /* GitHub link — hide text on very small screens */
+  .rg-github-text { display: none; }
+}
+
+/* ── Build page sidebar responsive ── */
+.rg-build-sidebar { width: 220px; flex-shrink: 0; }
+@media (max-width: 900px) { .rg-build-sidebar { width: 180px; } }
+@media (max-width: 600px) { .rg-build-sidebar { display: none; } }
+
+/* ── Build top bar responsive ── */
+.rg-build-topbar {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0 1.25rem; height: 52px; flex-shrink: 0;
+  border-bottom: 1px solid #292e42; background: #13141f;
+}
+@media (max-width: 768px) {
+  .rg-build-topbar { height: auto; padding: 0.6rem 1rem; flex-wrap: wrap; }
+  .rg-build-hint { display: none; }
+}
+@media (max-width: 480px) { .rg-build-topbar { gap: 0.5rem; } }
+
+/* ── What-is-a-Rune section ── */
+@media (max-width: 768px) { .rg-what-section { padding: 3rem 1.25rem !important; } }
+@media (max-width: 480px) { .rg-what-section { padding: 2rem 1rem !important; } }
+
+/* ── Stats number ── */
+.rg-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 1.75rem 1rem;
+  border-top: 1px solid #1f2335;
+  border-bottom: 1px solid #1f2335;
+  background: #16161e;
+}
+.rg-stat-item { text-align: center; padding: 0.25rem 0.5rem; }
+.rg-stat-value { font-size: 2rem; font-weight: 800; color: #bb9af7; font-family: 'Outfit', sans-serif; }
+.rg-stat-label { font-size: 0.75rem; color: #8ab4e0; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.25rem; }
+@media (max-width: 480px) {
+  .rg-stats-row { padding: 1.25rem 0.5rem; }
+  .rg-stat-value { font-size: 1.35rem; }
+  .rg-stat-label { font-size: 0.62rem; letter-spacing: 0.06em; }
+}
+
+/* ── Featured Runes heading ── */
+.rg-section-h2 { font-size: 1.5rem; font-weight: 700; color: #dde4fc; margin: 0; font-family: 'Outfit', sans-serif; letter-spacing: -0.01em; }
+@media (max-width: 480px) { .rg-section-h2 { font-size: 1.2rem; } }
+
+/* ── Footer ── */
+.rg-footer { padding: 2rem; margin-top: 4rem; }
+@media (max-width: 480px) { .rg-footer { padding: 1.5rem 1rem; margin-top: 2rem; font-size: 0.8rem; } }
+
+/* ── Morning Brief graph legend ── */
+.rg-legend {
+  display: flex; gap: 1.5rem;
+  margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+@media (max-width: 480px) { .rg-legend { gap: 0.75rem; } }
+
 /* Float */
 @keyframes float {
   0%, 100% { transform: translateY(0); }

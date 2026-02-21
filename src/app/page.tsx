@@ -13,48 +13,54 @@ export default function Home() {
   return (
     <div>
       {/* ── Hero ── */}
-      <section style={{ textAlign: 'center', padding: '6rem 2rem 4rem', position: 'relative', overflow: 'hidden' }}>
-        {/* Background glow */}
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(187,154,247,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <section style={{ textAlign: 'center', padding: '7rem 2rem 5rem', position: 'relative', overflow: 'hidden', minHeight: '580px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        {/* BG image */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-forge.jpg)', backgroundSize: 'cover', backgroundPosition: 'center 30%', zIndex: 0 }} />
+        {/* Dark overlay: top-heavy so text stays readable */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(26,27,38,0.82) 0%, rgba(26,27,38,0.6) 45%, rgba(26,27,38,0.92) 100%)', zIndex: 1 }} />
+        {/* Subtle purple center glow */}
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '700px', height: '400px', background: 'radial-gradient(ellipse, rgba(187,154,247,0.1) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 2 }} />
 
-        {/* Badge */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(187,154,247,0.1)', border: '1px solid rgba(187,154,247,0.3)', borderRadius: '100px', padding: '0.35rem 1.1rem', fontSize: '0.78rem', color: '#bb9af7', marginBottom: '2rem', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", letterSpacing: '0.05em' }}>
-          🔮 Open Source · Free Forever
-        </div>
+        {/* Hero content — above overlays */}
+        <div style={{ position: 'relative', zIndex: 3 }}>
+          {/* Badge */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(187,154,247,0.12)', border: '1px solid rgba(187,154,247,0.35)', borderRadius: '100px', padding: '0.35rem 1.1rem', fontSize: '0.78rem', color: '#bb9af7', marginBottom: '2rem', letterSpacing: '0.05em', backdropFilter: 'blur(4px)' }}>
+            🔮 Open Source · Free Forever
+          </div>
 
-        {/* Title */}
-        <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, margin: '0 0 1.25rem', fontFamily: "'Cinzel', serif" }}>
-          <span style={{ color: '#c0caf5' }}>Inscribe.</span>{' '}
-          <span style={{ color: '#bb9af7', textShadow: '0 0 30px rgba(187,154,247,0.4)' }}>Invoke.</span>{' '}
-          <span style={{ color: '#ff9e64', textShadow: '0 0 30px rgba(255,158,100,0.3)' }}>Trust.</span>
-        </h1>
+          {/* Title */}
+          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, margin: '0 0 1.25rem', fontFamily: "'Cinzel', serif", textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
+            <span style={{ color: '#c0caf5' }}>Inscribe.</span>{' '}
+            <span style={{ color: '#bb9af7', textShadow: '0 0 40px rgba(187,154,247,0.6)' }}>Invoke.</span>{' '}
+            <span style={{ color: '#ff9e64', textShadow: '0 0 40px rgba(255,158,100,0.5)' }}>Trust.</span>
+          </h1>
 
-        <p style={{ fontSize: '1.1rem', color: '#9aa5ce', maxWidth: '500px', margin: '0 auto 1rem', lineHeight: 1.7 }}>
-          See how AI skills connect. Build verified workflows. Share with the world.
-        </p>
-        <p style={{ fontSize: '0.85rem', color: '#414868', marginBottom: '2.5rem', fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", fontStyle: 'italic' }}>
-          Skills are ingredients · Runes are recipes · Graph is the map
-        </p>
+          <p style={{ fontSize: '1.1rem', color: '#a9b1d6', maxWidth: '500px', margin: '0 auto 1rem', lineHeight: 1.7 }}>
+            See how AI skills connect. Build verified workflows. Share with the world.
+          </p>
+          <p style={{ fontSize: '0.85rem', color: '#565f89', marginBottom: '2.5rem', fontStyle: 'italic' }}>
+            Skills are ingredients · Runes are recipes · Graph is the map
+          </p>
 
-        {/* CTAs */}
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/runes" style={{
-            padding: '0.8rem 2rem', background: 'linear-gradient(135deg, #9d7cd8, #bb9af7)',
-            color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 700,
-            fontSize: '0.95rem', boxShadow: '0 0 24px rgba(187,154,247,0.45)',
-            fontFamily: "'Cinzel', serif", letterSpacing: '0.05em',
-            transition: 'all 0.2s',
-          }}>
-            Explore Runes →
-          </Link>
-          <Link href="/skills" style={{
-            padding: '0.8rem 2rem', background: 'transparent',
-            color: '#bb9af7', border: '1px solid rgba(187,154,247,0.4)',
-            borderRadius: '8px', textDecoration: 'none', fontWeight: 600,
-            fontSize: '0.95rem', fontFamily: "'JetBrains Mono', monospace",
-          }}>
-            Browse Skills
-          </Link>
+          {/* CTAs */}
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/runes" style={{
+              padding: '0.8rem 2rem', background: 'linear-gradient(135deg, #9d7cd8, #bb9af7)',
+              color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 700,
+              fontSize: '0.95rem', boxShadow: '0 0 28px rgba(187,154,247,0.5)',
+              fontFamily: "'Cinzel', serif", letterSpacing: '0.05em',
+            }}>
+              Explore Runes →
+            </Link>
+            <Link href="/skills" style={{
+              padding: '0.8rem 2rem', background: 'rgba(26,27,38,0.6)',
+              color: '#bb9af7', border: '1px solid rgba(187,154,247,0.45)',
+              borderRadius: '8px', textDecoration: 'none', fontWeight: 600,
+              fontSize: '0.95rem', backdropFilter: 'blur(4px)',
+            }}>
+              Browse Skills
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -109,12 +115,17 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ textAlign: 'center', padding: '4rem 2rem', borderTop: '1px solid #1f2335' }}>
-        <h2 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#c0caf5', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif" }}>Browse the Skills Registry</h2>
-        <p style={{ color: '#7982a9', marginBottom: '2rem', fontSize: '0.9rem' }}>{FULL_GRAPH.nodes.length} real-world skills powering {RUNES.length} Runes</p>
-        <Link href="/skills" style={{ padding: '0.75rem 2rem', background: 'rgba(187,154,247,0.12)', color: '#bb9af7', border: '1px solid rgba(187,154,247,0.35)', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>
-          View All Skills →
-        </Link>
+      <section style={{ textAlign: 'center', padding: '5rem 2rem', position: 'relative', overflow: 'hidden' }}>
+        {/* Market BG */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-market.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(26,27,38,0.95) 0%, rgba(26,27,38,0.78) 50%, rgba(26,27,38,0.97) 100%)', zIndex: 1 }} />
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#c0caf5', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif", textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>Browse the Skills Registry</h2>
+          <p style={{ color: '#7982a9', marginBottom: '2rem', fontSize: '0.9rem' }}>{FULL_GRAPH.nodes.length} real-world skills powering {RUNES.length} Runes</p>
+          <Link href="/skills" style={{ padding: '0.75rem 2rem', background: 'rgba(187,154,247,0.15)', color: '#bb9af7', border: '1px solid rgba(187,154,247,0.4)', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em', backdropFilter: 'blur(4px)' }}>
+            View All Skills →
+          </Link>
+        </div>
       </section>
     </div>
   )

@@ -75,39 +75,52 @@ export default function Home() {
       </section>
 
       {/* ── What is a Rune? ── */}
-      <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
-        {/* Floating orb image */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-          <div style={{ position: 'relative', width: '160px', height: '160px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(187,154,247,0.25)', boxShadow: '0 0 40px rgba(187,154,247,0.15), 0 0 80px rgba(187,154,247,0.06)' }}>
-            <img src="/images/hero-hand-orb.jpg" alt="Rune Orb" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle, transparent 40%, rgba(26,27,38,0.5) 100%)' }} />
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '5rem 2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '4rem', alignItems: 'center' }}>
+
+          {/* Left: image */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ position: 'relative', width: '340px', height: '340px', borderRadius: '50%', overflow: 'hidden', border: '2px solid rgba(187,154,247,0.3)', boxShadow: '0 0 60px rgba(187,154,247,0.18), 0 0 120px rgba(187,154,247,0.07)', flexShrink: 0 }}>
+              <img src="/images/hero-hand-orb.jpg" alt="Rune Orb" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 45%, rgba(26,27,38,0.55) 100%)' }} />
+            </div>
+          </div>
+
+          {/* Right: text + cards */}
+          <div>
+            <p style={{ fontSize: '0.7rem', color: '#bb9af7', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.75rem', marginTop: 0 }}>The Core Concept</p>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.4rem)', fontWeight: 800, color: '#c0caf5', marginBottom: '1rem', marginTop: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', lineHeight: 1.15 }}>
+              What is a Rune?
+            </h2>
+            <p style={{ color: '#9aa5ce', fontSize: '1rem', marginBottom: '2rem', marginTop: 0, lineHeight: 1.75, maxWidth: '480px' }}>
+              A Rune is a verified, composable AI workflow — a recipe that chains multiple skills into one reliable, repeatable action.
+            </p>
+
+            {/* 3 concept rows */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {[
+                { emoji: '🧪', label: 'Skill',  accent: '#7aa2f7', title: 'The Ingredient', desc: 'A single, atomic capability — web-search, llm-summarize, slack-notify. Skills do one thing well.' },
+                { emoji: '🔮', label: 'Rune',   accent: '#bb9af7', title: 'The Recipe',      desc: 'A verified multi-skill workflow — chained in sequence or parallel, with Trust Score security.' },
+                { emoji: '🛡',  label: 'Trust',  accent: '#ff9e64', title: 'The Guarantee',  desc: 'Every Rune carries a Trust Score. Know exactly what services it touches and how safe each action is.' },
+              ].map(item => (
+                <div key={item.label} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1rem 1.1rem', background: '#16161e', border: `1px solid ${item.accent}20`, borderRadius: '10px' }}>
+                  <span style={{ fontSize: '1.5rem', flexShrink: 0, marginTop: '0.1rem' }}>{item.emoji}</span>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.3rem' }}>
+                      <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', color: item.accent, textTransform: 'uppercase', fontWeight: 700 }}>{item.label}</span>
+                      <span style={{ color: '#c0caf5', fontWeight: 700, fontSize: '0.95rem', fontFamily: "'Cinzel', serif" }}>{item.title}</span>
+                    </div>
+                    <p style={{ color: '#7aa2c8', fontSize: '0.83rem', lineHeight: 1.55, margin: 0 }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p style={{ color: '#6272a4', fontSize: '0.78rem', marginTop: '1.5rem', marginBottom: 0, fontStyle: 'italic' }}>
+              Think npm for AI workflows — but every package is security-verified.
+            </p>
           </div>
         </div>
-        <p style={{ textAlign: 'center', fontSize: '0.7rem', color: '#bb9af7', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem', fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>The Core Concept</p>
-        <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#c0caf5', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>What is a Rune?</h2>
-        <p style={{ textAlign: 'center', color: '#9aa5ce', fontSize: '0.9rem', maxWidth: '520px', margin: '0 auto 3rem', lineHeight: 1.7 }}>
-          A Rune is a verified, composable AI workflow — a recipe that chains multiple skills into one reliable, repeatable action.
-        </p>
-
-        {/* 3 concept cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1px', background: 'rgba(187,154,247,0.12)', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(187,154,247,0.2)' }}>
-          {[
-            { emoji: '🧪', label: 'Skill', accent: '#7aa2f7', title: 'The Ingredient', desc: 'A single, atomic capability — like web-search, llm-summarize, or slack-notify. Skills do one thing well.' },
-            { emoji: '🔮', label: 'Rune',  accent: '#bb9af7', title: 'The Recipe',     desc: 'A verified multi-skill workflow — skills chained in sequence or parallel, with Trust Score security.' },
-            { emoji: '🛡',  label: 'Trust',  accent: '#ff9e64', title: 'The Guarantee', desc: 'Every Rune carries a Trust Score. See which services it touches, what data it accesses, and how safe each action is before you run it.' },
-          ].map(item => (
-            <div key={item.label} style={{ background: '#16161e', padding: '2rem 1.75rem' }}>
-              <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{item.emoji}</div>
-              <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', color: item.accent, textTransform: 'uppercase', marginBottom: '0.4rem', fontWeight: 700, fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>{item.label}</div>
-              <div style={{ fontSize: '1rem', fontWeight: 700, color: '#c0caf5', marginBottom: '0.6rem', fontFamily: "'Cinzel', serif" }}>{item.title}</div>
-              <p style={{ color: '#7aa2c8', fontSize: '0.82rem', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <p style={{ textAlign: 'center', color: '#3b4261', fontSize: '0.78rem', marginTop: '2rem', fontStyle: 'italic', fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
-          Think npm for AI workflows — but every package is security-verified before it ships.
-        </p>
       </section>
 
       {/* ── Featured Runes ── */}

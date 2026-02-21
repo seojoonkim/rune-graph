@@ -74,27 +74,27 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
             </span>
           </div>
         </div>
-        <h1 style={{ margin: 0, fontSize: '2rem', color: '#c0caf5', lineHeight: 1.2, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em' }}>{rune.name}</h1>
-        <p style={{ color: '#b0bcd8', marginTop: '0.6rem', marginBottom: 0, maxWidth: '760px', lineHeight: 1.6, fontSize: '0.95rem' }}>{rune.purpose}</p>
+        <h1 style={{ margin: 0, fontSize: '2rem', color: '#dde4fc', lineHeight: 1.2, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em' }}>{rune.name}</h1>
+        <p style={{ color: '#c8d2ec', marginTop: '0.6rem', marginBottom: 0, maxWidth: '760px', lineHeight: 1.6, fontSize: '0.95rem' }}>{rune.purpose}</p>
       </div>
 
       {/* 3 info cards */}
       <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', marginBottom: '1.5rem' }}>
         <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
-          <h2 style={{ marginTop: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>Use Case</h2>
-          <p style={{ margin: 0, color: '#b0bcd8', lineHeight: 1.65, fontSize: '0.875rem' }}>{rune.useCase}</p>
+          <h2 style={{ marginTop: 0, color: '#dde4fc', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>Use Case</h2>
+          <p style={{ margin: 0, color: '#c8d2ec', lineHeight: 1.65, fontSize: '0.875rem' }}>{rune.useCase}</p>
         </section>
 
         <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
-          <h2 style={{ marginTop: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 style={{ marginTop: 0, color: '#dde4fc', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>
             Skill Pipeline <span style={{ color: '#8ab4e0', fontSize: '0.72rem', fontWeight: 400 }}>({rune.nodes.length} nodes)</span>
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {rune.nodes.map((node, i) => (
-              <div key={node.id} style={{ fontSize: '0.83rem', color: '#c0caf5', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ color: '#bac4e0' }}>{i + 1}. {node.label}</span>
+              <div key={node.id} style={{ fontSize: '0.83rem', color: '#dde4fc', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ color: '#ccd4ee' }}>{i + 1}. {node.label}</span>
                 <span style={{ color: CATEGORY_COLORS[node.category] || '#888', fontSize: '0.62rem', fontFamily: "'JetBrains Mono', monospace", background: `${CATEGORY_COLORS[node.category] || '#888'}18`, border: `1px solid ${CATEGORY_COLORS[node.category] || '#888'}35`, padding: '1px 6px', borderRadius: '3px', whiteSpace: 'nowrap', flexShrink: 0 }}>
                   {CATEGORY_LABELS[node.category] || node.category}
                 </span>
@@ -105,16 +105,16 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
 
         <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
           <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
-          <h2 style={{ marginTop: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 style={{ marginTop: 0, color: '#dde4fc', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.75rem' }}>
             Dependencies <span style={{ color: '#8ab4e0', fontSize: '0.72rem', fontWeight: 400 }}>({rune.edges.length})</span>
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {rune.edges.map((e, i) => (
-              <div key={`${e.source}-${e.target}-${i}`} style={{ fontSize: '0.78rem', color: '#b0bcd8', lineHeight: 1.4 }}>
+              <div key={`${e.source}-${e.target}-${i}`} style={{ fontSize: '0.78rem', color: '#c8d2ec', lineHeight: 1.4 }}>
                 <span style={{ color: '#7aa2f7', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem' }}>{e.source}</span>
                 <span style={{ margin: '0 0.3rem', color: '#8ab4e0' }}>→</span>
                 <span style={{ color: '#ff9e64', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem' }}>{e.target}</span>
-                <span style={{ marginLeft: '0.3rem', color: '#7c86b8', fontSize: '0.7rem' }}>· {e.label}</span>
+                <span style={{ marginLeft: '0.3rem', color: '#9aa4d2', fontSize: '0.7rem' }}>· {e.label}</span>
               </div>
             ))}
           </div>
@@ -124,7 +124,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
       {/* Pipeline Graph */}
       <section style={{ background: '#0F0F18', border: '1px solid #292e42', borderRadius: '12px', padding: '1rem', position: 'relative', overflow: 'hidden', marginBottom: '1.5rem' }}>
         <Corner pos="tl" /><Corner pos="tr" /><Corner pos="bl" /><Corner pos="br" />
-        <h2 style={{ marginTop: 0, marginBottom: '0.75rem', color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Pipeline Graph</h2>
+        <h2 style={{ marginTop: 0, marginBottom: '0.75rem', color: '#dde4fc', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Pipeline Graph</h2>
         <PipelineGraph rune={rune} />
       </section>
 
@@ -132,7 +132,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
       <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '12px', padding: '1.5rem', position: 'relative', overflow: 'hidden' }}>
         <Corner pos="tl" color="#bb9af7" /><Corner pos="tr" color="#bb9af7" />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-          <h2 style={{ margin: 0, color: '#c0caf5', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
+          <h2 style={{ margin: 0, color: '#dde4fc', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
             Skill Breakdown — {rune.nodes.length} Skills
           </h2>
           {/* Avg safety */}
@@ -144,7 +144,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {enrichedNodes.map(({ id, label, category, reg, safety }) => {
-            const cColor = CATEGORY_COLORS[category] || '#565f89'
+            const cColor = CATEGORY_COLORS[category] || '#9aa4d2'
             const sScore = safety?.total ?? 65
             const sColor2 = safetyColor(sScore)
             return (
@@ -154,19 +154,19 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
                       <span style={{ fontSize: '1rem' }}>{reg?.icon || '⚙️'}</span>
-                      <Link href={`/skills/${id}`} style={{ color: '#c0caf5', fontWeight: 600, fontSize: '0.92rem', textDecoration: 'none', fontFamily: "'Cinzel', serif" }}>
+                      <Link href={`/skills/${id}`} style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.92rem', textDecoration: 'none', fontFamily: "'Cinzel', serif" }}>
                         {label}
                       </Link>
                       <span style={{ fontSize: '0.6rem', padding: '1px 7px', borderRadius: '3px', background: `${cColor}15`, color: cColor, border: `1px solid ${cColor}35`, fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                         {CATEGORY_LABELS[category]}
                       </span>
                       {reg && (
-                        <span style={{ fontSize: '0.62rem', color: '#7c86b8', fontFamily: "'JetBrains Mono', monospace"}}>{reg.service}</span>
+                        <span style={{ fontSize: '0.62rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace"}}>{reg.service}</span>
                       )}
                     </div>
-                    <div style={{ color: '#7c86b8', fontSize: '0.65rem', fontFamily: "'JetBrains Mono', monospace", marginBottom: '0.4rem' }}>{id}</div>
+                    <div style={{ color: '#9aa4d2', fontSize: '0.65rem', fontFamily: "'JetBrains Mono', monospace", marginBottom: '0.4rem' }}>{id}</div>
                     {reg && (
-                      <p style={{ margin: 0, color: '#b0bcd8', fontSize: '0.8rem', lineHeight: 1.5 }}>{reg.description}</p>
+                      <p style={{ margin: 0, color: '#c8d2ec', fontSize: '0.8rem', lineHeight: 1.5 }}>{reg.description}</p>
                     )}
                   </div>
 
@@ -197,7 +197,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
           <div style={{ flex: 1, height: '8px', background: '#1a1b26', borderRadius: '4px', overflow: 'hidden', minWidth: '120px' }}>
             <div style={{ height: '100%', width: `${trustScore}%`, background: `linear-gradient(90deg, ${tColor}66, ${tColor})`, borderRadius: '4px', boxShadow: `0 0 12px ${tColor}55` }} />
           </div>
-          <div style={{ fontSize: '0.78rem', color: '#b0bcd8' }}>{rune.nodes.length} skills analyzed</div>
+          <div style={{ fontSize: '0.78rem', color: '#c8d2ec' }}>{rune.nodes.length} skills analyzed</div>
         </div>
       </section>
     </div>

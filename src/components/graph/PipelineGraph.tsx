@@ -33,7 +33,7 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
     label: e.label,
     animated: true,
     style: { stroke: '#bb9af7', strokeWidth: 1.5 },
-    labelStyle: { fill: '#a9b1d6', fontSize: 10 },
+    labelStyle: { fill: '#ccd4ee', fontSize: 10 },
     labelBgStyle: { fill: '#1e2030' },
   }))
 

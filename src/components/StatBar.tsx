@@ -11,7 +11,7 @@ export function StatBar({ label, score, max, color }: StatBarProps) {
   return (
     <div style={{ marginBottom: '0.75rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-        <span style={{ fontSize: '0.78rem', color: '#bac4e0' }}>{label}</span>
+        <span style={{ fontSize: '0.78rem', color: '#ccd4ee' }}>{label}</span>
         <span style={{ fontSize: '0.78rem', color, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>
           {score}/{max}
         </span>

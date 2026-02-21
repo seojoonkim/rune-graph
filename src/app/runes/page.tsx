@@ -24,7 +24,7 @@ export default function RunesPage() {
       <div style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
           <span style={{ fontSize: '1.5rem' }}>🔮</span>
-          <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#c0caf5', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Rune Catalog</h1>
+          <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Rune Catalog</h1>
         </div>
         <p style={{ color: '#8ab4e0', fontSize: '0.95rem', margin: 0 }}>
           {RUNES.length} verified skill orchestration workflows · Open Source
@@ -47,7 +47,7 @@ export default function RunesPage() {
                 outline: 'none',
                 transition: 'all 0.15s',
                 background: isActive ? 'rgba(187,154,247,0.15)' : '#1e2030',
-                color: isActive ? '#bb9af7' : '#7aa2c8',
+                color: isActive ? '#bb9af7' : '#8ab4e0',
                 border: `1px solid ${isActive ? 'rgba(187,154,247,0.45)' : '#292e42'}`,
                 fontWeight: isActive ? 600 : 400,
                 boxShadow: isActive ? '0 0 8px rgba(187,154,247,0.15)' : 'none',
@@ -67,7 +67,7 @@ export default function RunesPage() {
             placeholder="Search runes..."
             style={{
               background: '#1e2030', border: '1px solid #292e42', borderRadius: '6px',
-              color: '#c0caf5', padding: '0.35rem 1rem 0.35rem 2rem',
+              color: '#dde4fc', padding: '0.35rem 1rem 0.35rem 2rem',
               fontSize: '0.82rem', outline: 'none', width: '200px', fontFamily: 'inherit',
             }}
           />
@@ -75,7 +75,7 @@ export default function RunesPage() {
       </div>
 
       {/* Count */}
-      <p style={{ color: '#7c86b8', fontSize: '0.78rem', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace" }}>
+      <p style={{ color: '#9aa4d2', fontSize: '0.78rem', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace" }}>
         {filtered.length} rune{filtered.length !== 1 ? 's' : ''} {active !== 'All' ? `in ${active}` : 'total'}
       </p>
 

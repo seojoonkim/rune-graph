@@ -30,12 +30,12 @@ export default function Home() {
 
           {/* Title */}
           <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, margin: '0 0 1.25rem', fontFamily: "'Cinzel', serif", textShadow: '0 2px 30px rgba(0,0,0,0.8)' }}>
-            <span style={{ color: '#c0caf5' }}>Inscribe.</span>{' '}
+            <span style={{ color: '#dde4fc' }}>Inscribe.</span>{' '}
             <span style={{ color: '#bb9af7', textShadow: '0 0 40px rgba(187,154,247,0.6)' }}>Invoke.</span>{' '}
             <span style={{ color: '#ff9e64', textShadow: '0 0 40px rgba(255,158,100,0.5)' }}>Trust.</span>
           </h1>
 
-          <p style={{ fontSize: '1.125rem', color: '#bac4e0', maxWidth: '500px', margin: '0 auto 1rem', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '1.125rem', color: '#ccd4ee', maxWidth: '500px', margin: '0 auto 1rem', lineHeight: 1.7 }}>
             See how AI skills connect. Build verified workflows. Share with the world.
           </p>
           <p style={{ fontSize: '0.875rem', color: '#8ab4e0', marginBottom: '2.5rem' }}>
@@ -89,10 +89,10 @@ export default function Home() {
           {/* Right: text + cards */}
           <div>
             <p style={{ fontSize: '0.75rem', color: '#bb9af7', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.75rem', marginTop: 0 }}>The Core Concept</p>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#c0caf5', marginBottom: '1rem', marginTop: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', lineHeight: 1.2 }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#dde4fc', marginBottom: '1rem', marginTop: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', lineHeight: 1.2 }}>
               What is a Rune?
             </h2>
-            <p style={{ color: '#b0bcd8', fontSize: '1rem', marginBottom: '2rem', marginTop: 0, lineHeight: 1.75, maxWidth: '480px' }}>
+            <p style={{ color: '#c8d2ec', fontSize: '1rem', marginBottom: '2rem', marginTop: 0, lineHeight: 1.75, maxWidth: '480px' }}>
               A Rune is a verified, composable AI workflow — a recipe that chains multiple skills into one reliable, repeatable action.
             </p>
 
@@ -108,7 +108,7 @@ export default function Home() {
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.3rem' }}>
                       <span style={{ fontSize: '0.75rem', letterSpacing: '0.1em', color: item.accent, textTransform: 'uppercase', fontWeight: 700 }}>{item.label}</span>
-                      <span style={{ color: '#c0caf5', fontWeight: 700, fontSize: '1rem', fontFamily: "'Cinzel', serif" }}>{item.title}</span>
+                      <span style={{ color: '#dde4fc', fontWeight: 700, fontSize: '1rem', fontFamily: "'Cinzel', serif" }}>{item.title}</span>
                     </div>
                     <p style={{ color: '#8ab4e0', fontSize: '0.875rem', lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
                   </div>
@@ -116,7 +116,7 @@ export default function Home() {
               ))}
             </div>
 
-            <p style={{ color: '#7c86b8', fontSize: '0.875rem', marginTop: '1.5rem', marginBottom: 0 }}>
+            <p style={{ color: '#9aa4d2', fontSize: '0.875rem', marginTop: '1.5rem', marginBottom: 0 }}>
               Think npm for AI workflows — but every package is security-verified.
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function Home() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.75rem', color: '#c9a8ff', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>Live Example</span>
             <span style={{ color: '#2e3452' }}>·</span>
-            <span style={{ fontSize: '1rem', color: '#d0d8f8', fontWeight: 700, fontFamily: "'Cinzel', serif" }}>☀ Morning Brief</span>
+            <span style={{ fontSize: '1rem', color: '#e2e8ff', fontWeight: 700, fontFamily: "'Cinzel', serif" }}>☀ Morning Brief</span>
             <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#a8d878', background: 'rgba(168,216,120,0.08)', border: '1px solid rgba(168,216,120,0.25)', padding: '2px 10px', borderRadius: '20px', flexShrink: 0 }}>
               Trust Score 87
             </span>
@@ -154,9 +154,9 @@ export default function Home() {
                   flexShrink: 0,
                 }}>
                   <div style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{node.icon}</div>
-                  <div style={{ fontSize: '0.875rem', color: '#d0d8f8', fontWeight: 700, marginBottom: '0.2rem' }}>{node.name}</div>
+                  <div style={{ fontSize: '0.875rem', color: '#e2e8ff', fontWeight: 700, marginBottom: '0.2rem' }}>{node.name}</div>
                   <div style={{ fontSize: '0.68rem', color: node.color, textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, marginBottom: '0.4rem' }}>{node.cat}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#748ab8', lineHeight: 1.4 }}>{node.desc}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#9aa4d2', lineHeight: 1.4 }}>{node.desc}</div>
                   {/* Service badge */}
                   <div style={{ marginTop: '0.6rem', display: 'inline-block', fontSize: '0.65rem', color: node.color, background: `${node.color}10`, border: `1px solid ${node.color}25`, padding: '1px 7px', borderRadius: '4px', fontFamily: "'JetBrains Mono', monospace" }}>
                     {node.service}
@@ -175,7 +175,7 @@ export default function Home() {
           </div>
 
           {/* Caption */}
-          <p style={{ margin: '1.25rem 0 0', fontSize: '0.875rem', color: '#748ab8', lineHeight: 1.6 }}>
+          <p style={{ margin: '1.25rem 0 0', fontSize: '0.875rem', color: '#9aa4d2', lineHeight: 1.6 }}>
             Every morning: fetches unread emails → AI extracts key threads & todos → logs summary to Sheets → pings your Slack with the briefing. <span style={{ color: '#c9a8ff' }}>One Rune. Zero manual work.</span>
           </p>
         </div>
@@ -184,7 +184,7 @@ export default function Home() {
       {/* ── Featured Runes ── */}
       <section style={{ maxWidth: '1300px', margin: '0 auto', padding: '0 2rem 5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.75rem' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#c0caf5', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Featured Runes</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#dde4fc', margin: 0, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em' }}>Featured Runes</h2>
           <Link href="/runes" style={{ color: '#bb9af7', textDecoration: 'none', fontSize: '0.875rem' }}>View all {RUNES.length} →</Link>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
@@ -198,8 +198,8 @@ export default function Home() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/hero-market.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(26,27,38,0.95) 0%, rgba(26,27,38,0.78) 50%, rgba(26,27,38,0.97) 100%)', zIndex: 1 }} />
         <div style={{ position: 'relative', zIndex: 2 }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#c0caf5', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif", textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>Browse the Skills Registry</h2>
-          <p style={{ color: '#b0bcd8', marginBottom: '2rem', fontSize: '1rem' }}>{FULL_GRAPH.nodes.length} real-world skills powering {RUNES.length} Runes</p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#dde4fc', marginBottom: '0.75rem', fontFamily: "'Cinzel', serif", textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>Browse the Skills Registry</h2>
+          <p style={{ color: '#c8d2ec', marginBottom: '2rem', fontSize: '1rem' }}>{FULL_GRAPH.nodes.length} real-world skills powering {RUNES.length} Runes</p>
           <Link href="/skills" style={{ padding: '0.75rem 2rem', background: 'rgba(187,154,247,0.15)', color: '#bb9af7', border: '1px solid rgba(187,154,247,0.4)', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontFamily: "'Cinzel', serif", letterSpacing: '0.05em', backdropFilter: 'blur(4px)' }}>
             View All Skills →
           </Link>

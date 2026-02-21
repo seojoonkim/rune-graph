@@ -57,7 +57,7 @@ export function FullGraph() {
       id: `e-${i}`, source: e.source, target: e.target,
       label: e.label, animated: true,
       style: { stroke: '#bb9af7', strokeWidth: 1.2, opacity: 0.6 },
-      labelStyle: { fill: '#7982a9', fontSize: 9 },
+      labelStyle: { fill: '#9aa4d2', fontSize: 9 },
       labelBgStyle: { fill: '#1a1b26' },
     }))
 
@@ -76,13 +76,13 @@ export function FullGraph() {
           {Object.entries(CAT_LABELS).map(([cat, label]) => (
             <label key={cat} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', marginBottom: '0.5rem' }}>
               <input type="checkbox" checked={activeCategories.has(cat)} onChange={() => toggleCat(cat)} style={{ accentColor: CATEGORY_COLORS[cat as SkillCategory] }} />
-              <span style={{ fontSize: '0.8rem', color: activeCategories.has(cat) ? CATEGORY_COLORS[cat as SkillCategory] : '#565f89' }}>{label}</span>
+              <span style={{ fontSize: '0.8rem', color: activeCategories.has(cat) ? CATEGORY_COLORS[cat as SkillCategory] : '#9aa4d2' }}>{label}</span>
             </label>
           ))}
           <div style={{ borderTop: '1px solid #292e42', marginTop: '0.75rem', paddingTop: '0.75rem' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
               <input type="checkbox" checked={hubOnly} onChange={() => setHubOnly(!hubOnly)} style={{ accentColor: '#bb9af7' }} />
-              <span style={{ fontSize: '0.8rem', color: hubOnly ? '#bb9af7' : '#565f89' }}>⭐ Hub Skills Only</span>
+              <span style={{ fontSize: '0.8rem', color: hubOnly ? '#bb9af7' : '#9aa4d2' }}>⭐ Hub Skills Only</span>
             </label>
           </div>
         </div>
@@ -91,7 +91,7 @@ export function FullGraph() {
           <div style={{ background: '#1e2030', border: '1px solid #bb9af7', borderRadius: '8px', padding: '1rem' }}>
             <div style={{ fontSize: '0.7rem', color: '#bb9af7', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Used In</div>
             {usedInRunes.length ? usedInRunes.map(r => (
-              <div key={r} style={{ fontSize: '0.75rem', color: '#c0caf5', marginBottom: '0.25rem' }}>· {r}</div>
+              <div key={r} style={{ fontSize: '0.75rem', color: '#dde4fc', marginBottom: '0.25rem' }}>· {r}</div>
             )) : <div style={{ fontSize: '0.75rem', color: '#8ab4e0' }}>No Runes</div>}
           </div>
         )}

@@ -58,12 +58,12 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
     <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '2rem 1.5rem 4rem' }}>
 
       {/* Breadcrumb */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.75rem', fontSize: '0.82rem', color: '#7c86b8', fontFamily: "'JetBrains Mono', monospace" }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.75rem', fontSize: '0.82rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace" }}>
         <Link href="/skills" style={{ color: '#bb9af7', textDecoration: 'none' }}>Skills</Link>
         <span>›</span>
         <span style={{ color }}>{CAT_LABELS[skill.category]}</span>
         <span>›</span>
-        <span style={{ color: '#b0bcd8' }}>{skill.id}</span>
+        <span style={{ color: '#c8d2ec' }}>{skill.id}</span>
       </div>
 
       {/* Hero */}
@@ -79,13 +79,13 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '0.68rem', padding: '2px 10px', borderRadius: '4px', background: `${color}15`, color, border: `1px solid ${color}35`, fontFamily: "'JetBrains Mono', monospace", textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>{skill.category}</span>
-              <span style={{ fontSize: '0.68rem', color: '#7c86b8', fontFamily: "'JetBrains Mono', monospace" }}>{skill.service}</span>
+              <span style={{ fontSize: '0.68rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace" }}>{skill.service}</span>
             </div>
-            <h1 style={{ margin: '0 0 0.4rem', fontSize: '1.75rem', color: '#c0caf5', fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', fontWeight: 700 }}>{skill.label}</h1>
-            <p style={{ margin: 0, fontSize: '0.65rem', color: '#7c86b8', fontFamily: "'JetBrains Mono', monospace" }}>{skill.id}</p>
+            <h1 style={{ margin: '0 0 0.4rem', fontSize: '1.75rem', color: '#dde4fc', fontFamily: "'Cinzel', serif", letterSpacing: '0.03em', fontWeight: 700 }}>{skill.label}</h1>
+            <p style={{ margin: 0, fontSize: '0.65rem', color: '#9aa4d2', fontFamily: "'JetBrains Mono', monospace" }}>{skill.id}</p>
           </div>
         </div>
-        <p style={{ margin: '1.25rem 0 0', color: '#bac4e0', fontSize: '1rem', lineHeight: 1.7, maxWidth: '720px' }}>{skill.description}</p>
+        <p style={{ margin: '1.25rem 0 0', color: '#ccd4ee', fontSize: '1rem', lineHeight: 1.7, maxWidth: '720px' }}>{skill.description}</p>
         <a
           href={skill.docsUrl}
           target="_blank"
@@ -124,14 +124,14 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
                 <span style={{ fontSize: '1.3rem' }}>{skill.category === 'input' ? '⬇' : skill.category === 'api' ? '🔌' : skill.category === 'llm' ? '🧠' : '⬆'}</span>
                 <span style={{ color, fontWeight: 700, fontSize: '1rem' }}>{CAT_LABELS[skill.category]}</span>
               </div>
-              <p style={{ margin: 0, color: '#b0bcd8', fontSize: '0.82rem', lineHeight: 1.6 }}>{CAT_DESC[skill.category]}</p>
+              <p style={{ margin: 0, color: '#c8d2ec', fontSize: '0.82rem', lineHeight: 1.6 }}>{CAT_DESC[skill.category]}</p>
             </section>
 
             <section style={{ background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
               <Corner pos="tl" color="#292e42" /><Corner pos="br" color="#292e42" />
               <h2 style={{ margin: '0 0 0.75rem', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#8ab4e0', fontWeight: 600 }}>Powered By</h2>
-              <div style={{ fontWeight: 700, color: '#c0caf5', fontSize: '1rem', marginBottom: '0.5rem' }}>{skill.service}</div>
-              <p style={{ margin: '0 0 0.85rem', color: '#b0bcd8', fontSize: '0.82rem', lineHeight: 1.5 }}>Official API documentation and integration reference.</p>
+              <div style={{ fontWeight: 700, color: '#dde4fc', fontSize: '1rem', marginBottom: '0.5rem' }}>{skill.service}</div>
+              <p style={{ margin: '0 0 0.85rem', color: '#c8d2ec', fontSize: '0.82rem', lineHeight: 1.5 }}>Official API documentation and integration reference.</p>
             </section>
           </div>
 
@@ -148,7 +148,7 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
                     <div style={{ background: '#16161e', border: '1px solid #1f2335', borderRadius: '8px', padding: '0.85rem 1rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
                         <span>{rune.emoji}</span>
-                        <span style={{ color: '#c0caf5', fontWeight: 600, fontSize: '0.88rem', fontFamily: "'Cinzel', serif" }}>{rune.name}</span>
+                        <span style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.88rem', fontFamily: "'Cinzel', serif" }}>{rune.name}</span>
                         <span style={{ marginLeft: 'auto', fontSize: '0.6rem', color: '#bb9af7', background: 'rgba(187,154,247,0.1)', border: '1px solid rgba(187,154,247,0.2)', padding: '1px 6px', borderRadius: '3px', fontFamily: "'JetBrains Mono', monospace", flexShrink: 0 }}>{rune.category}</span>
                       </div>
                       <p style={{ margin: 0, color: '#8ab4e0', fontSize: '0.76rem', lineHeight: 1.5 }}>{rune.purpose}</p>
@@ -175,10 +175,10 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
                       <div style={{ background: '#16161e', border: '1px solid #1f2335', borderRadius: '7px', padding: '0.75rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
                           <span style={{ fontSize: '0.9rem' }}>{s.icon}</span>
-                          <span style={{ color: '#c0caf5', fontWeight: 600, fontSize: '0.8rem', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{s.label}</span>
+                          <span style={{ color: '#dde4fc', fontWeight: 600, fontSize: '0.8rem', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{s.label}</span>
                           <span style={{ fontSize: '0.6rem', color: rc, fontFamily: "'JetBrains Mono', monospace", flexShrink: 0 }}>{rs.total}</span>
                         </div>
-                        <div style={{ color: '#7c86b8', fontSize: '0.63rem', fontFamily: "'JetBrains Mono', monospace" }}>{s.id}</div>
+                        <div style={{ color: '#9aa4d2', fontSize: '0.63rem', fontFamily: "'JetBrains Mono', monospace" }}>{s.id}</div>
                       </div>
                     </Link>
                   )
@@ -203,13 +203,13 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
             ].map(f => (
               <div key={f.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
                 <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>{f.label}</span>
-                <span style={{ fontSize: '0.78rem', color: f.col || '#a9b1d6', fontFamily: f.mono ? "'JetBrains Mono', monospace" : 'inherit', fontWeight: 500 }}>{f.value}</span>
+                <span style={{ fontSize: '0.78rem', color: f.col || '#ccd4ee', fontFamily: f.mono ? "'JetBrains Mono', monospace" : 'inherit', fontWeight: 500 }}>{f.value}</span>
               </div>
             ))}
             {skill.author && (
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
                 <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>Author</span>
-                <span style={{ fontSize: '0.78rem', color: '#a9b1d6', fontWeight: 500, fontFamily: "'JetBrains Mono', monospace" }}>
+                <span style={{ fontSize: '0.78rem', color: '#ccd4ee', fontWeight: 500, fontFamily: "'JetBrains Mono', monospace" }}>
                   {skill.author.url ? (
                     <a href={skill.author.url} target="_blank" rel="noreferrer" style={{ color: '#a8b8dc', textDecoration: 'underline' }}>
                       {skill.author.name}
@@ -223,7 +223,7 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
             {skill.version && (
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
                 <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>Version</span>
-                <span style={{ fontSize: '0.78rem', color: '#a9b1d6', fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
+                <span style={{ fontSize: '0.78rem', color: '#ccd4ee', fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
                   {skill.version}
                 </span>
               </div>
@@ -231,7 +231,7 @@ export default async function SkillDetailPage({ params }: { params: Params }) {
             {skill.downloads !== undefined && (
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.45rem 0', borderBottom: '1px solid #1f2335' }}>
                 <span style={{ fontSize: '0.78rem', color: '#8ab4e0' }}>Downloads</span>
-                <span style={{ fontSize: '0.78rem', color: '#a9b1d6', fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
+                <span style={{ fontSize: '0.78rem', color: '#ccd4ee', fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}>
                   {skill.downloads.toLocaleString()}
                 </span>
               </div>

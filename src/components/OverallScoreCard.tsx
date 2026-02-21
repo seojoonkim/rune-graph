@@ -68,7 +68,7 @@ export default function OverallScoreCard({ overall, reasons }: OverallScoreCardP
           </div>
           <ul style={{ margin: 0, paddingLeft: '1.1rem', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
             {reasons.map((r, i) => (
-              <li key={i} style={{ fontSize: '0.78rem', color: '#bac4e0', lineHeight: 1.55 }}>
+              <li key={i} style={{ fontSize: '0.78rem', color: '#ccd4ee', lineHeight: 1.55 }}>
                 <span style={{ color: '#ff8fa0', fontWeight: 600 }}>{DIMENSION_LABELS[r.dimension] ?? r.dimension}:</span>{' '}
                 {r.message}
               </li>

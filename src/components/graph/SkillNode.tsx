@@ -34,7 +34,7 @@ export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
       <div style={{ fontSize: '0.7rem', color, fontWeight: 600, marginBottom: '2px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
         {CATEGORY_ICONS[data.category]} {data.category}
       </div>
-      <div style={{ fontSize: '0.8rem', color: '#c0caf5', fontWeight: 500 }}>{data.label}</div>
+      <div style={{ fontSize: '0.8rem', color: '#dde4fc', fontWeight: 500 }}>{data.label}</div>
       {isHub && <div style={{ position: 'absolute', top: -6, right: -6, fontSize: '0.6rem', background: color, color: '#000', borderRadius: '4px', padding: '1px 4px', fontWeight: 700 }}>HUB</div>}
       <Handle type="source" position={Position.Right} style={{ background: color, border: 'none', width: 8, height: 8 }} />
     </div>

@@ -69,7 +69,7 @@ export function Navbar() {
               padding: '0.4rem 0.85rem', borderRadius: '6px', textDecoration: 'none',
               fontSize: '0.825rem', fontWeight: 600,
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-              color: active ? '#bb9af7' : '#7982a9',
+              color: active ? '#bb9af7' : '#9aa4d2',
               background: active ? 'rgba(187,154,247,0.12)' : 'transparent',
               border: active ? '1px solid rgba(187,154,247,0.35)' : '1px solid transparent',
               transition: 'all 0.15s',

@@ -90,7 +90,7 @@ export default function SafetyDetailPanel({ safety, reasons, sColor, sLabel }: S
       {expanded && (
         <div style={{ marginTop: '0.85rem' }}>
           <div style={{ marginBottom: '0.7rem', border: '1px solid #292e42', borderRadius: '7px', overflow: 'hidden', background: '#16161e' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.72rem', color: '#bac4e0' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.72rem', color: '#ccd4ee' }}>
               <thead>
                 <tr style={{ background: '#1c2136', color: '#9fb2de' }}>
                   <th style={{ textAlign: 'left', padding: '0.5rem 0.65rem', borderBottom: '1px solid #2a2f47', fontWeight: 600 }}>Dimension</th>
@@ -102,8 +102,8 @@ export default function SafetyDetailPanel({ safety, reasons, sColor, sLabel }: S
               <tbody>
                 {BREAKDOWN_EXPLANATIONS.map((item, i) => (
                   <tr key={item.label}>
-                    <td style={{ padding: '0.5rem 0.65rem', borderBottom: i === BREAKDOWN_EXPLANATIONS.length - 1 ? undefined : '1px solid #282e47', color: '#c0caf5', fontFamily: "'JetBrains Mono', monospace'" }}>{item.label}</td>
-                    <td style={{ padding: '0.5rem 0.65rem', borderBottom: i === BREAKDOWN_EXPLANATIONS.length - 1 ? undefined : '1px solid #282e47', color: '#b0bcd8' }}>{item.what}</td>
+                    <td style={{ padding: '0.5rem 0.65rem', borderBottom: i === BREAKDOWN_EXPLANATIONS.length - 1 ? undefined : '1px solid #282e47', color: '#dde4fc', fontFamily: "'JetBrains Mono', monospace'" }}>{item.label}</td>
+                    <td style={{ padding: '0.5rem 0.65rem', borderBottom: i === BREAKDOWN_EXPLANATIONS.length - 1 ? undefined : '1px solid #282e47', color: '#c8d2ec' }}>{item.what}</td>
                     <td style={{ padding: '0.5rem 0.65rem', borderBottom: i === BREAKDOWN_EXPLANATIONS.length - 1 ? undefined : '1px solid #282e47', color: '#aab4d9', fontFamily: "'JetBrains Mono', monospace'" }}>{item.range}</td>
                     <td style={{ padding: '0.5rem 0.65rem', borderBottom: i === BREAKDOWN_EXPLANATIONS.length - 1 ? undefined : '1px solid #282e47', color: '#b7c2e0', lineHeight: 1.35 }}>
                       <div>Higher: {item.higher}</div>
@@ -118,7 +118,7 @@ export default function SafetyDetailPanel({ safety, reasons, sColor, sLabel }: S
           {reasons.length > 0 && (
             <div style={{ marginTop: '0.9rem', padding: '0.8rem 0.9rem', borderRadius: '7px', background: '#191d2f', border: '1px solid #422d39' }}>
               <div style={{ marginBottom: '0.55rem', color: '#ff9e88', fontSize: '0.78rem', fontWeight: 600 }}>⚠ Why some scores are low</div>
-              <ul style={{ margin: 0, paddingLeft: '1rem', color: '#b0bcd8', fontSize: '0.73rem', lineHeight: 1.45 }}>
+              <ul style={{ margin: 0, paddingLeft: '1rem', color: '#c8d2ec', fontSize: '0.73rem', lineHeight: 1.45 }}>
                 {reasons.map((reason, i) => (
                   <li key={`${reason.dimension}-${i}`} style={{ marginBottom: '0.4rem' }}>
                     {reason.message}

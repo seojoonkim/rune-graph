@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body style={{ background: '#1a1b26', color: '#c0caf5', minHeight: '100vh' }}>
+      <body style={{ background: '#1a1b26', color: '#dde4fc', minHeight: '100vh' }}>
         <Navbar />
         <main>{children}</main>
         <footer style={{ borderTop: '1px solid #292e42', padding: '2rem', textAlign: 'center', color: '#8ab4e0', fontSize: '0.875rem', marginTop: '4rem' }}>

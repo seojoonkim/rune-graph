@@ -35,7 +35,7 @@ export default function Home() {
           {/* Title */}
           <h1 style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.75rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.08, margin: '0 0 1.25rem', fontFamily: "'Outfit', sans-serif", textShadow: '0 2px 30px rgba(0,0,0,0.8)' }}>
             <span style={{ color: '#dde4fc' }}>Your AI stack,</span><br />
-            <span style={{ color: '#bb9af7', textShadow: '0 0 40px rgba(187,154,247,0.5)' }}>built with Runes.</span>
+            <span style={{ color: '#bb9af7', textShadow: '0 0 40px rgba(187,154,247,0.5)' }}>already built with Runes.</span>
           </h1>
 
           <p style={{ fontSize: '1.05rem', color: '#ccd4ee', maxWidth: '520px', margin: '0 auto 0.75rem', lineHeight: 1.75 }}>

@@ -41,11 +41,9 @@ export default function Home() {
           <p style={{ fontSize: '1.05rem', color: '#ccd4ee', maxWidth: '520px', margin: '0 auto 0.75rem', lineHeight: 1.75 }}>
             Pick a Rune. Run one command. Everything installs, connects, and executes — automatically.
           </p>
-          <p style={{ fontSize: '0.875rem', color: '#748ab8', maxWidth: '480px', margin: '0 auto 0.75rem', lineHeight: 1.6 }}>
-            Deterministic runs. 70% fewer tokens. Weeks of setup → one command.
-          </p>
-          <p style={{ fontSize: '0.82rem', color: '#4a5578', maxWidth: '460px', margin: '0 auto 1.75rem', lineHeight: 1.6, fontStyle: 'italic' }}>
-            The difference between a prompt and a Rune is giving someone directions once vs handing them a GPS — one works in the moment, the other works every time, even when the route changes.
+          <p style={{ fontSize: '0.875rem', color: '#748ab8', maxWidth: '480px', margin: '0 auto 1.75rem', lineHeight: 1.7 }}>
+            Deterministic runs. 70% fewer tokens. Weeks of setup → one command.{' '}
+            <span style={{ color: '#4a5578', fontStyle: 'italic' }}>Prompt = directions. Rune = GPS — works every time, even when the route changes.</span>
           </p>
 
           {/* CTAs */}

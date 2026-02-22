@@ -1,5 +1,5 @@
 'use client'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import ReactFlow, { Background, type Node, type Edge, type ReactFlowInstance } from 'reactflow'
 import { SkillNode } from './SkillNode'
 import { type Rune } from '@/data/runes'
@@ -101,12 +101,20 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
   const naturalH = (numLayers - 1) * ROW_STEP + NODE_H
   const graphH = Math.min(560, Math.max(240, naturalH + 80))
 
-  // ── fitView after mount ────────────────────────────────────────────────
+  // ── fitView: delayed until container has real CSS dimensions ──────────
+  const rfRef = useRef<ReactFlowInstance | null>(null)
   const onInit = useCallback((instance: ReactFlowInstance) => {
-    requestAnimationFrame(() => {
-      instance.fitView({ padding: 0.12, includeHiddenNodes: false })
-    })
+    rfRef.current = instance
   }, [])
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      rfRef.current?.fitView({ padding: 0.12, includeHiddenNodes: false })
+    }, 200)
+    return () => clearTimeout(t)
+  // Re-center whenever rune changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rune.id])
 
   return (
     <div style={{ height: graphH, overflow: 'hidden' }}>

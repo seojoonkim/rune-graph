@@ -122,46 +122,45 @@ export default function Home() {
         </div>
 
         {/* ── Comparison: RuneHub vs others ── */}
-        <div style={{ marginBottom: '3.5rem', padding: '1.75rem', background: '#0f1018', border: '1px solid rgba(187,154,247,0.15)', borderRadius: '14px' }}>
-          <p style={{ fontSize: '0.68rem', fontWeight: 900, letterSpacing: '0.15em', color: '#748ab8', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace', marginTop: 0" }}>HOW WE&apos;RE DIFFERENT</p>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.83rem' }}>
-              <thead>
-                <tr>
-                  {(['', 'skillsmp / playbooks', 'n8n / Zapier', 'RuneHub ✦'].map((h, i) => (
-                    <th key={i} style={{
-                      padding: '0.5rem 0.875rem',
-                      textAlign: i === 0 ? 'left' : 'center',
-                      color: i === 3 ? '#bb9af7' : '#748ab8',
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontWeight: i === 3 ? 800 : 600,
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.06em',
-                      borderBottom: '1px solid #1f2335',
-                      whiteSpace: 'nowrap',
-                    }}>{h}</th>
-                  )))}
-                </tr>
-              </thead>
-              <tbody>
-                {([
-                  ['Shareable workflows',       '✅ files',    '✅ exports',  '✅ registry'],
-                  ['One-command install',        '❌',          '❌',          '✅'],
-                  ['Executable pipelines',       '❌ static',   '✅ hosted',   '✅ local + cloud'],
-                  ['Trust Score / audit trail',  '❌',          '△ logs only', '✅'],
-                  ['Creator revenue share',      '❌',          '❌',          '✅ 85% on-chain'],
-                  ['Auto-eval + optimization',   '❌',          '❌',          '🔜 roadmap'],
-                ] as [string, string, string, string][]).map(([feat, a, b, c], i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #16161e' }}>
-                    <td style={{ padding: '0.6rem 0.875rem', color: '#c8d2ec', fontWeight: 500 }}>{feat}</td>
-                    <td style={{ padding: '0.6rem 0.875rem', textAlign: 'center', color: '#4a5578' }}>{a}</td>
-                    <td style={{ padding: '0.6rem 0.875rem', textAlign: 'center', color: '#4a5578' }}>{b}</td>
-                    <td style={{ padding: '0.6rem 0.875rem', textAlign: 'center', color: '#bb9af7', fontWeight: 700 }}>{c}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div style={{ marginBottom: '3.5rem', padding: '1.5rem', background: '#0f1018', border: '1px solid rgba(187,154,247,0.15)', borderRadius: '14px' }}>
+          <p style={{ fontSize: '0.68rem', fontWeight: 900, letterSpacing: '0.15em', color: '#748ab8', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace", marginTop: 0 }}>HOW WE&apos;RE DIFFERENT</p>
+
+          {/* Column header row */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 72px 72px 80px', gap: '0.25rem', marginBottom: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid #1f2335' }}>
+            <div />
+            {(['Skillsmp', 'n8n', 'RuneHub'] as const).map((h, i) => (
+              <div key={h} style={{
+                fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.06em',
+                color: i === 2 ? '#bb9af7' : '#4a5578',
+                fontFamily: "'JetBrains Mono', monospace",
+                textAlign: 'center', lineHeight: 1.3,
+              }}>{h}{i === 2 ? ' ✦' : ''}</div>
+            ))}
           </div>
+
+          {/* Feature rows */}
+          {([
+            { feat: 'Shareable workflows',      a: '✅ files',     ac: '#34d399', b: '✅ exports',      bc: '#34d399', c: '✅ registry',      cc: '#bb9af7' },
+            { feat: 'One-command install',       a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '✅',               cc: '#bb9af7' },
+            { feat: 'Executable pipelines',      a: '✗ static',     ac: '#f87171', b: '✅ hosted',       bc: '#34d399', c: '✅ local+cloud',   cc: '#bb9af7' },
+            { feat: 'Trust Score / audit',       a: '✗',            ac: '#f87171', b: '△ logs',          bc: '#ffd060', c: '✅',               cc: '#bb9af7' },
+            { feat: 'Creator revenue',           a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '✅ 85%',           cc: '#bb9af7' },
+            { feat: 'Auto-eval',                 a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '🔜 soon',          cc: '#ffd060' },
+          ] as { feat: string; a: string; ac: string; b: string; bc: string; c: string; cc: string }[]).map((row, i) => (
+            <div key={i} style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 72px 72px 80px',
+              gap: '0.25rem',
+              padding: '0.55rem 0',
+              borderBottom: i < 5 ? '1px solid #16161e' : undefined,
+              alignItems: 'center',
+            }}>
+              <span style={{ fontSize: '0.78rem', color: '#c8d2ec', fontWeight: 500, lineHeight: 1.3 }}>{row.feat}</span>
+              <span style={{ fontSize: '0.68rem', color: row.ac, textAlign: 'center', fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.3 }}>{row.a}</span>
+              <span style={{ fontSize: '0.68rem', color: row.bc, textAlign: 'center', fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.3 }}>{row.b}</span>
+              <span style={{ fontSize: '0.68rem', color: row.cc, textAlign: 'center', fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.3 }}>{row.c}</span>
+            </div>
+          ))}
         </div>
 
         {/* Divider: Why it matters */}

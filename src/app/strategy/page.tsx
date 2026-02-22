@@ -61,7 +61,7 @@ export default function StrategyPage() {
                 ['① Zero-token planning',  'The Rune graph is the plan. No LLM decides what steps to run — that phase costs 0 tokens.',        '~2,000 tok'],
                 ['② Context isolation',    'Each step receives only its required inputs, not the full conversation history.',                    '~5,000 tok'],
                 ['③ Semantic caching',     'If the same (or similar) input was processed before, the cached result is returned. LLM skipped.', 'run-specific'],
-                ['④ Smart model routing',  'Simple extraction → Groq. Classification → Haiku. Deep synthesis → Sonnet. Opus never by default.', '30–50% /step'],
+                ['④ Smart model routing',  'Simple extraction → Groq (ultra-fast open-source inference, 10× cheaper than GPT-4). Classification → Haiku. Deep synthesis → Sonnet. Opus never by default.', '30–50% /step'],
               ] as [string, string, string][]).map(([name, how, saves], i, arr) => (
                 <div key={name} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr auto', gap: '0', padding: '0.7rem 1rem', borderBottom: i < arr.length - 1 ? '1px solid rgba(255,158,100,0.08)' : 'none', fontSize: '0.8rem', alignItems: 'start' }}>
                   <span style={{ color: '#e2c9a0', fontWeight: 700, paddingRight: '0.5rem' }}>{name}</span>

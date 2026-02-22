@@ -26,12 +26,28 @@ export function Navbar() {
               <stop offset="100%" stopColor="#8ab4ff"/>
             </linearGradient>
           </defs>
+          {/* Hexagon border */}
           <polygon points="13,1.5 22.6,7 22.6,19 13,24.5 3.4,19 3.4,7"
             stroke="url(#rg-grad)" strokeWidth="1.4" fill="none" strokeLinejoin="round"/>
-          <line x1="13" y1="1.5"  x2="13" y2="24.5" stroke="#c9a8ff" strokeWidth="0.8" opacity="0.3"/>
-          <line x1="3.4" y1="7"   x2="22.6" y2="19" stroke="#c9a8ff" strokeWidth="0.8" opacity="0.3"/>
-          <line x1="22.6" y1="7"  x2="3.4"  y2="19" stroke="#c9a8ff" strokeWidth="0.8" opacity="0.3"/>
-          <circle cx="13" cy="13" r="2.2" fill="url(#rg-grad)"/>
+          {/* Static dim half-lines (base) */}
+          <line x1="13"   y1="1.5"  x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="0.7" opacity="0.15"/>
+          <line x1="13"   y1="24.5" x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="0.7" opacity="0.15"/>
+          <line x1="22.6" y1="7"    x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="0.7" opacity="0.15"/>
+          <line x1="3.4"  y1="19"   x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="0.7" opacity="0.15"/>
+          <line x1="22.6" y1="19"   x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="0.7" opacity="0.15"/>
+          <line x1="3.4"  y1="7"    x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="0.7" opacity="0.15"/>
+          {/* Animated spark half-lines — all converge to center simultaneously */}
+          <line x1="13"   y1="1.5"  x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="1.2" className="rg-logo-spark"/>
+          <line x1="13"   y1="24.5" x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="1.2" className="rg-logo-spark"/>
+          <line x1="22.6" y1="7"    x2="13"   y2="13"   stroke="#8ab4ff" strokeWidth="1.2" className="rg-logo-spark"/>
+          <line x1="3.4"  y1="19"   x2="13"   y2="13"   stroke="#8ab4ff" strokeWidth="1.2" className="rg-logo-spark"/>
+          <line x1="22.6" y1="19"   x2="13"   y2="13"   stroke="#8ab4ff" strokeWidth="1.2" className="rg-logo-spark"/>
+          <line x1="3.4"  y1="7"    x2="13"   y2="13"   stroke="#c9a8ff" strokeWidth="1.2" className="rg-logo-spark"/>
+          {/* Center glow halo */}
+          <circle cx="13" cy="13" r="3.5" fill="none" stroke="#c9a8ff" strokeWidth="0.8" className="rg-logo-halo"/>
+          {/* Center dot */}
+          <circle cx="13" cy="13" r="2.2" fill="url(#rg-grad)" className="rg-logo-center-dot"/>
+          {/* Vertex nodes */}
           <circle cx="13"   cy="1.5"  r="1.2" fill="#c9a8ff" opacity="0.7"/>
           <circle cx="22.6" cy="7"    r="1.2" fill="#8ab4ff" opacity="0.7"/>
           <circle cx="22.6" cy="19"   r="1.2" fill="#8ab4ff" opacity="0.7"/>

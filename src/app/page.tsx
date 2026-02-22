@@ -39,10 +39,10 @@ export default function Home() {
           </h1>
 
           <p style={{ fontSize: '1.05rem', color: '#ccd4ee', maxWidth: '520px', margin: '0 auto 0.75rem', lineHeight: 1.75 }}>
-            Browse pre-built AI workflow packages. Pick one, run one command — every Skill auto-installs, every connection wires itself, pipeline executes immediately.
+            Pick a workflow. Run one command. Everything installs, connects, and executes — automatically.
           </p>
           <p style={{ fontSize: '0.875rem', color: '#748ab8', maxWidth: '480px', margin: '0 auto 1.75rem', lineHeight: 1.6 }}>
-            Reproducible every run. 70% fewer tokens. Trust Score on every package.
+            Deterministic runs. 70% fewer tokens. Trust-scored and auditable.
           </p>
 
           {/* CTAs */}
@@ -78,7 +78,7 @@ export default function Home() {
               What is a Rune?
             </h2>
             <p style={{ color: '#c8d2ec', fontSize: '1rem', marginBottom: 0, maxWidth: '460px', lineHeight: 1.75 }}>
-              A Rune is a verified, composable AI workflow — a recipe that chains multiple Skills into one reliable, repeatable action. Install it once; it runs the same way every time.
+              A Rune is a composable AI workflow — a recipe that chains multiple Skills into one reliable pipeline. Install once, get the same result every time.
             </p>
           </div>
           {/* Orb image */}
@@ -93,9 +93,9 @@ export default function Home() {
         {/* Concept 3-col grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.875rem', marginBottom: '3.5rem' }}>
           {([
-            { label: 'Skill', accent: '#7aa2f7', title: 'The Ingredient', desc: 'An installable service capability — gmail, slack, github. Each Skill packages all actions for that service with agent-ready instructions.' },
-            { label: 'Rune',  accent: '#bb9af7', title: 'The Recipe',     desc: 'A verified multi-Skill workflow — chained in sequence or parallel, with Trust Score security and reproducible execution.' },
-            { label: 'Trust', accent: '#ff9e64', title: 'The Guarantee',  desc: 'Every Rune carries a Trust Score. Know exactly what services it touches, what scopes it needs, and how safe each action is.' },
+            { label: 'Skill', accent: '#7aa2f7', title: 'The Ingredient', desc: 'A packaged service capability — gmail, slack, github. Each Skill bundles every action for that service with agent-ready instructions.' },
+            { label: 'Rune',  accent: '#bb9af7', title: 'The Recipe',     desc: 'A multi-Skill workflow — chained in sequence or parallel, verified with a Trust Score before you run it.' },
+            { label: 'Trust', accent: '#ff9e64', title: 'The Guarantee',  desc: 'Every Rune carries a Trust Score — showing which services it accesses, what scopes it needs, and the risk level of each action.' },
           ] as { label: string; accent: string; title: string; desc: string }[]).map(item => (
             <div key={item.label} style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start', padding: '1rem 1.1rem', background: '#16161e', border: `1px solid ${item.accent}25`, borderRadius: '10px' }}>
               <div>
@@ -117,17 +117,16 @@ export default function Home() {
         </div>
         <h2 style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.9rem)', fontWeight: 800, color: '#dde4fc', margin: '0 0 0.75rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em', lineHeight: 1.2 }}>
           Vibe coding hits a ceiling.<br />
-          <span style={{ color: '#bb9af7' }}>Runes are what comes next.</span>
+          <span style={{ color: '#bb9af7' }}>Runes break through it.</span>
         </h2>
         <p style={{ color: '#748ab8', fontSize: '1rem', marginBottom: '1.5rem', maxWidth: '600px' }}>
-          92% of devs use AI daily. The edge isn&apos;t the model anymore — it&apos;s the playbook. Every Rune is deterministic, auditable, and cost-efficient by design.
+          92% of devs use AI daily. The edge isn&apos;t the model — it&apos;s the playbook. Runes make every playbook deterministic, auditable, and cheap to run.
         </p>
         {/* Wrapper gap callout */}
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', background: 'rgba(187,154,247,0.05)', border: '1px solid rgba(187,154,247,0.2)', borderRadius: '10px', padding: '1rem 1.25rem', marginBottom: '2.5rem', maxWidth: '680px' }}>
           <span style={{ fontSize: '1.1rem', flexShrink: 0, marginTop: '1px' }}>💡</span>
           <p style={{ color: '#c8d2ec', fontSize: '0.875rem', lineHeight: 1.65, margin: 0 }}>
-            <span style={{ color: '#bb9af7', fontWeight: 700 }}>The gap is the business.</span>{' '}
-            95% of potential users will never spend 10 hours setting up an AI agent themselves. The people who win in the Skill Era aren&apos;t the best engineers — they&apos;re the ones who package the right workflows and put them one command away.
+            95% of potential users will never spend 10 hours configuring an AI agent. The winners in the Skill Era aren&apos;t the best engineers — they&apos;re the ones who package the right workflow and put it one command away.
           </p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
@@ -146,7 +145,7 @@ export default function Home() {
               </div>
               <div style={{ color: '#bb9af7', fontSize: '1.35rem', fontWeight: 900, fontFamily: "'Outfit', sans-serif", marginBottom: '0.75rem' }}>100% deterministic</div>
               <p style={{ color: '#9aa4d2', fontSize: '0.875rem', lineHeight: 1.7, margin: '0 0 1.5rem' }}>
-                LLMs improvise differently every run. A Rune locks the workflow graph — same skills, same order, same result. Every time.
+                LLMs improvise differently every run. A Rune locks the workflow graph — same Skills, same order, same result. Guaranteed.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -170,7 +169,7 @@ export default function Home() {
               </div>
               <div style={{ color: '#ff9e64', fontSize: '1.35rem', fontWeight: 900, fontFamily: "'Outfit', sans-serif", marginBottom: '0.75rem' }}>~70% cost savings</div>
               <p style={{ color: '#9aa4d2', fontSize: '0.875rem', lineHeight: 1.7, margin: '0 0 1rem' }}>
-                Zero-token planning. Context isolation per step. Semantic caching across runs. Smart model routing picks the cheapest model that works.
+                Zero-token planning. Per-step context isolation. Semantic caching. Smart model routing — cheapest model that gets the job done, automatically.
               </p>
               {/* SkillsBench callout */}
               <div style={{ background: 'rgba(255,158,100,0.06)', border: '1px solid rgba(255,158,100,0.2)', borderRadius: '8px', padding: '0.65rem 0.9rem', marginBottom: '1rem', fontSize: '0.78rem', color: '#c8d2ec', lineHeight: 1.55 }}>
@@ -199,7 +198,7 @@ export default function Home() {
               </div>
               <div style={{ color: '#34d399', fontSize: '1.35rem', fontWeight: 900, fontFamily: "'Outfit', sans-serif", marginBottom: '0.75rem' }}>Least-privilege scopes</div>
               <p style={{ color: '#9aa4d2', fontSize: '0.875rem', lineHeight: 1.7, margin: '0 0 1rem' }}>
-                Every Rune declares exactly which services it touches. Secrets never reach the LLM. Full audit logs track every action.
+                Least-privilege by default. Secrets injected at runtime — never exposed to the LLM. Every execution produces an immutable audit log.
               </p>
               {/* ClawHavoc callout */}
               <div style={{ background: 'rgba(248,113,113,0.06)', border: '1px solid rgba(248,113,113,0.2)', borderRadius: '8px', padding: '0.65rem 0.9rem', marginBottom: '1rem', fontSize: '0.78rem', color: '#c8d2ec', lineHeight: 1.55 }}>
@@ -238,7 +237,7 @@ export default function Home() {
           One command. That&apos;s it.
         </h2>
         <p style={{ color: '#748ab8', fontSize: '1rem', marginBottom: '2.5rem', maxWidth: '520px' }}>
-          Install a Rune — skills auto-install, pipeline executes immediately. No config. No glue code.
+          RuneHub resolves dependencies, configures auth, wires every step, and runs — all from a single CLI command.
         </p>
 
         {/* Hero terminal */}
@@ -284,9 +283,9 @@ export default function Home() {
         {/* 3 auto-things */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
           {[
-            { color: '#bb9af7', icon: '⬡', label: 'Auto-install', desc: 'All required skills pulled in automatically — no manual dependency management.' },
-            { color: '#ff9e64', icon: '⬡', label: 'Auto-configure', desc: 'Auth scopes, action wiring, agent docs — set up in the right order, every time.' },
-            { color: '#34d399', icon: '⬡', label: 'Auto-audit', desc: 'Every step logged. Tokens counted. Services scoped. Nothing runs outside the graph.' },
+            { color: '#bb9af7', icon: '⬡', label: 'Auto-install', desc: 'Skills resolve like npm packages — no hunting for dependencies or versions.' },
+            { color: '#ff9e64', icon: '⬡', label: 'Auto-configure', desc: 'Auth scopes, action wiring, and agent context set in the correct order, every run.' },
+            { color: '#34d399', icon: '⬡', label: 'Auto-audit', desc: 'Immutable logs per step. Token usage tracked. Nothing executes outside the declared graph.' },
           ].map(({ color, label, desc }) => (
             <div key={label} style={{ background: '#16161e', border: `1px solid ${color}22`, borderRadius: '10px', padding: '1.1rem 1.25rem' }}>
               <div style={{ color, fontSize: '0.68rem', fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', marginBottom: '0.4rem' }}>{label.toUpperCase()}</div>

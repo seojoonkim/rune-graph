@@ -144,7 +144,7 @@ export default function Home() {
             { feat: 'One-command install',       a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '✅',               cc: '#bb9af7' },
             { feat: 'Executable pipelines',      a: '✗ static',     ac: '#f87171', b: '✅ hosted',       bc: '#34d399', c: '✅ local+cloud',   cc: '#bb9af7' },
             { feat: 'Trust Score / audit',       a: '✗',            ac: '#f87171', b: '△ logs',          bc: '#ffd060', c: '✅',               cc: '#bb9af7' },
-            { feat: 'Creator revenue',           a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '✅ 85%',           cc: '#bb9af7' },
+            { feat: 'Creator revenue',           a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '🔜 planned',        cc: '#ffd060' },
             { feat: 'Auto-eval',                 a: '✗',            ac: '#f87171', b: '✗',               bc: '#f87171', c: '🔜 soon',          cc: '#ffd060' },
           ] as { feat: string; a: string; ac: string; b: string; bc: string; c: string; cc: string }[]).map((row, i) => (
             <div key={i} style={{
@@ -426,13 +426,13 @@ export default function Home() {
               Build a Rune.<br /><span style={{ color: '#34d399' }}>Earn from every run.</span>
             </h2>
             <p style={{ color: '#9aa4d2', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-              Publish your workflow to the registry. Every time someone runs your Rune, usage revenue is generated — automatically tokenized and distributed to you. No ads, no subscriptions — pure usage economics.
+              Publish your workflow to the registry. Every time someone runs your Rune, usage revenue is generated and distributed back to you. No ads, no subscriptions — pure usage economics.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
               {[
                 { icon: '🔨', color: '#34d399', title: 'Build once', body: 'Author a Rune with the Builder or CLI. Auto-Fill wires the gaps. Validate with one command.' },
                 { icon: '📈', color: '#60a5fa', title: 'Community improves it', body: 'Developers fork, extend, and contribute — each Rune evolves through community iteration.' },
-                { icon: '💰', color: '#ff9e64', title: 'Revenue is tokenized', body: 'Usage fees flow back to creators as on-chain revenue shares. Verifiable, automatic, no middleman.' },
+                { icon: '💰', color: '#ff9e64', title: 'Creator revenue', body: 'When RuneHub goes paid, usage revenue flows back to creators automatically. No middleman, no invoicing.' },
               ].map(s => (
                 <div key={s.title} style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start' }}>
                   <span style={{ fontSize: '1.1rem', flexShrink: 0, marginTop: '2px' }}>{s.icon}</span>
@@ -454,7 +454,7 @@ export default function Home() {
               { step: '02', label: 'Publish to registry', sub: 'Trust Score ≥ 70 required', color: '#60a5fa' },
               { step: '03', label: 'Users run it', sub: 'Every execution is logged', color: '#bb9af7' },
               { step: '04', label: 'Auto-eval & optimize', sub: 'Community forks improve the Rune', color: '#ff9e64' },
-              { step: '05', label: 'Revenue → tokenized', sub: 'Creator receives 85% of usage fees', color: '#a8d878' },
+              { step: '05', label: 'Revenue → yours', sub: 'Creator revenue when RuneHub goes paid', color: '#a8d878' },
             ].map((s, i, arr) => (
               <div key={s.step} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
@@ -544,7 +544,7 @@ export default function Home() {
             <div style={{ flex: 1, minWidth: '240px' }}>
               <div style={{ fontSize: '0.65rem', color: '#a8d878', fontWeight: 800, letterSpacing: '0.15em', fontFamily: "'JetBrains Mono', monospace", marginBottom: '0.35rem' }}>CREATOR PROGRAM</div>
               <div style={{ color: '#dde4fc', fontSize: '1rem', fontWeight: 700, fontFamily: "'Outfit', sans-serif", marginBottom: '0.3rem' }}>Build Runes. Earn from every run.</div>
-              <div style={{ color: '#748ab8', fontSize: '0.85rem' }}>Every time someone runs your Rune, usage revenue is tokenized and 85% flows back to you — automatically, on-chain, no invoicing.</div>
+              <div style={{ color: '#748ab8', fontSize: '0.85rem' }}>When RuneHub goes paid, usage revenue flows back to creators automatically — no invoicing, no middleman.</div>
             </div>
             <Link href="/runes/build" style={{ padding: '0.6rem 1.4rem', background: 'rgba(168,216,120,0.12)', border: '1px solid rgba(168,216,120,0.35)', borderRadius: '8px', color: '#a8d878', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 700, flexShrink: 0, whiteSpace: 'nowrap' }}>
               Start building ›

@@ -95,15 +95,13 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
       aspectRatio: `${AR_W} / ${AR_H}`,
       minHeight: '180px',
       maxHeight: '680px',
-      background: '#1a1b26',
-      borderRadius: '12px',
-      border: '1px solid #292e42',
       overflow: 'hidden',
     }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        style={{ background: '#1a1b26' }}
         fitView
         fitViewOptions={{ padding: 0.06 }}
         nodesDraggable={false}

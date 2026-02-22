@@ -1396,6 +1396,147 @@ const BASE_RUNES: Rune[] = [
       { source: 'claude-analyze', target: 'wise-transfer', label: 'funding instruction' },
     ],
   },
+
+  // ── Content Machine ──────────────────────────────────────────
+  {
+    id: 'rune-content-machine',
+    slug: 'content-machine',
+    name: 'Content Machine',
+    purpose: 'Auto-generate a full week of social posts, newsletters, and video scripts in your brand voice — from trending topics.',
+    category: 'Content',
+    emoji: '✍️',
+    useCase: 'Wake up to a complete content calendar: 14 posts, 2 newsletters, 3 scripts — all in your voice. Review and publish.',
+    description: 'Monitors X, Reddit, and RSS for trending topics in your niche, generates content in a custom brand voice profile, creates visuals, and queues everything across platforms. Built for creators spending 10+ hours/week on production.',
+    nodes: [
+      { id: 'rss-scraper',      label: 'RSS / Reddit Scraper', category: 'input'  },
+      { id: 'x-trends',         label: 'X Trends Monitor',     category: 'input'  },
+      { id: 'brand-voice',      label: 'Brand Voice Profile',  category: 'api'    },
+      { id: 'claude-write',     label: 'Claude Write Content', category: 'llm'    },
+      { id: 'dalle-thumbnails', label: 'DALL·E Thumbnails',    category: 'api'    },
+      { id: 'buffer-schedule',  label: 'Buffer Schedule',      category: 'output' },
+      { id: 'telegram-preview', label: 'Telegram Preview',     category: 'output' },
+    ],
+    edges: [
+      { source: 'rss-scraper',      target: 'claude-write',     label: 'trending topics' },
+      { source: 'x-trends',         target: 'claude-write',     label: 'viral signals' },
+      { source: 'brand-voice',      target: 'claude-write',     label: 'voice context' },
+      { source: 'claude-write',     target: 'dalle-thumbnails', label: 'visual brief' },
+      { source: 'claude-write',     target: 'buffer-schedule',  label: 'posts queue' },
+      { source: 'dalle-thumbnails', target: 'buffer-schedule',  label: 'visuals' },
+      { source: 'buffer-schedule',  target: 'telegram-preview', label: 'weekly summary' },
+    ],
+  },
+
+  // ── Health Coach ─────────────────────────────────────────────
+  {
+    id: 'rune-health-coach',
+    slug: 'health-coach',
+    name: 'Health Coach',
+    purpose: 'AI-powered personal health coach — food recognition, meal planning, grocery ordering, and Apple Health sync.',
+    category: 'Health',
+    emoji: '💪',
+    useCase: 'Snap a photo of your lunch. 10 seconds later: calories counted, macros tracked, dinner plan adjusted, groceries ordered if needed.',
+    description: 'Vision model reads food photos, tracks macros against goals, generates weekly meal plans, orders groceries via delivery API, syncs Apple Health data. Choose your coach persona: supportive mentor or savage roaster. People quit apps — they don\'t quit their coach.',
+    nodes: [
+      { id: 'vision-food',      label: 'Vision Food Recognition', category: 'input'  },
+      { id: 'apple-health',     label: 'Apple Health Sync',       category: 'input'  },
+      { id: 'claude-coach',     label: 'Claude Coach LLM',        category: 'llm'    },
+      { id: 'instacart-api',    label: 'Grocery Delivery API',    category: 'api'    },
+      { id: 'meal-planner',     label: 'Meal Plan Generator',     category: 'api'    },
+      { id: 'whatsapp-coach',   label: 'WhatsApp Coach Reply',    category: 'output' },
+    ],
+    edges: [
+      { source: 'vision-food',    target: 'claude-coach',   label: 'food data' },
+      { source: 'apple-health',   target: 'claude-coach',   label: 'biometrics' },
+      { source: 'claude-coach',   target: 'meal-planner',   label: 'goal context' },
+      { source: 'meal-planner',   target: 'instacart-api',  label: 'shopping list' },
+      { source: 'claude-coach',   target: 'whatsapp-coach', label: 'coaching message' },
+    ],
+  },
+
+  // ── RPG Life System ──────────────────────────────────────────
+  {
+    id: 'rune-rpg-life',
+    slug: 'rpg-life',
+    name: 'RPG Life System',
+    purpose: 'Turn real-life goals into an RPG — XP, levels, daily quests, and a character sheet that grows as you do.',
+    category: 'Productivity',
+    emoji: '🎮',
+    useCase: '"Done with gym" → +30 Strength XP. Hit Level 20 Intelligence after a 6-month streak. Real life with a progress bar.',
+    description: 'Gamifies productivity with 5 life stats (Intelligence, Strength, Discipline, Social, Creativity). Daily quests, XP rewards, streak tracking, and a character dashboard. Insane viral potential — people screenshot their character sheets.',
+    nodes: [
+      { id: 'task-input',       label: 'Task / Message Input',   category: 'input'  },
+      { id: 'streak-tracker',   label: 'Streak Tracker DB',      category: 'api'    },
+      { id: 'claude-rpg',       label: 'Claude Quest Engine',    category: 'llm'    },
+      { id: 'xp-calculator',    label: 'XP Calculator',          category: 'api'    },
+      { id: 'dashboard-update', label: 'Character Dashboard',    category: 'output' },
+      { id: 'telegram-quest',   label: 'Telegram Quest Notify',  category: 'output' },
+    ],
+    edges: [
+      { source: 'task-input',       target: 'claude-rpg',       label: 'completed task' },
+      { source: 'streak-tracker',   target: 'claude-rpg',       label: 'streak context' },
+      { source: 'claude-rpg',       target: 'xp-calculator',    label: 'task category' },
+      { source: 'xp-calculator',    target: 'dashboard-update', label: 'XP delta' },
+      { source: 'xp-calculator',    target: 'telegram-quest',   label: 'level up alert' },
+    ],
+  },
+
+  // ── Autonomous Dev Team ──────────────────────────────────────
+  {
+    id: 'rune-dev-team',
+    slug: 'dev-team',
+    name: 'Autonomous Dev Team',
+    purpose: 'Describe a product in plain English — get a live deployed URL. Sub-agents handle coding, testing, and deployment.',
+    category: 'Engineering',
+    emoji: '🤖',
+    useCase: '"Build a SaaS dashboard with Stripe billing" → sub-agent picks boilerplate → builds → tests → deploys → sends live URL.',
+    description: 'Orchestrates Codex, Claude Code, and Cursor sub-agents with pre-loaded boilerplates for every project type. Reads errors, fixes bugs, redeploys automatically. Built for non-technical founders, indie hackers, and agencies.',
+    nodes: [
+      { id: 'spec-input',       label: 'Product Spec Input',     category: 'input'  },
+      { id: 'claude-architect', label: 'Claude Architect',       category: 'llm'    },
+      { id: 'codex-agent',      label: 'Codex Sub-Agent',        category: 'api'    },
+      { id: 'boilerplate-repo', label: 'Boilerplate Repo',       category: 'api'    },
+      { id: 'test-runner',      label: 'Test Runner',            category: 'api'    },
+      { id: 'vercel-deploy',    label: 'Vercel Deploy',          category: 'output' },
+      { id: 'slack-live-url',   label: 'Slack Live URL',         category: 'output' },
+    ],
+    edges: [
+      { source: 'spec-input',       target: 'claude-architect', label: 'requirements' },
+      { source: 'claude-architect', target: 'boilerplate-repo', label: 'template pick' },
+      { source: 'boilerplate-repo', target: 'codex-agent',      label: 'starter code' },
+      { source: 'codex-agent',      target: 'test-runner',      label: 'built code' },
+      { source: 'test-runner',      target: 'vercel-deploy',    label: 'tests passed' },
+      { source: 'vercel-deploy',    target: 'slack-live-url',   label: 'live URL' },
+    ],
+  },
+
+  // ── SEO Empire Builder ────────────────────────────────────────
+  {
+    id: 'rune-seo-empire',
+    slug: 'seo-empire',
+    name: 'SEO Empire Builder',
+    purpose: 'Autonomous SEO — keyword research, content creation, CMS publishing, backlink outreach, and Search Console monitoring 24/7.',
+    category: 'Marketing',
+    emoji: '📈',
+    useCase: 'Wake up to: "3 backlinks acquired. 12 keywords hit page 1. 4 articles published. Weekly report attached."',
+    description: 'Runs full-cycle SEO autonomously: keyword clustering, programmatic content, direct CMS publishing, personalized outreach emails, and performance tracking via Search Console. Built for SEO agencies and affiliate marketers who know SEO is a game of volume and consistency.',
+    nodes: [
+      { id: 'semrush-api',      label: 'SEMrush Keyword API',    category: 'input'  },
+      { id: 'gsc-monitor',      label: 'Search Console Monitor', category: 'input'  },
+      { id: 'claude-seo',       label: 'Claude SEO Strategist',  category: 'llm'    },
+      { id: 'cms-publish',      label: 'CMS Auto-Publish',       category: 'output' },
+      { id: 'outreach-email',   label: 'Backlink Outreach Email',category: 'output' },
+      { id: 'slack-seo-report', label: 'Slack Weekly Report',    category: 'output' },
+    ],
+    edges: [
+      { source: 'semrush-api',   target: 'claude-seo',       label: 'keyword data' },
+      { source: 'gsc-monitor',   target: 'claude-seo',       label: 'performance data' },
+      { source: 'claude-seo',    target: 'cms-publish',      label: 'content + strategy' },
+      { source: 'claude-seo',    target: 'outreach-email',   label: 'link targets' },
+      { source: 'cms-publish',   target: 'slack-seo-report', label: 'published count' },
+      { source: 'outreach-email',target: 'slack-seo-report', label: 'links acquired' },
+    ],
+  },
 ];
 
 const buildHubSkills = (runes: Rune[]) => {

@@ -1,15 +1,15 @@
 export default function AboutPage() {
   return (
     <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1.5rem 3rem' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', marginBottom: '0.5rem' }}>About RuneGraph</h1>
+      <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#dde4fc', marginBottom: '0.5rem' }}>About RuneHub</h1>
       <p style={{ color: '#ccd4ee', lineHeight: 1.7 }}>
-        RuneGraph는 AI 에이전트 스킬을 중심으로, 스킬 간 연결관계와 실행 흐름을 이해하기 쉽게 정리한 오픈소스 프로젝트입니다.
+        RuneHub는 AI 에이전트 스킬을 중심으로, 스킬 간 연결관계와 실행 흐름을 이해하기 쉽게 정리한 오픈소스 프로젝트입니다.
       </p>
 
       <section style={{ marginTop: '1.5rem', background: '#1e2030', border: '1px solid #292e42', borderRadius: '10px', padding: '1.1rem' }}>
         <h2 style={{ color: '#dde4fc', marginTop: 0 }}>왜 만들었나요?</h2>
         <p style={{ color: '#999', lineHeight: 1.7 }}>
-          AI 워크플로우는 아이디어와 구현이 자주 단절됩니다. RuneGraph는 Rune(작은 실행 단위)과 Skill(기능 단위) 시각화를 통해
+          AI 워크플로우는 아이디어와 구현이 자주 단절됩니다. RuneHub는 Rune(작은 실행 단위)과 Skill(기능 단위) 시각화를 통해
           기획자·개발자·운영자가 같은 기준에서 협업할 수 있도록 만들었습니다.
         </p>
       </section>

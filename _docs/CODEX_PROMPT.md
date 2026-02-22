@@ -1,4 +1,4 @@
-# Build RuneGraph — AI Skill Orchestration Marketplace
+# Build RuneHub — AI Skill Orchestration Marketplace
 
 Read PLAN.md and STRATEGY.md first. Then build the complete Next.js project.
 
@@ -57,7 +57,7 @@ Edit tailwind.config.ts to add custom colors.
 **`/about` (about/page.tsx)** — simple page with mission + roadmap
 
 ### 5. Navigation
-Dark navbar: RuneGraph logo (🔮), links to Runes | Graph | Strategy | About
+Dark navbar: RuneHub logo (🔮), links to Runes | Graph | Strategy | About
 Purple active link indicator, hover glow effect.
 
 ### 6. Deploy prep
@@ -79,5 +79,5 @@ Add `.gitignore`, update `README.md` with project description.
 - All data is in /src/data/runes.ts — no backend needed
 - TypeScript strict mode
 
-When done, run: git add -A && git commit -m "feat: complete RuneGraph v0.1" && git push
-Then: openclaw system event --text "Done: RuneGraph built and pushed to GitHub" --mode now
+When done, run: git add -A && git commit -m "feat: complete RuneHub v0.1" && git push
+Then: openclaw system event --text "Done: RuneHub built and pushed to GitHub" --mode now

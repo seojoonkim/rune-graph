@@ -3,7 +3,7 @@ import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 
 export const metadata: Metadata = {
-  title: 'RuneGraph — Inscribe. Invoke. Trust.',
+  title: 'RuneHub — Inscribe. Invoke. Trust.',
   description: 'AI Agent Skill Orchestration Marketplace. See how skills connect. Build what matters.',
   icons: {
     icon: [
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main>{children}</main>
         <footer className="rg-footer" style={{ borderTop: '1px solid #292e42', textAlign: 'center', color: '#8ab4e0', fontSize: '0.875rem' }}>
-          <span style={{ color: '#bb9af7', fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, letterSpacing: '0.06em' }}>RuneGraph</span>
+          <span style={{ color: '#bb9af7', fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, letterSpacing: '0.06em' }}>RuneHub</span>
           {' '}— Inscribe. Invoke. Trust. · Open Source
         </footer>
       </body>

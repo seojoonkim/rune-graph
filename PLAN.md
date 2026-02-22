@@ -1,4 +1,4 @@
-# RuneGraph 프로젝트 계획서
+# RuneHub 프로젝트 계획서
 
 > AI 에이전트 스킬 오케스트레이션 마켓플레이스
 > 슬로건: "Inscribe. Invoke. Trust."
@@ -459,7 +459,7 @@
 /graph               → 전체 스킬 관계 통합 그래프 (필터/검색 가능)
 /skills              → 스킬 사전 (전체 스킬 목록 + 어떤 Rune에서 쓰이는지)  ← 추가 제안
 /strategy            → 전략 문서
-/about               → RuneGraph 소개 + 로드맵  ← 추가 제안
+/about               → RuneHub 소개 + 로드맵  ← 추가 제안
 ```
 
 ### 3. 디자인 방향

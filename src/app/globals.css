@@ -240,20 +240,28 @@ a { text-underline-offset: 3px; }
 /* ── Stats number ── */
 .rg-stats-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0;
   padding: 1.75rem 1rem;
   border-top: 1px solid #1f2335;
   border-bottom: 1px solid #1f2335;
   background: #16161e;
 }
-.rg-stat-item { text-align: center; padding: 0.25rem 0.5rem; }
+.rg-stat-item {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #1f2335;
+}
+.rg-stat-item:nth-child(4),
+.rg-stat-item:nth-child(5),
+.rg-stat-item:nth-child(6) { border-bottom: none; }
 .rg-stat-value { font-size: 2rem; font-weight: 800; color: #bb9af7; font-family: 'Outfit', sans-serif; }
 .rg-stat-label { font-size: 0.75rem; color: #8ab4e0; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.25rem; }
-@media (max-width: 480px) {
-  .rg-stats-row { padding: 1.25rem 0.5rem; }
+@media (max-width: 600px) {
+  .rg-stats-row { padding: 0.5rem 0; }
+  .rg-stat-item { padding: 0.75rem 0.25rem; }
   .rg-stat-value { font-size: 1.35rem; }
-  .rg-stat-label { font-size: 0.62rem; letter-spacing: 0.06em; }
+  .rg-stat-label { font-size: 0.58rem; letter-spacing: 0.04em; }
 }
 
 /* ── Featured Runes heading ── */

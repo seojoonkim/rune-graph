@@ -97,7 +97,7 @@ export default function SkillsPage() {
       }}>
         {[
           { label: 'Action',  color: '#748ab8', desc: 'Single atomic API call — the primitive unit.', example: 'gmail.fetchEmails()', layer: '1' },
-          { label: 'Skill',   color: '#a78bfa', desc: 'Installable service package bundling related actions.', example: 'clawhub install gmail', layer: '2' },
+          { label: 'Skill',   color: '#a78bfa', desc: 'Installable service package bundling related actions.', example: 'rune skill add gmail', layer: '2' },
           { label: 'Rune',    color: '#f472b6', desc: 'Verified multi-skill workflow pipeline.', example: 'Morning Brief ↗', layer: '3' },
         ].map((item, i) => (
           <div key={item.label} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', flex: '1 1 200px', minWidth: 0 }}>

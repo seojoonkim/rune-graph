@@ -13,8 +13,12 @@ const COL_GAP  = 72
 const COL_STEP = NODE_W + COL_GAP   // = 240px
 const ROW_STEP = 160
 
+// Max nodes per rendered row — keeps canvasW narrow enough to zoom in on mobile
+const MAX_COLS = 3
+
 export function PipelineGraph({ rune }: { rune: Rune }) {
-  // ── Topological layer assignment (Kahn's BFS) ─────────────────────────
+  // ── Step 1: Topological layer assignment (Kahn's BFS) ─────────────────
+  // Assigns each node the LONGEST distance from any root (ensures all edges go down)
   const adj: Record<string, string[]> = {}
   const inDeg: Record<string, number> = {}
   rune.nodes.forEach(n => { adj[n.id] = []; inDeg[n.id] = 0 })
@@ -37,18 +41,35 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
     })
   }
 
-  // ── Group by layer, center each row ───────────────────────────────────
-  const numLayers = Math.max(...rune.nodes.map(n => nodeLayer[n.id])) + 1
-  const byLayer: string[][] = Array.from({ length: numLayers }, () => [])
-  rune.nodes.forEach(n => byLayer[nodeLayer[n.id]].push(n.id))
+  // ── Step 2: Group by topological layer ───────────────────────────────
+  const maxOrigLayer = Math.max(...rune.nodes.map(n => nodeLayer[n.id]))
+  const byOrigLayer: string[][] = Array.from({ length: maxOrigLayer + 1 }, () => [])
+  rune.nodes.forEach(n => byOrigLayer[nodeLayer[n.id]].push(n.id))
 
-  const maxCols = Math.max(...byLayer.map(l => l.length))
+  // ── Step 3: Split wide layers into sub-rows (MAX_COLS limit) ──────────
+  // Nodes in the same topological layer have no edges between each other,
+  // so any sub-row ordering is safe — all edges still point downward.
+  const renderLayers: string[][] = []
+  byOrigLayer.forEach(layerNodes => {
+    if (layerNodes.length <= MAX_COLS) {
+      renderLayers.push(layerNodes)
+    } else {
+      // Chunk into groups of MAX_COLS
+      for (let i = 0; i < layerNodes.length; i += MAX_COLS) {
+        renderLayers.push(layerNodes.slice(i, i + MAX_COLS))
+      }
+    }
+  })
+
+  // ── Step 4: Position nodes by render layer ────────────────────────────
+  const numLayers = renderLayers.length
+  const maxCols = Math.max(...renderLayers.map(l => l.length))
   const canvasW = maxCols * COL_STEP - COL_GAP
 
   const nodes: Node[] = []
-  byLayer.forEach((layerNodes, rowIdx) => {
+  renderLayers.forEach((layerNodes, rowIdx) => {
     const rowW = layerNodes.length * COL_STEP - COL_GAP
-    const startX = (canvasW - rowW) / 2
+    const startX = (canvasW - rowW) / 2  // center-align each row
     layerNodes.forEach((nodeId, colIdx) => {
       const rn = rune.nodes.find(n => n.id === nodeId)!
       nodes.push({
@@ -76,17 +97,14 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
     labelBgBorderRadius: 4,
   }))
 
-  // ── Container height: based on content, bounded ────────────────────────
-  // naturalH = actual pixel height of graph content at 1x scale
+  // ── Container height ──────────────────────────────────────────────────
   const naturalH = (numLayers - 1) * ROW_STEP + NODE_H
-  // graphH: tall enough to show full graph at reasonable zoom, max 580px
-  const graphH = Math.min(580, Math.max(240, naturalH + 80))
+  const graphH = Math.min(560, Math.max(240, naturalH + 80))
 
-  // ── fitView after nodes mount (avoids pre-mount measurement issues) ────
+  // ── fitView after mount ────────────────────────────────────────────────
   const onInit = useCallback((instance: ReactFlowInstance) => {
-    // Brief delay so ReactFlow measures node sizes before fitting
     requestAnimationFrame(() => {
-      instance.fitView({ padding: 0.14, includeHiddenNodes: false })
+      instance.fitView({ padding: 0.12, includeHiddenNodes: false })
     })
   }, [])
 
@@ -104,8 +122,8 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
         zoomOnScroll={false}
         panOnScroll={false}
         panOnDrag={false}
-        minZoom={0.2}
-        maxZoom={1.8}
+        minZoom={0.15}
+        maxZoom={2.0}
       >
         <Background color="#1f2335" gap={22} size={1} />
       </ReactFlow>

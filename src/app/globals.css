@@ -741,3 +741,20 @@ a { text-underline-offset: 3px; }
 .react-flow__minimap { background-color: #1e2030 !important; }
 .react-flow__minimap svg { display: block; }
 .react-flow__nodesselection-rect, .react-flow__selection { background: rgba(187,154,247,0.08); border: 1px dotted rgba(187,154,247,0.5); }
+
+/* ── Mobile section padding ── */
+/* Reduces side padding so boxes fill more of the screen width */
+@media (max-width: 768px) {
+  .rg-pad-section { padding-left: 1rem !important; padding-right: 1rem !important; }
+}
+@media (max-width: 480px) {
+  .rg-pad-section { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+}
+
+/* ── Live Example box inner padding ── */
+@media (max-width: 768px) {
+  .rg-live-box { padding: 1.25rem 1.25rem !important; }
+}
+@media (max-width: 480px) {
+  .rg-live-box { padding: 1rem 0.875rem !important; }
+}

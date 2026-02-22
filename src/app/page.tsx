@@ -68,7 +68,7 @@ export default function Home() {
       </section>
 
       {/* ── What is a Rune + Why Rune (merged) ── */}
-      <section id="why-rune" style={{ maxWidth: '1200px', margin: '0 auto', padding: '5rem 2rem' }}>
+      <section id="why-rune" className="rg-pad-section" style={{ maxWidth: '1200px', margin: '0 auto', padding: '5rem 2rem' }}>
 
         {/* Part 1: What is a Rune — 2-col: text left, orb right */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', alignItems: 'center', marginBottom: '2.5rem' }}>
@@ -232,7 +232,7 @@ export default function Home() {
       </section>
 
       {/* ── How It Works ── */}
-      <section id="how-it-works" style={{ maxWidth: '900px', margin: '0 auto', padding: '5rem 2rem' }}>
+      <section id="how-it-works" className="rg-pad-section" style={{ maxWidth: '900px', margin: '0 auto', padding: '5rem 2rem' }}>
         <p style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.15em', color: '#7aa2f7', marginBottom: '0.75rem', fontFamily: "'JetBrains Mono', monospace" }}>HOW IT WORKS</p>
         <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 800, color: '#dde4fc', margin: '0 0 0.75rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>
           One command. That&apos;s it.
@@ -297,10 +297,10 @@ export default function Home() {
       </section>
 
       {/* ── Live Example: Morning Brief ── */}
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem 5rem' }}>
+      <section className="rg-pad-section" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem 5rem' }}>
 
         {/* ── Live Example: Morning Brief ── */}
-        <div style={{ marginTop: '3.5rem', background: '#16161e', border: '1px solid #2e3452', borderRadius: '14px', padding: '1.75rem 2rem' }}>
+        <div className="rg-live-box" style={{ marginTop: '3.5rem', background: '#16161e', border: '1px solid #2e3452', borderRadius: '14px', padding: '1.75rem 2rem' }}>
 
           {/* Header row */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
@@ -355,7 +355,7 @@ export default function Home() {
 
       {/* ── Pricing ── */}
       <section style={{ background: '#16161e', borderTop: '1px solid #1f2335', borderBottom: '1px solid #1f2335' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
+        <div className="rg-pad-section" style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2rem' }}>
           <p style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.15em', color: '#ff9e64', marginBottom: '0.75rem', fontFamily: "'JetBrains Mono', monospace", textAlign: 'center' }}>PRICING</p>
           <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', fontWeight: 800, color: '#dde4fc', margin: '0 0 0.75rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em', textAlign: 'center' }}>
             Start free. Optimize when ready.

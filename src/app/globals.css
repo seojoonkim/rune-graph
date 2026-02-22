@@ -834,6 +834,22 @@ a { text-underline-offset: 3px; }
   animation: rg-legendary-pulse 2.4s ease-in-out infinite;
 }
 
+/* ── Navbar title glow ── */
+@keyframes rg-title-glow {
+  0%, 100% {
+    text-shadow: 0 0 14px rgba(201,168,255,0.28), 0 0 2px rgba(201,168,255,0.10);
+    opacity: 0.92;
+  }
+  50% {
+    text-shadow: 0 0 28px rgba(201,168,255,0.58), 0 0 8px rgba(138,180,255,0.25);
+    opacity: 1;
+  }
+}
+
+.rg-navbar-title {
+  animation: rg-title-glow 3.6s ease-in-out infinite;
+}
+
 /* ── SVG Star twinkle animations ── */
 @keyframes rg-star-twinkle {
   0%, 100% { opacity: 1;   transform: scale(1);    filter: drop-shadow(0 0 0px currentColor); }

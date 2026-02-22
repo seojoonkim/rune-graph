@@ -55,10 +55,9 @@ export function Navbar() {
           <circle cx="3.4"  cy="19"   r="1.2" fill="#c9a8ff" opacity="0.7"/>
           <circle cx="3.4"  cy="7"    r="1.2" fill="#c9a8ff" opacity="0.7"/>
         </svg>
-        <span style={{
+        <span className="rg-navbar-title" style={{
           fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, color: '#c9a8ff',
           fontSize: '1.1rem', letterSpacing: '0.06em', textTransform: 'uppercase',
-          textShadow: '0 0 18px rgba(201,168,255,0.35)',
         }}>RuneHub</span>
       </Link>
 

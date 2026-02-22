@@ -2,6 +2,34 @@
 import Link from 'next/link'
 import { type Rune } from '@/data/runes'
 
+// ── SVG Star ─────────────────────────────────────────────────────────
+function StarSvg({ color, size = 10, delay = 0, bright = false }: {
+  color: string; size?: number; delay?: number; bright?: boolean
+}) {
+  return (
+    <svg
+      width={size} height={size} viewBox="0 0 10 10"
+      className={bright ? 'rg-star-bright' : 'rg-star'}
+      style={{ color, animationDelay: `${delay}s`, display: 'inline-block', verticalAlign: 'middle', flexShrink: 0 }}
+    >
+      <polygon
+        points="5,0.6 6.18,3.8 9.75,3.8 6.94,5.9 7.94,9.1 5,7.1 2.06,9.1 3.06,5.9 0.25,3.8 3.82,3.8"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function RarityStars({ count, color, bright }: { count: number; color: string; bright: boolean }) {
+  return (
+    <span style={{ display: 'inline-flex', gap: '2px', alignItems: 'center' }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <StarSvg key={i} color={color} size={9} delay={i * 0.3} bright={bright} />
+      ))}
+    </span>
+  )
+}
+
 const CAT_COLORS: Record<string, string> = {
   input:  '#7aa2f7',
   api:    '#9ece6a',
@@ -12,43 +40,44 @@ const CAT_COLORS: Record<string, string> = {
 // ── Rarity system — maps Trust Score to RPG rarity tier ──────────────
 type Rarity = {
   label:    string
-  stars:    string
-  color:    string   // text / border color
-  glow:     string   // box-shadow glow color
-  bg:       string   // card background tint
-  animated: boolean  // Legendary gets pulse animation
+  count:    number   // number of SVG stars
+  color:    string
+  glow:     string
+  bg:       string
+  animated: boolean
+  bright:   boolean  // bright twinkle for Legendary/Epic
 }
 
 function getRarity(trust: number): Rarity {
   if (trust >= 94) return {
-    label: 'LEGENDARY', stars: '✦✦✦✦✦',
+    label: 'LEGENDARY', count: 5,
     color: '#ffd060', glow: '#ffd060',
     bg: 'rgba(255,208,96,0.06)',
-    animated: true,
+    animated: true, bright: true,
   }
   if (trust >= 85) return {
-    label: 'EPIC', stars: '✦✦✦✦',
+    label: 'EPIC', count: 4,
     color: '#ff9e64', glow: '#ff9e64',
     bg: 'rgba(255,158,100,0.05)',
-    animated: false,
+    animated: false, bright: true,
   }
   if (trust >= 75) return {
-    label: 'RARE', stars: '✦✦✦',
+    label: 'RARE', count: 3,
     color: '#bb9af7', glow: '#bb9af7',
     bg: 'rgba(187,154,247,0.05)',
-    animated: false,
+    animated: false, bright: false,
   }
   if (trust >= 60) return {
-    label: 'UNCOMMON', stars: '✦✦',
+    label: 'UNCOMMON', count: 2,
     color: '#7aa2f7', glow: '#7aa2f7',
     bg: 'rgba(122,162,247,0.04)',
-    animated: false,
+    animated: false, bright: false,
   }
   return {
-    label: 'COMMON', stars: '✦',
+    label: 'COMMON', count: 1,
     color: '#8899bb', glow: '#8899bb',
     bg: 'rgba(136,153,187,0.03)',
-    animated: false,
+    animated: false, bright: false,
   }
 }
 
@@ -123,12 +152,16 @@ export function RuneCard({ rune }: { rune: Rune }) {
           marginBottom: '-0.25rem',
         }}>
           <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: '5px',
             fontSize: '0.58rem',
             fontWeight: 800,
             letterSpacing: '0.12em',
             color: rarity.color,
             fontFamily: "'JetBrains Mono', monospace",
-          }}>{rarity.stars} {rarity.label}</span>
+          }}>
+            {rarity.label}
+            <RarityStars count={rarity.count} color={rarity.color} bright={rarity.bright} />
+          </span>
           <span style={{
             fontSize: '0.65rem',
             background: `${rarity.color}18`,

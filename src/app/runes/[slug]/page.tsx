@@ -28,12 +28,21 @@ function Corner({ pos, color = '#bb9af7' }: { pos: 'tl'|'tr'|'bl'|'br'; color?: 
   return <div style={s} />
 }
 
-function getRarity(trust: number): { label: string; stars: string; color: string } {
-  if (trust >= 94) return { label: 'LEGENDARY', stars: '✦✦✦✦✦', color: '#ffd060' }
-  if (trust >= 85) return { label: 'EPIC',      stars: '✦✦✦✦',  color: '#ff9e64' }
-  if (trust >= 75) return { label: 'RARE',      stars: '✦✦✦',   color: '#bb9af7' }
-  if (trust >= 60) return { label: 'UNCOMMON',  stars: '✦✦',    color: '#7aa2f7' }
-  return                    { label: 'COMMON',   stars: '✦',     color: '#8899bb' }
+function StarSvg({ color, size = 10, delay = 0 }: { color: string; size?: number; delay?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 10 10" className="rg-star-bright"
+      style={{ color, animationDelay: `${delay}s`, display: 'inline-block', verticalAlign: 'middle' }}>
+      <polygon points="5,0.6 6.18,3.8 9.75,3.8 6.94,5.9 7.94,9.1 5,7.1 2.06,9.1 3.06,5.9 0.25,3.8 3.82,3.8" fill="currentColor" />
+    </svg>
+  )
+}
+
+function getRarity(trust: number): { label: string; count: number; color: string } {
+  if (trust >= 94) return { label: 'LEGENDARY', count: 5, color: '#ffd060' }
+  if (trust >= 85) return { label: 'EPIC',      count: 4, color: '#ff9e64' }
+  if (trust >= 75) return { label: 'RARE',      count: 3, color: '#bb9af7' }
+  if (trust >= 60) return { label: 'UNCOMMON',  count: 2, color: '#7aa2f7' }
+  return                    { label: 'COMMON',   count: 1, color: '#8899bb' }
 }
 
 // Compute overall rune trust score from node safety scores
@@ -98,7 +107,12 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
             border: `1px solid ${rarity.color}55`, padding: '3px 10px', borderRadius: '4px',
             fontFamily: "'JetBrains Mono', monospace",
             boxShadow: `0 0 10px ${rarity.color}33`,
-          }}>{rarity.stars} {rarity.label}</span>
+          }}>
+            {rarity.label}&nbsp;
+            {Array.from({ length: rarity.count }).map((_, i) => (
+              <StarSvg key={i} color={rarity.color} size={11} delay={i * 0.3} />
+            ))}
+          </span>
           <span style={{ fontSize: '0.68rem', color: '#8ab4e0', background: 'rgba(122,162,247,0.08)', border: '1px solid rgba(122,162,247,0.2)', padding: '3px 10px', borderRadius: '4px', fontFamily: "'JetBrains Mono', monospace" }}>{rune.category}</span>
         </div>
 

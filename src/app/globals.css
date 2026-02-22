@@ -833,3 +833,16 @@ a { text-underline-offset: 3px; }
 .rg-card-legendary {
   animation: rg-legendary-pulse 2.4s ease-in-out infinite;
 }
+
+/* ── SVG Star twinkle animations ── */
+@keyframes rg-star-twinkle {
+  0%, 100% { opacity: 1;   transform: scale(1);    filter: drop-shadow(0 0 0px currentColor); }
+  50%       { opacity: 0.55; transform: scale(0.88); filter: drop-shadow(0 0 2px currentColor); }
+}
+@keyframes rg-star-twinkle-bright {
+  0%, 100% { opacity: 1;   transform: scale(1);    filter: drop-shadow(0 0 2px currentColor); }
+  50%       { opacity: 0.7; transform: scale(0.92); filter: drop-shadow(0 0 4px currentColor); }
+}
+
+.rg-star { animation: rg-star-twinkle 2.8s ease-in-out infinite; }
+.rg-star-bright { animation: rg-star-twinkle-bright 2.2s ease-in-out infinite; }

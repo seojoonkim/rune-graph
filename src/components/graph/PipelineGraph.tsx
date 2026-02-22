@@ -55,14 +55,14 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
     type:     'smoothstep',
     animated: true,
     style: { stroke: '#bb9af7', strokeWidth: 1.6 },
-    labelStyle:     { fill: '#c8d2ec', fontSize: 9, fontFamily: "'JetBrains Mono', monospace" },
+    labelStyle:     { fill: '#c8d2ec', fontSize: 10, fontFamily: "'JetBrains Mono', monospace" },
     labelBgStyle:   { fill: '#16161e', fillOpacity: 1 },
     labelBgPadding: [4, 5] as [number, number],
     labelBgBorderRadius: 4,
   }))
 
-  // Height: one ROW_STEP per category row + padding for last node
-  const graphH = Math.max(360, activeRows.length * ROW_STEP + 140)
+  // Height: one ROW_STEP per category row + small padding for last node
+  const graphH = Math.max(300, activeRows.length * ROW_STEP + 60)
 
   return (
     <div style={{
@@ -77,7 +77,7 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
         edges={edges}
         nodeTypes={nodeTypes}
         fitView
-        fitViewOptions={{ padding: 0.25 }}
+        fitViewOptions={{ padding: 0.08 }}
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}

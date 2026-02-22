@@ -50,7 +50,7 @@ export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
         <div style={{
           position: 'absolute',
           top: 4, right: 5,
-          fontSize: '0.55rem',
+          fontSize: '0.62rem',
           background: color,
           color: '#0d0e17',
           borderRadius: '3px',
@@ -65,7 +65,7 @@ export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
 
       {/* Category row */}
       <div style={{
-        fontSize: '0.65rem',
+        fontSize: '0.72rem',
         color,
         fontWeight: 700,
         letterSpacing: '0.08em',
@@ -79,13 +79,13 @@ export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
         justifyContent: isHub ? 'flex-start' : 'center',
         gap: '3px',
       }}>
-        <span style={{ fontSize: '0.6rem' }}>{CATEGORY_ICONS[data.category]}</span>
+        <span style={{ fontSize: '0.67rem' }}>{CATEGORY_ICONS[data.category]}</span>
         <span>{CATEGORY_LABELS[data.category]}</span>
       </div>
 
       {/* Label — wraps to 2 lines */}
       <div style={{
-        fontSize: '0.78rem',
+        fontSize: '0.85rem',
         color: '#e2e8ff',
         fontWeight: 600,
         lineHeight: 1.35,

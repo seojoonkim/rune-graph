@@ -6,7 +6,7 @@ import { useState } from 'react'
 const links = [
   { href: '/runes',        label: 'Runes' },
   { href: '/skills',       label: 'Skills' },
-  { href: '/runes/build',  label: 'Build', highlight: true },
+  { href: '/runes/build',  label: 'Build' },
   { href: '/strategy',     label: 'Strategy' },
 ]
 
@@ -53,8 +53,6 @@ export function Navbar() {
             || (l.href === '/runes' && path.startsWith('/runes') && path !== '/runes/build' && !path.startsWith('/runes/build'))
             || (l.href !== '/runes' && l.href !== '/runes/build' && path.startsWith(l.href))
             || (l.href === '/runes/build' && path === '/runes/build')
-          // highlight = just brighter text color, never a box/background
-          const isHighlight = 'highlight' in l && l.highlight
           return (
             <Link key={l.href} href={l.href}
               onClick={() => setOpen(false)}
@@ -62,7 +60,7 @@ export function Navbar() {
                 padding: '0.4rem 0.85rem', borderRadius: '6px', textDecoration: 'none',
                 fontSize: '0.825rem', fontWeight: 600,
                 fontFamily: "'Inter', -apple-system, sans-serif",
-                color: active ? '#bb9af7' : isHighlight ? '#c084fc' : '#9aa4d2',
+                color: active ? '#bb9af7' : '#9aa4d2',
                 background: active ? 'rgba(187,154,247,0.12)' : 'transparent',
                 border: active ? '1px solid rgba(187,154,247,0.3)' : 'none',
                 transition: 'all 0.15s',

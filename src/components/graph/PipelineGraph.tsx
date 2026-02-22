@@ -5,48 +5,71 @@ import { type Rune } from '@/data/runes'
 
 const nodeTypes = { skill: SkillNode }
 
-// ── Vertical layout constants ──────────────────────────────────────────
-// Category = ROW (top→bottom: input → api → llm → output)
-// Nodes within same category = COLUMNS (centered horizontally)
+// ── Layout constants ───────────────────────────────────────────────────
 const NODE_W   = 168   // must match SkillNode fixed width
-const COL_GAP  = 72    // horizontal gap between sibling nodes (wider → room for edge labels)
+const NODE_H   = 66    // approximate rendered height of SkillNode
+const COL_GAP  = 72    // horizontal gap between sibling nodes
 const COL_STEP = NODE_W + COL_GAP   // = 240px
-const ROW_STEP = 160   // vertical step between category rows (taller → room for edge labels)
+const ROW_STEP = 160   // vertical step between layers
 
 export function PipelineGraph({ rune }: { rune: Rune }) {
-  const categoryOrder = ['input', 'api', 'llm', 'output']
-  const byCategory: Record<string, typeof rune.nodes> = {
-    input: [], api: [], llm: [], output: [],
-  }
-  rune.nodes.forEach(n => { byCategory[n.category]?.push(n) })
+  // ── Topological layer assignment (Kahn's BFS) ─────────────────────────
+  // Guarantees every edge goes source-layer → target-layer (never upward)
+  const adj: Record<string, string[]> = {}
+  const inDeg: Record<string, number> = {}
+  rune.nodes.forEach(n => { adj[n.id] = []; inDeg[n.id] = 0 })
+  rune.edges.forEach(e => {
+    adj[e.source].push(e.target)
+    inDeg[e.target]++
+  })
 
-  // Active rows (categories that have at least one node), in order
-  const activeRows = categoryOrder.filter(cat => byCategory[cat].length > 0)
-  const maxCols = Math.max(...activeRows.map(cat => byCategory[cat].length))
-  const canvasW = maxCols * COL_STEP - COL_GAP   // total width for centering
+  // Longest-path layer (so A→B→C puts B at layer 1, C at layer 2)
+  const nodeLayer: Record<string, number> = {}
+  rune.nodes.forEach(n => { nodeLayer[n.id] = 0 })
+  const inDegCopy = { ...inDeg }
+
+  // Process nodes with in-degree 0 first, propagate layers
+  const queue: string[] = rune.nodes
+    .filter(n => inDeg[n.id] === 0)
+    .map(n => n.id)
+
+  while (queue.length > 0) {
+    const cur = queue.shift()!
+    adj[cur].forEach(nxt => {
+      nodeLayer[nxt] = Math.max(nodeLayer[nxt], nodeLayer[cur] + 1)
+      inDegCopy[nxt]--
+      if (inDegCopy[nxt] === 0) queue.push(nxt)
+    })
+  }
+
+  // ── Group nodes by layer, center each row ─────────────────────────────
+  const numLayers = Math.max(...rune.nodes.map(n => nodeLayer[n.id])) + 1
+  const byLayer: string[][] = Array.from({ length: numLayers }, () => [])
+  rune.nodes.forEach(n => byLayer[nodeLayer[n.id]].push(n.id))
+
+  const maxCols = Math.max(...byLayer.map(l => l.length))
+  const canvasW = maxCols * COL_STEP - COL_GAP
 
   const nodes: Node[] = []
-
-  activeRows.forEach((cat, rowIdx) => {
-    const catNodes = byCategory[cat]
-    const rowW = catNodes.length * COL_STEP - COL_GAP
-    // Center this row within the canvas
-    const startX = (canvasW - rowW) / 2
-
-    catNodes.forEach((n, colIdx) => {
+  byLayer.forEach((layerNodes, rowIdx) => {
+    const rowW = layerNodes.length * COL_STEP - COL_GAP
+    const startX = (canvasW - rowW) / 2   // center-align each row
+    layerNodes.forEach((nodeId, colIdx) => {
+      const rn = rune.nodes.find(n => n.id === nodeId)!
       nodes.push({
-        id: n.id,
+        id: rn.id,
         type: 'skill',
         position: {
           x: startX + colIdx * COL_STEP,
           y: rowIdx * ROW_STEP,
         },
-        data: { label: n.label, category: n.category },
+        data: { label: rn.label, category: rn.category },
         style: { overflow: 'visible' },
       })
     })
   })
 
+  // ── Edges ──────────────────────────────────────────────────────────────
   const edges: Edge[] = rune.edges.map((e, i) => ({
     id:       `e-${i}`,
     source:   e.source,
@@ -61,19 +84,17 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
     labelBgBorderRadius: 4,
   }))
 
-  // Natural canvas dimensions (without fitView padding)
-  const NODE_H = 66  // approximate rendered height of SkillNode
-  const naturalH = (activeRows.length - 1) * ROW_STEP + NODE_H
-  // aspect ratio: wider graphs are proportionally shorter
-  // +80 vertical: room for edge labels above top row and below bottom row
+  // ── Container: aspect-ratio matches graph dimensions ──────────────────
+  // This prevents vertical whitespace on mobile (avoids fitView over-zoom-out)
+  const naturalH = (numLayers - 1) * ROW_STEP + NODE_H
   const AR_W = canvasW
-  const AR_H = naturalH + 80
+  const AR_H = naturalH + 80   // +80 for edge labels above/below boundary rows
 
   return (
     <div style={{
       aspectRatio: `${AR_W} / ${AR_H}`,
       minHeight: '180px',
-      maxHeight: '640px',
+      maxHeight: '680px',
       background: '#1a1b26',
       borderRadius: '12px',
       border: '1px solid #292e42',

@@ -65,20 +65,30 @@ export function RuneCard({ rune }: { rune: Rune }) {
         {/* Corner bracket BR */}
         <div style={{ position: 'absolute', bottom: 4, right: 4, width: 10, height: 10, borderBottom: '1.5px solid #bb9af7', borderRight: '1.5px solid #bb9af7', opacity: 0.6 }} />
 
-        {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <span style={{ fontSize: '1.75rem' }}>{rune.emoji}</span>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem' }}>
+        {/* Header: title + badges */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem' }}>
+          <div style={{ fontWeight: 800, color: '#dde4fc', fontSize: '1.2rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.02em', lineHeight: 1.2 }}>{rune.name}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem', flexShrink: 0 }}>
             <span style={{ fontSize: '0.65rem', background: 'rgba(187,154,247,0.15)', color: '#bb9af7', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(187,154,247,0.3)', fontFamily: "'JetBrains Mono', monospace" }}>{rune.category}</span>
-            {/* Grade badge */}
             <span style={{ fontSize: '0.6rem', color: grade.color, border: `1px solid ${grade.color}55`, padding: '1px 6px', borderRadius: '3px', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>{grade.label}</span>
           </div>
         </div>
 
-        {/* Name + purpose */}
-        <div>
-          <div style={{ fontWeight: 700, color: '#dde4fc', marginBottom: '0.35rem', fontSize: '1rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.01em' }}>{rune.name}</div>
-          <div style={{ fontSize: '0.78rem', color: '#ccd4ee', lineHeight: 1.5 }}>{rune.purpose}</div>
+        {/* Icon + description */}
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+          {/* Icon box */}
+          <div style={{
+            flexShrink: 0,
+            width: '42px', height: '42px',
+            background: 'rgba(187,154,247,0.08)',
+            border: '1px solid rgba(187,154,247,0.2)',
+            borderRadius: '8px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '1.4rem',
+          }}>
+            {rune.emoji}
+          </div>
+          <div style={{ fontSize: '0.78rem', color: '#ccd4ee', lineHeight: 1.55, paddingTop: '2px' }}>{rune.purpose}</div>
         </div>
 
         {/* Trust score bar */}

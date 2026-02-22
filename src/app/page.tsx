@@ -6,11 +6,11 @@ import { MorningBriefGraph } from '@/components/graph/MorningBriefGraph'
 
 export default function Home() {
   const stats = [
-    { value: RUNES.length,              label: 'Runes',              color: '#bb9af7' },
-    { value: SKILL_PACKAGES.length,     label: 'Skills',             color: '#bb9af7' },
-    { value: SKILLS_REGISTRY.length,    label: 'Actions',            color: '#bb9af7' },
-    { value: '68%',                     label: 'Avg Token Savings',  color: '#34d399' },
-    { value: '87',                      label: 'Avg Trust Score',    color: '#ff9e64' },
+    { value: RUNES.length,              label: 'Verified Runes',     color: '#bb9af7' },
+    { value: SKILL_PACKAGES.length,     label: 'Skill Packages',     color: '#c8a8ff' },
+    { value: SKILLS_REGISTRY.length,    label: 'Total Actions',      color: '#9d7cd8' },
+    { value: '68%',                     label: 'Token Savings',      color: '#34d399' },
+    { value: '87',                      label: 'Avg Power Level',    color: '#ffd060' },
     { value: '95%',                     label: 'Skip Manual Setup',  color: '#7aa2f7' },
   ]
 
@@ -116,10 +116,10 @@ export default function Home() {
         </div>
 
         {/* Divider: Why it matters */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
-          <div style={{ flex: 1, height: '1px', background: '#1f2335' }} />
-          <p style={{ fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.18em', color: '#bb9af7', margin: 0, fontFamily: "'JetBrains Mono', monospace", whiteSpace: 'nowrap' as const }}>WHY IT MATTERS</p>
-          <div style={{ flex: 1, height: '1px', background: '#1f2335' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, #bb9af755)' }} />
+          <p style={{ fontSize: '0.68rem', fontWeight: 900, letterSpacing: '0.18em', color: '#bb9af7', margin: 0, fontFamily: "'JetBrains Mono', monospace", whiteSpace: 'nowrap' as const, textShadow: '0 0 12px #bb9af788' }}>≪ ◈ WHY IT MATTERS ◈ ≫</p>
+          <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, #bb9af755, transparent)' }} />
         </div>
         <h2 style={{ fontSize: 'clamp(1.7rem, 3.2vw, 2.4rem)', fontWeight: 800, color: '#dde4fc', margin: '0 0 0.75rem', fontFamily: "'Outfit', sans-serif", letterSpacing: '-0.02em', lineHeight: 1.15 }}>
           Vibe coding hits a ceiling.<br />

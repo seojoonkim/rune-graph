@@ -254,27 +254,41 @@ a { text-underline-offset: 3px; }
 .rg-stats-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  padding: 1.75rem 1rem;
+  gap: 1px;
+  padding: 0;
+  background: #1f2335;  /* gap color */
   border-top: 1px solid #1f2335;
   border-bottom: 1px solid #1f2335;
-  background: #16161e;
 }
 .rg-stat-item {
   text-align: center;
-  padding: 1rem 0.5rem;
-  border-bottom: 1px solid #1f2335;
+  padding: 1.25rem 0.5rem;
+  background: #0f1018;
+  position: relative;
 }
-.rg-stat-item:nth-child(4),
-.rg-stat-item:nth-child(5),
-.rg-stat-item:nth-child(6) { border-bottom: none; }
-.rg-stat-value { font-size: 2rem; font-weight: 800; color: #bb9af7; font-family: 'Outfit', sans-serif; }
-.rg-stat-label { font-size: 0.75rem; color: #8ab4e0; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.25rem; }
+.rg-stat-item::before {
+  content: '◈';
+  position: absolute;
+  top: 6px; left: 50%; transform: translateX(-50%);
+  font-size: 0.45rem;
+  color: #2e3452;
+  letter-spacing: 0;
+}
+.rg-stat-value {
+  font-size: 2.1rem; font-weight: 900; color: #bb9af7;
+  font-family: 'Outfit', sans-serif;
+  text-shadow: 0 0 20px currentColor;
+}
+.rg-stat-label {
+  font-size: 0.6rem; color: #748ab8;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  margin-top: 0.3rem;
+  font-family: 'JetBrains Mono', monospace;
+}
 @media (max-width: 600px) {
-  .rg-stats-row { padding: 0.5rem 0; }
-  .rg-stat-item { padding: 0.75rem 0.25rem; }
-  .rg-stat-value { font-size: 1.35rem; }
-  .rg-stat-label { font-size: 0.58rem; letter-spacing: 0.04em; }
+  .rg-stat-item { padding: 1rem 0.25rem; }
+  .rg-stat-value { font-size: 1.4rem; }
+  .rg-stat-label { font-size: 0.52rem; letter-spacing: 0.06em; }
 }
 
 /* ── Featured Runes heading ── */

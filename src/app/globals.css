@@ -745,16 +745,16 @@ a { text-underline-offset: 3px; }
 /* ── Mobile section padding ── */
 /* Reduces side padding so boxes fill more of the screen width */
 @media (max-width: 768px) {
-  .rg-pad-section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .rg-pad-section { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
 }
 @media (max-width: 480px) {
-  .rg-pad-section { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+  .rg-pad-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
 }
 
 /* ── Live Example box inner padding ── */
 @media (max-width: 768px) {
-  .rg-live-box { padding: 1.25rem 1.25rem !important; }
+  .rg-live-box { padding: 1.5rem 1.625rem !important; }
 }
 @media (max-width: 480px) {
-  .rg-live-box { padding: 1rem 0.875rem !important; }
+  .rg-live-box { padding: 1.25rem 1.375rem !important; }
 }

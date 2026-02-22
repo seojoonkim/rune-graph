@@ -41,7 +41,7 @@ export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
     }}>
       <Handle
         type="target"
-        position={Position.Left}
+        position={Position.Top}
         style={{ background: color, border: `2px solid #1e2030`, width: 9, height: 9 }}
       />
 
@@ -98,7 +98,7 @@ export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
 
       <Handle
         type="source"
-        position={Position.Right}
+        position={Position.Bottom}
         style={{ background: color, border: `2px solid #1e2030`, width: 9, height: 9 }}
       />
     </div>

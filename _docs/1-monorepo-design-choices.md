@@ -204,7 +204,7 @@ GitHub repo to an OS cache directory and reads from the cached clone.
 - **Phase 2 transition**: When data moves to a separate repo, the only change
   is the clone URL. The entire loading mechanism stays identical.
 
-**Clone source**: `https://github.com/seojoonkim/rune-hub` (the public monorepo).
+**Clone source**: `https://github.com/runehub-ai/rune-hub` (the public monorepo).
 Sparse checkout of `skill-packages/`, `skills/`, and `runes/` only.
 
 **Result**:
@@ -451,7 +451,7 @@ import { execSync } from 'child_process'
 import os from 'os'
 import path from 'path'
 
-const REPO_URL = 'https://github.com/seojoonkim/rune-hub.git'
+const REPO_URL = 'https://github.com/runehub-ai/rune-hub.git'
 const CACHE_DIR = path.join(
   process.env.XDG_CACHE_HOME || path.join(os.homedir(), '.cache'),
   'rune-hub', 'repo'
@@ -532,4 +532,4 @@ and 200+ actions hardcoded as TypeScript arrays, and `runes.ts` has 65 runes.
 - [`runehub-ai/skills`](https://github.com/runehub-ai/skills) — Future external registry (Phase 2)
 - [`openclaw/clawhub`](https://github.com/openclaw/clawhub) — ClawHub registry (Phase 3 reference)
 - [OpenClaw Skills Docs](https://docs.openclaw.ai/skills) — OpenClaw's runtime loading model
-- [`seojoonkim/rune-hub`](https://github.com/seojoonkim/rune-hub) — CLI clone source
+ [`runehub-ai/rune-hub`](https://github.com/runehub-ai/rune-hub) — CLI clone source

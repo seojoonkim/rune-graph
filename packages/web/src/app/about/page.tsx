@@ -50,7 +50,7 @@ export default function AboutPage() {
           RuneHub is open source. The registry, the Rune schema, and the Skills catalog are all public. Fork it, extend it, publish your own Runes.
         </p>
         <a
-          href="https://github.com/seojoonkim/rune-hub"
+          href="https://github.com/runehub-ai/rune-hub"
           target="_blank"
           rel="noreferrer"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.25rem', background: 'rgba(187,154,247,0.08)', border: '1px solid rgba(187,154,247,0.3)', borderRadius: '8px', color: '#bb9af7', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 600 }}

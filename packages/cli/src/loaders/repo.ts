@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from "fs";
 import os from "os";
 import path from "path";
 
-const REPO_URL = "https://github.com/seojoonkim/rune-hub.git";
+const REPO_URL = "https://github.com/runehub-ai/rune-hub.git";
 const CACHE_DIR = path.join(
   process.env.XDG_CACHE_HOME || path.join(os.homedir(), ".cache"),
   "rune-hub",

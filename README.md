@@ -22,7 +22,7 @@ bun install
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open http://localhost:3000.
 
 ## CLI
 
@@ -37,7 +37,3 @@ bun run dev:cli -- skills show gmail
 bun run build:cli
 node packages/cli/dist/index.js runes
 ```
-
-## License
-
-MIT

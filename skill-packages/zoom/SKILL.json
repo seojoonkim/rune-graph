@@ -1,0 +1,19 @@
+{
+  "name": "zoom",
+  "displayName": "Zoom",
+  "description": "Zoom Meetings API for scheduling meetings, getting recordings, transcripts, and managing participants programmatically.",
+  "vendor": "Zoom",
+  "emoji": "📹",
+  "tagline": "Create meetings, get transcripts, and manage participants.",
+  "category": "communication",
+  "version": "1.0.0",
+  "verified": true,
+  "docsUrl": "https://developers.zoom.us/docs",
+  "downloads": 31000,
+  "stars": 620,
+  "skills": [
+    "zoom-create-meeting",
+    "zoom-get-recording",
+    "zoom-get-transcript"
+  ]
+}

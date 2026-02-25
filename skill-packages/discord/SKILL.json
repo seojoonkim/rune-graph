@@ -1,0 +1,18 @@
+{
+  "name": "discord",
+  "displayName": "Discord",
+  "description": "Post messages to Discord channels via webhook or bot, and read channel history. Great for dev teams and community notifications.",
+  "vendor": "Discord",
+  "emoji": "🎮",
+  "tagline": "Send and read messages in Discord channels via bot or webhook.",
+  "category": "communication",
+  "version": "1.1.0",
+  "verified": true,
+  "docsUrl": "https://discord.com/developers/docs/intro",
+  "downloads": 82000,
+  "stars": 1920,
+  "skills": [
+    "discord-post",
+    "discord-fetch"
+  ]
+}

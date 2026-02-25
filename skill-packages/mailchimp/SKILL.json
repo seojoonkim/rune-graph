@@ -1,0 +1,19 @@
+{
+  "name": "mailchimp",
+  "displayName": "Mailchimp",
+  "description": "Mailchimp API for managing subscriber lists, sending email campaigns, creating automations, and tracking performance.",
+  "vendor": "Intuit",
+  "emoji": "🐒",
+  "tagline": "Send campaigns, manage lists, and track email performance.",
+  "category": "communication",
+  "version": "1.2.0",
+  "verified": true,
+  "docsUrl": "https://mailchimp.com/developer",
+  "downloads": 35000,
+  "stars": 670,
+  "skills": [
+    "mailchimp-send-campaign",
+    "mailchimp-add-subscriber",
+    "mailchimp-get-stats"
+  ]
+}

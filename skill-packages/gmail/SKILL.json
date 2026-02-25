@@ -1,0 +1,19 @@
+{
+  "name": "gmail",
+  "displayName": "Gmail",
+  "description": "Full Gmail integration — read inbox with query filters, send transactional emails, and manage labels. Requires Google OAuth.",
+  "vendor": "Google",
+  "emoji": "📧",
+  "tagline": "Fetch, send, and label emails via the Gmail API.",
+  "category": "communication",
+  "version": "1.0.0",
+  "verified": true,
+  "docsUrl": "https://developers.google.com/gmail/api",
+  "downloads": 265000,
+  "stars": 4070,
+  "skills": [
+    "gmail-fetch",
+    "gmail-send",
+    "gmail-label"
+  ]
+}

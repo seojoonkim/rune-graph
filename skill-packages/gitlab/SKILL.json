@@ -1,0 +1,18 @@
+{
+  "name": "gitlab",
+  "displayName": "GitLab",
+  "description": "GitLab CI/CD and issue management — create merge requests, trigger pipelines, and post review comments via the GitLab REST API.",
+  "vendor": "GitLab",
+  "emoji": "🦊",
+  "tagline": "Create MRs, manage pipelines, and post comments in GitLab.",
+  "category": "dev",
+  "version": "1.0.0",
+  "verified": false,
+  "docsUrl": "https://docs.gitlab.com/ee/api/",
+  "downloads": 52000,
+  "stars": 870,
+  "skills": [
+    "gitlab-create-mr",
+    "gitlab-get-pipeline"
+  ]
+}

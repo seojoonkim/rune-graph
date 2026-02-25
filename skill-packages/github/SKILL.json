@@ -1,0 +1,22 @@
+{
+  "name": "github",
+  "displayName": "GitHub",
+  "description": "Comprehensive GitHub automation — list and review pull requests, fetch code diffs, post PR comments, create issues, and monitor releases. Essential for DevOps Runes.",
+  "vendor": "GitHub (Microsoft)",
+  "emoji": "🐙",
+  "tagline": "List PRs, get diffs, post comments, and create issues.",
+  "category": "dev",
+  "version": "2.0.0",
+  "verified": true,
+  "docsUrl": "https://docs.github.com/en/rest",
+  "downloads": 178000,
+  "stars": 3940,
+  "skills": [
+    "github-list-prs",
+    "github-get-diff",
+    "github-post-comment",
+    "github-create-issue",
+    "github-list-releases",
+    "github-scan-repo"
+  ]
+}

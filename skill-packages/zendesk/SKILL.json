@@ -1,0 +1,20 @@
+{
+  "name": "zendesk",
+  "displayName": "Zendesk",
+  "description": "Zendesk Support API for creating tickets, updating status, adding comments, and routing support conversations.",
+  "vendor": "Zendesk",
+  "emoji": "🎫",
+  "tagline": "Create tickets, update status, and manage support queues.",
+  "category": "communication",
+  "version": "1.1.0",
+  "verified": true,
+  "docsUrl": "https://developer.zendesk.com/api-reference",
+  "downloads": 26000,
+  "stars": 510,
+  "skills": [
+    "zendesk-create-ticket",
+    "zendesk-update-ticket",
+    "zendesk-get-ticket",
+    "zendesk-add-comment"
+  ]
+}

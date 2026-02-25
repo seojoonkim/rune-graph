@@ -101,9 +101,9 @@ export async function loadSkillPackages(): Promise<SkillPackage[]> {
     entries
       .filter((entry) => entry.isDirectory())
       .map(async (entry) => {
-        const skillMdPath = path.join(skillPackagesDir, entry.name, 'SKILL.md')
-        const source = await fs.readFile(skillMdPath, 'utf8')
-        const { data } = matter(source)
+        const skillJsonPath = path.join(skillPackagesDir, entry.name, 'SKILL.json')
+        const source = await fs.readFile(skillJsonPath, 'utf8')
+        const data = JSON.parse(source)
 
         return {
           id: data.name,

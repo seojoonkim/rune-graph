@@ -1,0 +1,18 @@
+{
+  "name": "google-sheets",
+  "displayName": "Google Sheets",
+  "description": "Read rows from and append data to Google Sheets. Commonly used for logging Rune outputs, analytics dashboards, and lightweight databases.",
+  "vendor": "Google",
+  "emoji": "📊",
+  "tagline": "Read and write spreadsheet data via the Sheets API.",
+  "category": "productivity",
+  "version": "1.0.0",
+  "verified": true,
+  "docsUrl": "https://developers.google.com/sheets/api",
+  "downloads": 87000,
+  "stars": 1760,
+  "skills": [
+    "gsheets-read",
+    "gsheets-write"
+  ]
+}

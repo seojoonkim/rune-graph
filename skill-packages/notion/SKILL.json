@@ -1,0 +1,19 @@
+{
+  "name": "notion",
+  "displayName": "Notion",
+  "description": "Full Notion integration — read page content, create new pages, and query databases with filters. Popular for storing Rune outputs as structured knowledge.",
+  "vendor": "Notion",
+  "emoji": "📓",
+  "tagline": "Read pages, create content, and query databases in Notion.",
+  "category": "productivity",
+  "version": "2.0.0",
+  "verified": true,
+  "docsUrl": "https://developers.notion.com/",
+  "downloads": 112000,
+  "stars": 2840,
+  "skills": [
+    "notion-read",
+    "notion-write",
+    "notion-db-query"
+  ]
+}

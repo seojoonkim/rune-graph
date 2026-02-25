@@ -1,0 +1,19 @@
+{
+  "name": "ethereum",
+  "displayName": "Ethereum",
+  "description": "Ethereum JSON-RPC API for reading balances, fetching transactions, calling smart contracts, and monitoring events.",
+  "vendor": "Ethereum Foundation",
+  "emoji": "💎",
+  "tagline": "Read on-chain data, send transactions, and call contracts.",
+  "category": "finance",
+  "version": "2.0.0",
+  "verified": false,
+  "docsUrl": "https://ethereum.org/en/developers/docs/apis/json-rpc",
+  "downloads": 44000,
+  "stars": 880,
+  "skills": [
+    "eth-balance",
+    "eth-transaction",
+    "eth-contract-call"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "openai",
+  "displayName": "OpenAI",
+  "description": "Full OpenAI API coverage — GPT-4o for multimodal reasoning, Whisper for audio transcription, DALL-E 3 for image generation, and text embeddings.",
+  "vendor": "OpenAI",
+  "emoji": "🤖",
+  "tagline": "GPT-4o text & vision, Whisper transcription, DALL-E image generation.",
+  "category": "ai",
+  "version": "2.1.0",
+  "verified": true,
+  "docsUrl": "https://platform.openai.com/docs/overview",
+  "downloads": 195000,
+  "stars": 3650,
+  "skills": [
+    "gpt4o-vision",
+    "whisper-transcribe",
+    "dalle3-generate"
+  ]
+}

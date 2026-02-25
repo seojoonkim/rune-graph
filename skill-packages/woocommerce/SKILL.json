@@ -1,0 +1,19 @@
+{
+  "name": "woocommerce",
+  "displayName": "WooCommerce",
+  "description": "WooCommerce REST API for managing products, processing orders, updating inventory, and managing customer accounts.",
+  "vendor": "Automattic",
+  "emoji": "🛒",
+  "tagline": "Manage WordPress store products, orders, and customers.",
+  "category": "marketing",
+  "version": "1.1.0",
+  "verified": false,
+  "docsUrl": "https://woocommerce.github.io/woocommerce-rest-api-docs",
+  "downloads": 38000,
+  "stars": 760,
+  "skills": [
+    "woo-product",
+    "woo-order",
+    "woo-customer"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "jira",
+  "displayName": "Jira",
+  "description": "Jira Software integration — create issues, update statuses, query sprint boards, and link issues to PRs in DevOps pipelines.",
+  "vendor": "Atlassian",
+  "emoji": "🔷",
+  "tagline": "Create and fetch Jira tickets and update sprint boards.",
+  "category": "dev",
+  "version": "1.1.0",
+  "verified": false,
+  "docsUrl": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/",
+  "downloads": 68000,
+  "stars": 1120,
+  "skills": [
+    "jira-create-issue",
+    "jira-fetch-issues"
+  ]
+}

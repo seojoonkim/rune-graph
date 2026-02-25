@@ -1,0 +1,19 @@
+{
+  "name": "docusign",
+  "displayName": "DocuSign",
+  "description": "DocuSign eSignature API for creating and sending envelopes, tracking signing status, downloading signed documents, and managing templates.",
+  "vendor": "DocuSign",
+  "emoji": "✍️",
+  "tagline": "Send envelopes for signature and track signing status.",
+  "category": "utility",
+  "version": "1.1.0",
+  "verified": true,
+  "docsUrl": "https://developers.docusign.com/docs",
+  "downloads": 28000,
+  "stars": 560,
+  "skills": [
+    "docusign-send",
+    "docusign-status",
+    "docusign-download"
+  ]
+}

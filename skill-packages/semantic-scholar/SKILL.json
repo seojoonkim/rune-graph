@@ -1,0 +1,19 @@
+{
+  "name": "semantic-scholar",
+  "displayName": "Semantic Scholar",
+  "description": "Semantic Scholar API for searching academic papers, fetching citation data, author profiles, and related research.",
+  "vendor": "Allen Institute for AI",
+  "emoji": "🎓",
+  "tagline": "Search AI research papers with citation context.",
+  "category": "utility",
+  "version": "1.0.0",
+  "verified": false,
+  "docsUrl": "https://api.semanticscholar.org",
+  "downloads": 12000,
+  "stars": 240,
+  "skills": [
+    "s2-search",
+    "s2-paper",
+    "s2-citations"
+  ]
+}

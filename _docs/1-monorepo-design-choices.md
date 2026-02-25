@@ -7,11 +7,11 @@ rune-hub is a monorepo with the following structure:
 ```
 rune-hub/
 ├── package.json                        # npm workspaces root
-├── skill-packages/                     # Skill Packages (service bundles)
-│   ├── gmail/SKILL.md
-│   ├── slack/SKILL.md
-│   ├── claude/SKILL.md
-│   └── .../SKILL.md
+├── skill-packages/                     # Skill Packages (service bundles, JSON)
+│   ├── gmail/SKILL.json
+│   ├── slack/SKILL.json
+│   ├── claude/SKILL.json
+│   └── .../SKILL.json
 ├── skills/                             # Skills (individual atomic operations)
 │   ├── gmail-fetch/SKILL.md
 │   ├── gmail-send/SKILL.md
@@ -68,7 +68,7 @@ from that package. You install the package; the rune calls the function.
 ### How They Relate
 
 ```
-skill-packages/slack/SKILL.md
+skill-packages/slack/SKILL.json
   → declares skills: [slack-post, slack-read, slack-react]
 
 skills/slack-post/SKILL.md
@@ -87,29 +87,34 @@ into rune pipelines.
 
 ## Decision Log
 
-### D1. Clean top-level frontmatter (not strict Agent Skills spec)
+### D1. Skill packages as JSON; skills as Markdown (SKILL.md)
 
-**Decision**: Use native YAML types as top-level frontmatter fields in SKILL.md.
-Do not force rune-hub-specific data into the Agent Skills `metadata` string map.
+**Decision**: Skill packages use `SKILL.json` (pure structured data). Skills use
+`SKILL.md` with YAML frontmatter (documentation format). Runes use `RUNE.json`.
 
-**Context**: The [Agent Skills spec](https://agentskills.io/specification) defines
-`metadata` as a map from string keys to string values. Cramming our rich data
-(nested arrays, numbers, booleans) into string values requires double-parsing —
-`gray-matter` parses the frontmatter, then a second YAML parse is needed for
-stringified fields. This is fragile and produces ugly files.
-
+**Context**: Skill packages are registry metadata — name, vendor, category, skill
+list. They contain no prose and no documentation body. Skills, on the other hand,
+are actual skill documents following the [Agent Skills spec](https://agentskills.io/specification)
+format, where the Markdown body can contain usage docs, parameters, examples, and
+setup instructions.
 **Reasoning**:
-- We are not publishing to ClawHub, Anthropic's plugin marketplace, or any
-  external registry that validates strict spec compliance.
-- `gray-matter` parses YAML frontmatter into native JavaScript types directly —
-  arrays, numbers, booleans all work out of the box with top-level fields.
-- `name` + `description` (the two required Agent Skills fields) remain
-  compatible. We just add our own fields alongside them.
-- If we later need strict compliance (Phase 2/3), a migration script can move
-  top-level fields into `metadata` — it's a mechanical transformation.
-- Clean files are easier to author and review in PRs.
+- Skill packages are **pure data** — `JSON.parse` is simpler and faster than YAML
+  frontmatter parsing. No `gray-matter` dependency needed for packages.
+- Skills are **documentation** — Markdown body is the right format for human-readable
+  skill docs that may grow over time (parameters, examples, configuration).
+- Runes are **graph data** (nodes + edges) — JSON is the natural format.
+- This gives a clean separation: JSON for data, Markdown for docs.
+- `gray-matter` is still used for skill SKILL.md files in the web loader.
+- The CLI only loads skill-packages and runes (both JSON), so the CLI loader
+  needs no YAML parsing at all — just `JSON.parse`.
 
-**Result**: SKILL.md uses top-level YAML for all fields. No `metadata` nesting.
+**Result**: Three formats matching their purpose:
+
+| Directory | Format | Why |
+|-----------|--------|-----|
+| `skill-packages/` | `SKILL.json` | Pure registry metadata |
+| `skills/` | `SKILL.md` | Skill documentation (Agent Skills format) |
+| `runes/` | `RUNE.json` | Graph/pipeline data |
 
 ### D2. Runes as graph data (JSON, not Markdown)
 
@@ -272,48 +277,32 @@ URL. Phase 2 → 3 is adding a backend.
 
 ---
 
-## Skill Packages: `./skill-packages/{name}/SKILL.md`
-
+## Skill Packages: `./skill-packages/{name}/SKILL.json`
 A skill package is a service-level bundle — the installable unit that groups
-related skills.
+related skills. Stored as JSON since it's pure structured data with no prose.
 
-### SKILL.md Format (Skill Package)
+### SKILL.json Format (Skill Package)
 
-```yaml
----
-name: gmail
-description: >
-  Full Gmail integration — read inbox with query filters, send transactional
-  emails, and manage labels. Requires Google OAuth.
-displayName: Gmail
-vendor: Google
-emoji: "📧"
-tagline: Fetch, send, and label emails via the Gmail API.
-category: communication
-version: 1.0.0
-verified: true
-docsUrl: https://developers.google.com/gmail/api
-downloads: 265000
-stars: 4070
-skills:
-  - gmail-fetch
-  - gmail-send
-  - gmail-label
----
-
-# Gmail
-
-Full Gmail integration — read inbox with query filters, send transactional
-emails, and manage labels. Requires Google OAuth.
-
-## Setup
-Requires Google OAuth credentials. See https://developers.google.com/gmail/api
+```json
+{
+  "name": "gmail",
+  "displayName": "Gmail",
+  "description": "Full Gmail integration — read inbox with query filters, send transactional emails, and manage labels.",
+  "vendor": "Google",
+  "emoji": "📧",
+  "tagline": "Fetch, send, and label emails via the Gmail API.",
+  "category": "communication",
+  "version": "1.0.0",
+  "verified": true,
+  "docsUrl": "https://developers.google.com/gmail/api",
+  "downloads": 265000,
+  "stars": 4070,
+  "skills": ["gmail-fetch", "gmail-send", "gmail-label"]
+}
 ```
 
 **Key field**: `skills` is an array of skill ids that this package bundles.
-
 **Categories**: `ai` | `communication` | `productivity` | `dev` | `data` | `finance` | `marketing` | `iot` | `media` | `utility`
-
 ---
 
 ## Skills: `./skills/{name}/SKILL.md`
@@ -347,16 +336,16 @@ Supports query parameters for date range, sender, labels, and full-text search.
 ```
 skill-packages/                 skills/
 ├── gmail/                      ├── gmail-fetch/
-│   └── SKILL.md                │   └── SKILL.md
+│   └── SKILL.json              │   └── SKILL.md
 ├── slack/                      ├── gmail-send/
-│   └── SKILL.md                │   └── SKILL.md
+│   └── SKILL.json              │   └── SKILL.md
 ├── claude/                     ├── gmail-label/
-│   └── SKILL.md                │   └── SKILL.md
-└── ... (30+ packages)          ├── slack-post/
+│   └── SKILL.json              │   └── SKILL.md
+└── ... (130+ packages)         ├── slack-post/
                                 │   └── SKILL.md
                                 ├── claude-summarize/
                                 │   └── SKILL.md
-                                └── ... (200+ skills)
+                                └── ... (220+ skills)
 ```
 
 ---
@@ -407,24 +396,26 @@ Rune nodes reference **skill ids** — entries from `./skills/`, not packages:
 // packages/web/src/lib/loader.ts
 import fs from 'fs/promises'
 import path from 'path'
-import matter from 'gray-matter'
-
-function getMonorepoRoot(): string {
-  // walk up from packages/web to find root package.json with "workspaces"
-}
-
+import matter from 'gray-matter'  // only needed for skills (SKILL.md)
 export async function loadSkillPackages(): Promise<SkillPackage[]> {
-  const root = getMonorepoRoot()
-  const dir = path.join(root, 'skill-packages')
-  const entries = await fs.readdir(dir, { withFileTypes: true })
-  return Promise.all(
-    entries.filter(e => e.isDirectory()).map(async (entry) => {
-      const raw = await fs.readFile(path.join(dir, entry.name, 'SKILL.md'), 'utf-8')
-      const { data, content } = matter(raw)
-      return parseSkillPackage(data, content)
-    })
-  )
+  // Skill packages are JSON — no gray-matter needed
+  const raw = await fs.readFile(path.join(dir, entry.name, 'SKILL.json'), 'utf-8')
+  const data = JSON.parse(raw)
+  return parseSkillPackage(data)
 }
+
+export async function loadSkills(): Promise<Skill[]> {
+  // Skills use SKILL.md — gray-matter parses frontmatter
+  const raw = await fs.readFile(path.join(dir, entry.name, 'SKILL.md'), 'utf-8')
+  const { data } = matter(raw)
+  return parseSkill(data)
+}
+
+export async function loadRunes(): Promise<Rune[]> {
+  const raw = await fs.readFile(path.join(dir, entry.name, 'RUNE.json'), 'utf-8')
+  return JSON.parse(raw) as Rune
+}
+```
 
 export async function loadSkills(): Promise<Skill[]> {
   const root = getMonorepoRoot()
@@ -500,11 +491,11 @@ and 200+ actions hardcoded as TypeScript arrays, and `runes.ts` has 65 runes.
 
 ### Steps
 
-1. **Generate `./skill-packages/*/SKILL.md`** from `SkillPackage` entries
+1. **Generate `./skill-packages/*/SKILL.json`** from `SkillPackage` entries
 2. **Generate `./skills/*/SKILL.md`** from `Action` entries (one per action)
 3. **Generate `./runes/*/RUNE.json`** from `Rune` entries
 4. **Create web loader** using `gray-matter` + `JSON.parse`
-5. **Create CLI loader** using git sparse clone + same parse logic
+4. **Create web loader** using `JSON.parse` (packages, runes) + `gray-matter` (skills)
 6. **Update web pages** — replace static imports with loader calls
 7. **Update CLI** — replace symlink import with cache-based loader
 8. **Delete `skills-registry.ts`** and **`runes.ts`**

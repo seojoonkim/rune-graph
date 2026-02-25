@@ -1,0 +1,19 @@
+{
+  "name": "quickbooks",
+  "displayName": "QuickBooks",
+  "description": "QuickBooks Online API for creating invoices, recording expenses, managing customers, and syncing accounting data.",
+  "vendor": "Intuit",
+  "emoji": "📒",
+  "tagline": "Sync invoices, expenses, and accounting data.",
+  "category": "finance",
+  "version": "1.0.0",
+  "verified": true,
+  "docsUrl": "https://developer.intuit.com/app/developer/qbo/docs",
+  "downloads": 26000,
+  "stars": 520,
+  "skills": [
+    "qb-create-invoice",
+    "qb-record-expense",
+    "qb-get-report"
+  ]
+}

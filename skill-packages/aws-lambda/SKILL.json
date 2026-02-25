@@ -1,0 +1,19 @@
+{
+  "name": "aws-lambda",
+  "displayName": "AWS Lambda",
+  "description": "AWS Lambda API for invoking functions, managing event source mappings, and monitoring function execution.",
+  "vendor": "Amazon",
+  "emoji": "λ",
+  "tagline": "Invoke and manage AWS Lambda functions.",
+  "category": "dev",
+  "version": "2.0.0",
+  "verified": true,
+  "docsUrl": "https://docs.aws.amazon.com/lambda",
+  "downloads": 68000,
+  "stars": 1360,
+  "skills": [
+    "lambda-invoke",
+    "lambda-update-code",
+    "lambda-get-logs"
+  ]
+}

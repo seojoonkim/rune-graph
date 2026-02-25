@@ -81,7 +81,7 @@ function getRarity(trust: number): Rarity {
   }
 }
 
-function getTrustScore(rune: Rune): number {
+export function getTrustScore(rune: Rune): number {
   return Math.min(99, 40 + rune.nodes.length * 7 + rune.edges.length * 2)
 }
 

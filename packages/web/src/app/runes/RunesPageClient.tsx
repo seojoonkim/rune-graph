@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { RuneCard } from '@/components/ui/RuneCard'
+import { RuneCard, getTrustScore } from '@/components/ui/RuneCard'
 import type { Rune } from '@/lib/loader'
 
 interface RunesPageClientProps {
@@ -12,6 +12,7 @@ export default function RunesPageClient({ runes }: RunesPageClientProps) {
 
   const [active, setActive] = useState('All')
   const [search, setSearch] = useState('')
+  const [sort, setSort] = useState<'power' | 'name' | 'skills'>('power')
 
   const filtered = runes.filter(r => {
     const matchCat = active === 'All' || r.category === active
@@ -19,6 +20,10 @@ export default function RunesPageClient({ runes }: RunesPageClientProps) {
       r.name.toLowerCase().includes(search.toLowerCase()) ||
       r.purpose.toLowerCase().includes(search.toLowerCase())
     return matchCat && matchSearch
+  }).sort((a, b) => {
+    if (sort === 'power') return getTrustScore(b) - getTrustScore(a)
+    if (sort === 'name') return a.name.localeCompare(b.name)
+    return b.nodes.length - a.nodes.length
   })
 
   return (
@@ -75,9 +80,38 @@ export default function RunesPageClient({ runes }: RunesPageClientProps) {
         </div>
       </div>
 
-      <p style={{ color: '#9aa4d2', fontSize: '0.78rem', marginBottom: '1.25rem', fontFamily: "'JetBrains Mono', monospace" }}>
-        {filtered.length} rune{filtered.length !== 1 ? 's' : ''} {active !== 'All' ? `in ${active}` : 'total'}
-      </p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <p style={{ color: '#9aa4d2', fontSize: '0.78rem', margin: 0, fontFamily: "'JetBrains Mono', monospace" }}>
+          {filtered.length} rune{filtered.length !== 1 ? 's' : ''} {active !== 'All' ? `in ${active}` : 'total'}
+        </p>
+        <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.68rem', color: '#414868', marginRight: '0.25rem', fontFamily: "'JetBrains Mono', monospace" }}>Sort</span>
+          {([['power', '⚡ Power'], ['name', 'A→Z'], ['skills', '🧩 Skills']] as const).map(([key, label]) => {
+            const isActive = sort === key
+            return (
+              <button
+                key={key}
+                onClick={() => setSort(key)}
+                style={{
+                  padding: '0.25rem 0.6rem',
+                  borderRadius: '4px',
+                  fontSize: '0.68rem',
+                  cursor: 'pointer',
+                  outline: 'none',
+                  transition: 'all 0.15s',
+                  background: isActive ? 'rgba(187,154,247,0.15)' : '#161824',
+                  color: isActive ? '#bb9af7' : '#748ab8',
+                  border: `1px solid ${isActive ? 'rgba(187,154,247,0.4)' : '#292e42'}`,
+                  fontWeight: isActive ? 700 : 400,
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
         {filtered.map(r => <RuneCard key={r.id} rune={r} />)}

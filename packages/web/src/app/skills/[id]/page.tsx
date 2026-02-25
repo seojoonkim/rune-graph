@@ -45,9 +45,9 @@ function Corner({ pos, color }: { pos: 'tl'|'tr'|'bl'|'br'; color: string }) {
 
 export default async function SkillDetailPage({ params }: { params: Params }) {
   const { id } = await params
-  const [skillsRegistry, skillPackages, runes] = await Promise.all([
-    loadSkills(),
-    loadSkillPackages(),
+  const skillPackages = await loadSkillPackages()
+  const [skillsRegistry, runes] = await Promise.all([
+    loadSkills(skillPackages),
     loadRunes(),
   ])
 

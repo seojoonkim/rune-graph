@@ -127,11 +127,11 @@ export async function loadSkillPackages(): Promise<SkillPackage[]> {
   return packages
 }
 
-export async function loadSkills(): Promise<Skill[]> {
+export async function loadSkills(preloadedPackages?: SkillPackage[]): Promise<Skill[]> {
   const root = getMonorepoRoot()
   const skillsDir = path.join(root, 'skills')
   const entries = await fs.readdir(skillsDir, { withFileTypes: true })
-  const packages = await loadSkillPackages()
+  const packages = preloadedPackages ?? await loadSkillPackages()
   const packageById = new Map(packages.map((pkg) => [pkg.id, pkg]))
 
   const skills = await Promise.all(

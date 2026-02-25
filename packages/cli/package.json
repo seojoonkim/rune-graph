@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "npx tsx src/index.ts",
+    "dev": "RUNE_HUB_DATA_DIR=../.. bun x tsx src/index.ts",
     "start": "node dist/index.js"
   },
   "dependencies": {

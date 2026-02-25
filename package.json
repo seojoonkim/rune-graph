@@ -6,11 +6,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev -w @rune-hub/web",
-    "dev:cli": "npm run dev -w @rune-hub/cli",
-    "build:cli": "npm run build -w @rune-hub/cli",
-    "build": "npm run build -w @rune-hub/web && npm run build -w @rune-hub/cli",
-    "lint": "npm run lint -w @rune-hub/web"
+    "dev": "bun run --filter @rune-hub/web dev",
+    "dev:cli": "bun run --filter @rune-hub/cli dev",
+    "build:cli": "bun run --filter @rune-hub/cli build",
+    "build": "bun run --filter @rune-hub/web build && bun run --filter @rune-hub/cli build",
+    "lint": "bun run --filter @rune-hub/web lint"
   },
   "devDependencies": {
     "@types/node": "^20",

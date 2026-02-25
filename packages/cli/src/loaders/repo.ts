@@ -55,8 +55,12 @@ export interface Rune {
 
 
 export function ensureRepoCache(): string {
-  mkdirSync(path.dirname(CACHE_DIR), { recursive: true });
+  const localDir = process.env.RUNE_HUB_DATA_DIR;
+  if (localDir) {
+    return localDir;
+  }
 
+  mkdirSync(path.dirname(CACHE_DIR), { recursive: true });
   const gitDir = path.join(CACHE_DIR, ".git");
   if (existsSync(gitDir)) {
     try {

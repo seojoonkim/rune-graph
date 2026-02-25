@@ -12,18 +12,23 @@ const SKILL_VENDOR_WIDTH = 16;
 
 let RUNES: Rune[] = [];
 let SKILL_PACKAGES: SkillPackage[] = [];
+let dataLoaded = false;
 
 function ensureData(): void {
-  if (RUNES.length > 0) {
+  if (dataLoaded) {
     return;
   }
 
   ensureRepoCache();
   RUNES = loadRunes();
   SKILL_PACKAGES = loadSkillPackages();
+  dataLoaded = true;
 }
 
 function formatCell(value: string, width: number): string {
+  if (value.length > width) {
+    return value.slice(0, width - 1) + "…";
+  }
   return value.padEnd(width, " ");
 }
 

@@ -1,0 +1,49 @@
+{
+  "id": "rune-sales-crm-enrichment",
+  "slug": "sales-crm-enrichment",
+  "name": "Sales CRM Enrichment",
+  "purpose": "Create Salesforce leads from LinkedIn profiles and personalize outreach with Claude.",
+  "category": "Sales",
+  "emoji": "🤝",
+  "useCase": "Capture leads from LinkedIn and push enriched Salesforce records plus SendGrid draft messages.",
+  "description": "Create Salesforce leads from LinkedIn profiles and personalize outreach with Claude.",
+  "nodes": [
+    {
+      "id": "linkedin-profile",
+      "label": "LinkedIn Profile",
+      "category": "input"
+    },
+    {
+      "id": "salesforce-create-lead",
+      "label": "Salesforce Create Lead",
+      "category": "api"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft",
+      "category": "llm"
+    },
+    {
+      "id": "sendgrid-send",
+      "label": "SendGrid Send Email",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "linkedin-profile",
+      "target": "salesforce-create-lead",
+      "label": "lead data"
+    },
+    {
+      "source": "salesforce-create-lead",
+      "target": "claude-draft",
+      "label": "lead context"
+    },
+    {
+      "source": "claude-draft",
+      "target": "sendgrid-send",
+      "label": "personalized outreach"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+---
+name: ollama
+description: "Run open-source large language models locally with Ollama. Supports Llama 3, Mistral, Phi-3, Gemma, and 100+ models."
+displayName: "Ollama"
+vendor: "Ollama"
+emoji: "🦙"
+tagline: "Run LLMs locally — Llama, Mistral, Phi, Gemma."
+category: ai
+version: "2.0.0"
+verified: false
+docsUrl: "https://ollama.com/docs"
+downloads: 67000
+stars: 1540
+skills:
+  - ollama-generate
+  - ollama-chat
+  - ollama-pull
+---
+
+# Ollama
+
+Run open-source large language models locally with Ollama. Supports Llama 3, Mistral, Phi-3, Gemma, and 100+ models.

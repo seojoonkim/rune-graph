@@ -1,0 +1,69 @@
+{
+  "id": "rune-health-coach",
+  "slug": "health-coach",
+  "name": "Health Coach",
+  "purpose": "Use when you want to snap a meal photo and instantly know calories, macros, and get your dinner plan and grocery order adjusted automatically.",
+  "category": "Health",
+  "emoji": "💪",
+  "useCase": "Snap a photo of your lunch. 10 seconds later: calories counted, macros tracked, dinner plan adjusted, groceries ordered if needed.",
+  "description": "Vision model reads food photos, tracks macros against goals, generates weekly meal plans, orders groceries via delivery API, syncs Apple Health data. Choose your coach persona: supportive mentor or savage roaster. People quit apps — they don't quit their coach.",
+  "nodes": [
+    {
+      "id": "vision-food",
+      "label": "Vision Food Recognition",
+      "category": "input"
+    },
+    {
+      "id": "apple-health",
+      "label": "Apple Health Sync",
+      "category": "input"
+    },
+    {
+      "id": "claude-coach",
+      "label": "Claude Coach LLM",
+      "category": "llm"
+    },
+    {
+      "id": "instacart-api",
+      "label": "Grocery Delivery API",
+      "category": "api"
+    },
+    {
+      "id": "meal-planner",
+      "label": "Meal Plan Generator",
+      "category": "api"
+    },
+    {
+      "id": "whatsapp-coach",
+      "label": "WhatsApp Coach Reply",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "vision-food",
+      "target": "claude-coach",
+      "label": "food data"
+    },
+    {
+      "source": "apple-health",
+      "target": "claude-coach",
+      "label": "biometrics"
+    },
+    {
+      "source": "claude-coach",
+      "target": "meal-planner",
+      "label": "goal context"
+    },
+    {
+      "source": "meal-planner",
+      "target": "instacart-api",
+      "label": "shopping list"
+    },
+    {
+      "source": "claude-coach",
+      "target": "whatsapp-coach",
+      "label": "coaching message"
+    }
+  ]
+}

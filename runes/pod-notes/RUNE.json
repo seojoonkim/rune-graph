@@ -1,0 +1,59 @@
+{
+  "id": "rune-pod-notes",
+  "slug": "pod-notes",
+  "name": "Pod Notes",
+  "purpose": "Transcribe podcast episodes and generate structured show notes for publishing.",
+  "category": "Media",
+  "emoji": "🎙️",
+  "useCase": "Fetch a podcast episode from RSS, transcribe with Whisper, generate show notes, and draft on Substack.",
+  "description": "Transcribe podcast episodes and generate structured show notes for publishing.",
+  "nodes": [
+    {
+      "id": "podcast-rss-fetch",
+      "label": "Podcast RSS Fetch",
+      "category": "input"
+    },
+    {
+      "id": "whisper-transcribe",
+      "label": "Whisper Transcribe Audio",
+      "category": "llm"
+    },
+    {
+      "id": "claude-summarize",
+      "label": "Claude Summarize",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "substack-draft",
+      "label": "Substack Create Draft",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "podcast-rss-fetch",
+      "target": "whisper-transcribe",
+      "label": "audio file"
+    },
+    {
+      "source": "whisper-transcribe",
+      "target": "claude-summarize",
+      "label": "transcript"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "claude-draft",
+      "label": "key points"
+    },
+    {
+      "source": "claude-draft",
+      "target": "substack-draft",
+      "label": "show notes post"
+    }
+  ]
+}

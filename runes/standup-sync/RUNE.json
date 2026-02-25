@@ -1,0 +1,59 @@
+{
+  "id": "rune-standup-sync",
+  "slug": "standup-sync",
+  "name": "Standup Sync",
+  "purpose": "Auto-generate daily standup updates from GitHub activity, Linear issues, and Slack messages.",
+  "category": "DevOps",
+  "emoji": "🤝",
+  "useCase": "Never write a standup again — let AI compile your commits, tickets, and messages into a standup post.",
+  "description": "Auto-generate daily standup updates from GitHub activity, Linear issues, and Slack messages.",
+  "nodes": [
+    {
+      "id": "github-list-prs",
+      "label": "GitHub List PRs",
+      "category": "input"
+    },
+    {
+      "id": "linear-fetch-issues",
+      "label": "Linear Fetch Issues",
+      "category": "input"
+    },
+    {
+      "id": "slack-fetch",
+      "label": "Slack Read Channel",
+      "category": "input"
+    },
+    {
+      "id": "claude-summarize",
+      "label": "Claude Summarize",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github-list-prs",
+      "target": "claude-summarize",
+      "label": "PR activity"
+    },
+    {
+      "source": "linear-fetch-issues",
+      "target": "claude-summarize",
+      "label": "ticket updates"
+    },
+    {
+      "source": "slack-fetch",
+      "target": "claude-summarize",
+      "label": "discussion context"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "slack-post",
+      "label": "standup update"
+    }
+  ]
+}

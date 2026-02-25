@@ -1,0 +1,49 @@
+{
+  "id": "rune-db-etl-pipeline",
+  "slug": "db-etl-pipeline",
+  "name": "DB ETL Pipeline",
+  "purpose": "Query PostgreSQL, summarize transformation logic, and push cleaned data summaries to Sheets.",
+  "category": "Data",
+  "emoji": "⚙️",
+  "useCase": "Run SQL extraction, transform insights with Claude, then report completion in Slack.",
+  "description": "Query PostgreSQL, summarize transformation logic, and push cleaned data summaries to Sheets.",
+  "nodes": [
+    {
+      "id": "pg-query",
+      "label": "Postgres Query",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "google-sheets-append",
+      "label": "Google Sheets Append",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pg-query",
+      "target": "claude-analyze",
+      "label": "raw dataset"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "google-sheets-append",
+      "label": "transformed output"
+    },
+    {
+      "source": "google-sheets-append",
+      "target": "slack-post",
+      "label": "etl complete"
+    }
+  ]
+}

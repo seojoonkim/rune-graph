@@ -1,0 +1,69 @@
+{
+  "id": "rune-blog-forge",
+  "slug": "blog-forge",
+  "name": "Blog Forge",
+  "purpose": "Use when you want to turn a rough topic idea into a fully researched, SEO-optimized blog post — without writing a single word yourself.",
+  "category": "Content",
+  "emoji": "📝",
+  "useCase": "Turn a simple topic into a fully researched, SEO-optimized blog post ready for publishing on WordPress or Ghost.",
+  "description": "Use when you want to turn a rough topic idea into a fully researched, SEO-optimized blog post — without writing a single word yourself.",
+  "nodes": [
+    {
+      "id": "user-input",
+      "label": "User Text Input",
+      "category": "input"
+    },
+    {
+      "id": "brave-search",
+      "label": "Brave Web Search",
+      "category": "api"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "dalle3-generate",
+      "label": "DALL-E 3 Generate Image",
+      "category": "llm"
+    },
+    {
+      "id": "wordpress-publish",
+      "label": "WordPress Publish Post",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "user-input",
+      "target": "brave-search",
+      "label": "topic"
+    },
+    {
+      "source": "brave-search",
+      "target": "claude-draft",
+      "label": "research data"
+    },
+    {
+      "source": "user-input",
+      "target": "claude-draft",
+      "label": "topic + tone"
+    },
+    {
+      "source": "claude-draft",
+      "target": "dalle3-generate",
+      "label": "image prompt"
+    },
+    {
+      "source": "claude-draft",
+      "target": "wordpress-publish",
+      "label": "blog post"
+    },
+    {
+      "source": "dalle3-generate",
+      "target": "wordpress-publish",
+      "label": "featured image"
+    }
+  ]
+}

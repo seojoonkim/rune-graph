@@ -1,0 +1,49 @@
+{
+  "id": "rune-habit-loop",
+  "slug": "habit-loop",
+  "name": "Habit Loop",
+  "purpose": "Track daily habits with streak counting and AI-generated reflections.",
+  "category": "Personal",
+  "emoji": "🔄",
+  "useCase": "Check in daily, maintain streaks, and get personalized AI reflections on your progress in a Notion journal.",
+  "description": "Track daily habits with streak counting and AI-generated reflections.",
+  "nodes": [
+    {
+      "id": "user-input",
+      "label": "User Text Input",
+      "category": "input"
+    },
+    {
+      "id": "streak-tracker",
+      "label": "Streak Tracker",
+      "category": "api"
+    },
+    {
+      "id": "claude-reflect",
+      "label": "Claude Reflect",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "user-input",
+      "target": "streak-tracker",
+      "label": "daily check-in"
+    },
+    {
+      "source": "streak-tracker",
+      "target": "claude-reflect",
+      "label": "streak data"
+    },
+    {
+      "source": "claude-reflect",
+      "target": "notion-write",
+      "label": "journal entry"
+    }
+  ]
+}

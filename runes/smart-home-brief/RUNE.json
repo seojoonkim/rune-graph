@@ -1,0 +1,59 @@
+{
+  "id": "rune-smart-home-brief",
+  "slug": "smart-home-brief",
+  "name": "Smart Home Brief",
+  "purpose": "Create a spoken morning briefing from smart home sensors, weather, and calendar.",
+  "category": "IoT",
+  "emoji": "🏠",
+  "useCase": "Wake up to an AI-narrated briefing that covers your home status, weather, and schedule via ElevenLabs TTS.",
+  "description": "Create a spoken morning briefing from smart home sensors, weather, and calendar.",
+  "nodes": [
+    {
+      "id": "homeassistant-states",
+      "label": "Home Assistant Get States",
+      "category": "input"
+    },
+    {
+      "id": "openweather-fetch",
+      "label": "OpenWeatherMap Fetch",
+      "category": "api"
+    },
+    {
+      "id": "gcal-list-events",
+      "label": "Google Calendar List Events",
+      "category": "input"
+    },
+    {
+      "id": "claude-summarize",
+      "label": "Claude Summarize",
+      "category": "llm"
+    },
+    {
+      "id": "elevenlabs-tts",
+      "label": "ElevenLabs Text-to-Speech",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "homeassistant-states",
+      "target": "claude-summarize",
+      "label": "sensor data"
+    },
+    {
+      "source": "openweather-fetch",
+      "target": "claude-summarize",
+      "label": "weather"
+    },
+    {
+      "source": "gcal-list-events",
+      "target": "claude-summarize",
+      "label": "schedule"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "elevenlabs-tts",
+      "label": "morning brief text"
+    }
+  ]
+}

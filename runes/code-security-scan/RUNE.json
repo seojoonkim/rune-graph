@@ -1,0 +1,49 @@
+{
+  "id": "rune-code-security-scan",
+  "slug": "code-security-scan",
+  "name": "Code Security Scan",
+  "purpose": "Scan push events for security issues and create alerts automatically.",
+  "category": "Security",
+  "emoji": "🧯",
+  "useCase": "Analyze GitHub push events with Claude and create Sentry alerts plus Slack notices.",
+  "description": "Scan push events for security issues and create alerts automatically.",
+  "nodes": [
+    {
+      "id": "github-push-event",
+      "label": "GitHub Push Event",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "sentry-create-alert",
+      "label": "Sentry Create Alert",
+      "category": "api"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github-push-event",
+      "target": "claude-analyze",
+      "label": "code diff"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "sentry-create-alert",
+      "label": "security finding"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "security update"
+    }
+  ]
+}

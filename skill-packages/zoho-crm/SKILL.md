@@ -1,0 +1,22 @@
+---
+name: zoho-crm
+description: "Zoho CRM API for creating leads, converting to contacts, managing deals, and running module-specific operations."
+displayName: "Zoho CRM"
+vendor: "Zoho"
+emoji: "🐘"
+tagline: "Manage leads, contacts, and deals in Zoho CRM."
+category: marketing
+version: "1.0.0"
+verified: false
+docsUrl: "https://www.zoho.com/crm/developer/docs"
+downloads: 17000
+stars: 340
+skills:
+  - zoho-create-lead
+  - zoho-update-deal
+  - zoho-get-contact
+---
+
+# Zoho CRM
+
+Zoho CRM API for creating leads, converting to contacts, managing deals, and running module-specific operations.

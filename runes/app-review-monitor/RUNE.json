@@ -1,0 +1,59 @@
+{
+  "id": "rune-app-review-monitor",
+  "slug": "app-review-monitor",
+  "name": "App Review Monitor",
+  "purpose": "Track reviews across Google Places and Yelp and produce sentiment insights.",
+  "category": "Marketing",
+  "emoji": "⭐",
+  "useCase": "Collect app reviews from multiple sources, summarize sentiment, and notify Slack/Notion.",
+  "description": "Track reviews across Google Places and Yelp and produce sentiment insights.",
+  "nodes": [
+    {
+      "id": "places-reviews",
+      "label": "Google Places Reviews",
+      "category": "input"
+    },
+    {
+      "id": "yelp-reviews",
+      "label": "Yelp Reviews",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "places-reviews",
+      "target": "claude-analyze",
+      "label": "google reviews"
+    },
+    {
+      "source": "yelp-reviews",
+      "target": "claude-analyze",
+      "label": "yelp reviews"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-create-page",
+      "label": "app review digest"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "review insights"
+    }
+  ]
+}

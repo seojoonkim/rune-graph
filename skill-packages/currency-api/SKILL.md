@@ -1,0 +1,22 @@
+---
+name: currency-api
+description: "Currency exchange rate API for live rates, historical data, and currency conversion across 170+ currencies."
+displayName: "Currency Exchange"
+vendor: "exchangerate-api.com"
+emoji: "💱"
+tagline: "Get live exchange rates for 170+ currencies."
+category: utility
+version: "1.0.0"
+verified: false
+docsUrl: "https://www.exchangerate-api.com/docs"
+downloads: 31000
+stars: 620
+skills:
+  - currency-rate
+  - currency-convert
+  - currency-history
+---
+
+# Currency Exchange
+
+Currency exchange rate API for live rates, historical data, and currency conversion across 170+ currencies.

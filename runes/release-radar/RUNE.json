@@ -1,0 +1,49 @@
+{
+  "id": "rune-release-radar",
+  "slug": "release-radar",
+  "name": "Release Radar",
+  "purpose": "Monitor GitHub releases for tracked repositories and notify the team with changelogs.",
+  "category": "DevOps",
+  "emoji": "📡",
+  "useCase": "Stay on top of dependency updates and framework releases with auto-generated changelog summaries in Slack.",
+  "description": "Monitor GitHub releases for tracked repositories and notify the team with changelogs.",
+  "nodes": [
+    {
+      "id": "github-list-releases",
+      "label": "GitHub List Releases",
+      "category": "input"
+    },
+    {
+      "id": "claude-summarize",
+      "label": "Claude Summarize",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    },
+    {
+      "id": "discord-post",
+      "label": "Discord Send Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github-list-releases",
+      "target": "claude-summarize",
+      "label": "release notes"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "slack-post",
+      "label": "changelog summary"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "discord-post",
+      "label": "changelog summary"
+    }
+  ]
+}

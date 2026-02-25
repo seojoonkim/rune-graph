@@ -1,8 +1,6 @@
 import { Command } from "commander";
-import * as runesModule from "./data/runes.js";
-import * as skillsRegistryModule from "./data/skills-registry.js";
-import type { Rune } from "./data/runes.js";
-import type { SkillPackage } from "./data/skills-registry.js";
+import { ensureRepoCache, loadSkillPackages, loadRunes } from "./loaders/repo.js";
+import type { Rune, SkillPackage } from "./loaders/repo.js";
 
 const RUNE_SLUG_WIDTH = 20;
 const RUNE_NAME_WIDTH = 24;
@@ -12,30 +10,26 @@ const SKILL_ID_WIDTH = 20;
 const SKILL_NAME_WIDTH = 24;
 const SKILL_VENDOR_WIDTH = 16;
 
-function readNamedExport<T>(moduleObject: Record<string, unknown>, exportName: string): T {
-  if (exportName in moduleObject) {
-    return moduleObject[exportName] as T;
+let RUNES: Rune[] = [];
+let SKILL_PACKAGES: SkillPackage[] = [];
+
+function ensureData(): void {
+  if (RUNES.length > 0) {
+    return;
   }
 
-  const defaultExport = moduleObject.default;
-  if (defaultExport && typeof defaultExport === "object" && exportName in defaultExport) {
-    return (defaultExport as Record<string, unknown>)[exportName] as T;
-  }
-
-  throw new Error(`Missing export '${exportName}'`);
+  ensureRepoCache();
+  RUNES = loadRunes();
+  SKILL_PACKAGES = loadSkillPackages();
 }
-
-const RUNES = readNamedExport<Rune[]>(runesModule as Record<string, unknown>, "RUNES");
-const SKILL_PACKAGES = readNamedExport<SkillPackage[]>(
-  skillsRegistryModule as Record<string, unknown>,
-  "SKILL_PACKAGES",
-);
 
 function formatCell(value: string, width: number): string {
   return value.padEnd(width, " ");
 }
 
 function printRunesList(): void {
+  ensureData();
+
   for (const rune of RUNES) {
     const line = [
       `  ${rune.emoji}`,
@@ -50,6 +44,8 @@ function printRunesList(): void {
 }
 
 function printRuneDetail(slug: string): void {
+  ensureData();
+
   const rune = RUNES.find((entry) => entry.slug === slug);
 
   if (!rune) {
@@ -74,6 +70,8 @@ function printRuneDetail(slug: string): void {
 }
 
 function printSkillsList(): void {
+  ensureData();
+
   for (const skill of SKILL_PACKAGES) {
     const line = [
       `  ${skill.emoji}`,
@@ -88,6 +86,8 @@ function printSkillsList(): void {
 }
 
 function printSkillDetail(id: string): void {
+  ensureData();
+
   const skill = SKILL_PACKAGES.find((entry) => entry.id === id);
 
   if (!skill) {

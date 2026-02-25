@@ -1,0 +1,22 @@
+---
+name: circleci
+description: "CircleCI API for triggering pipelines, checking workflow status, rerunning failed jobs, and fetching build artifacts."
+displayName: "CircleCI"
+vendor: "CircleCI"
+emoji: "⭕"
+tagline: "Trigger pipelines and monitor build status."
+category: dev
+version: "1.0.0"
+verified: false
+docsUrl: "https://circleci.com/docs/api/v2"
+downloads: 22000
+stars: 440
+skills:
+  - circleci-trigger
+  - circleci-get-workflow
+  - circleci-rerun
+---
+
+# CircleCI
+
+CircleCI API for triggering pipelines, checking workflow status, rerunning failed jobs, and fetching build artifacts.

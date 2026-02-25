@@ -1,0 +1,49 @@
+{
+  "id": "rune-competitor-intelligence",
+  "slug": "competitor-intelligence",
+  "name": "Competitor Intelligence",
+  "purpose": "Scrape competitors and analyze intelligence before writing a report.",
+  "category": "Competitive Intel",
+  "emoji": "🕵️",
+  "useCase": "Fetch news and scraped data, analyze with Claude, and write a structured report to Google Sheets.",
+  "description": "Scrape competitors and analyze intelligence before writing a report.",
+  "nodes": [
+    {
+      "id": "brave-search",
+      "label": "Brave Search",
+      "category": "input"
+    },
+    {
+      "id": "firecrawl-scrape",
+      "label": "Firecrawl Scrape",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "google-sheets-append",
+      "label": "Google Sheets Append",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "brave-search",
+      "target": "firecrawl-scrape",
+      "label": "search targets"
+    },
+    {
+      "source": "firecrawl-scrape",
+      "target": "claude-analyze",
+      "label": "scraped content"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "google-sheets-append",
+      "label": "intelligence report"
+    }
+  ]
+}

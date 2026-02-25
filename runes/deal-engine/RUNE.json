@@ -1,0 +1,59 @@
+{
+  "id": "rune-deal-engine",
+  "slug": "deal-engine",
+  "name": "Deal Engine",
+  "purpose": "Source leads, enrich with company data, score with AI, and push qualified leads to CRM.",
+  "category": "Sales",
+  "emoji": "💼",
+  "useCase": "Find leads on Apollo, enrich with Clearbit, AI-score for fit, and auto-create deals in HubSpot CRM.",
+  "description": "Source leads, enrich with company data, score with AI, and push qualified leads to CRM.",
+  "nodes": [
+    {
+      "id": "apollo-search",
+      "label": "Apollo People Search",
+      "category": "api"
+    },
+    {
+      "id": "clearbit-enrich",
+      "label": "Clearbit Enrich Company",
+      "category": "api"
+    },
+    {
+      "id": "claude-score",
+      "label": "Claude Score & Rank",
+      "category": "llm"
+    },
+    {
+      "id": "hubspot-create-contact",
+      "label": "HubSpot Create Contact",
+      "category": "output"
+    },
+    {
+      "id": "hubspot-update-deal",
+      "label": "HubSpot Update Deal",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "apollo-search",
+      "target": "clearbit-enrich",
+      "label": "lead data"
+    },
+    {
+      "source": "clearbit-enrich",
+      "target": "claude-score",
+      "label": "enriched profile"
+    },
+    {
+      "source": "claude-score",
+      "target": "hubspot-create-contact",
+      "label": "qualified leads"
+    },
+    {
+      "source": "claude-score",
+      "target": "hubspot-update-deal",
+      "label": "deal score"
+    }
+  ]
+}

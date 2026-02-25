@@ -1,0 +1,59 @@
+{
+  "id": "rune-inbox-zero",
+  "slug": "inbox-zero",
+  "name": "Inbox Zero",
+  "purpose": "Automatically triage, categorize, and draft replies for email overload.",
+  "category": "Productivity",
+  "emoji": "📨",
+  "useCase": "Let AI classify your Gmail inbox, draft quick replies, and label everything so you hit inbox zero daily.",
+  "description": "Automatically triage, categorize, and draft replies for email overload.",
+  "nodes": [
+    {
+      "id": "gmail-fetch",
+      "label": "Gmail Fetch Emails",
+      "category": "input"
+    },
+    {
+      "id": "claude-classify",
+      "label": "Claude Classify",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "gmail-label",
+      "label": "Gmail Apply Label",
+      "category": "api"
+    },
+    {
+      "id": "gmail-send",
+      "label": "Gmail Send Email",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "gmail-fetch",
+      "target": "claude-classify",
+      "label": "unread emails"
+    },
+    {
+      "source": "claude-classify",
+      "target": "gmail-label",
+      "label": "category labels"
+    },
+    {
+      "source": "claude-classify",
+      "target": "claude-draft",
+      "label": "needs-reply emails"
+    },
+    {
+      "source": "claude-draft",
+      "target": "gmail-send",
+      "label": "draft replies"
+    }
+  ]
+}

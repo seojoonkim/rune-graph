@@ -1,0 +1,20 @@
+---
+name: openweather
+description: "Real-time and forecast weather data for any city or coordinates — temperature, precipitation, wind, UV index. No-friction API with generous free tier."
+displayName: "OpenWeatherMap"
+vendor: "OpenWeather"
+emoji: "⛅"
+tagline: "Current weather conditions and forecasts for any location."
+category: data
+version: "1.0.0"
+verified: true
+docsUrl: "https://openweathermap.org/api"
+downloads: 84000
+stars: 1420
+skills:
+  - openweather-fetch
+---
+
+# OpenWeatherMap
+
+Real-time and forecast weather data for any city or coordinates — temperature, precipitation, wind, UV index. No-friction API with generous free tier.

@@ -1,0 +1,39 @@
+{
+  "id": "rune-crypto-price-monitor",
+  "slug": "crypto-price-monitor",
+  "name": "Crypto Price Monitor",
+  "purpose": "Monitor token prices and explain trends with AI.",
+  "category": "Finance",
+  "emoji": "🪙",
+  "useCase": "Track CoinGecko price changes and send AI summaries to Telegram.",
+  "description": "Monitor token prices and explain trends with AI.",
+  "nodes": [
+    {
+      "id": "coingecko-price",
+      "label": "CoinGecko Get Price",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "telegram-send",
+      "label": "Telegram Send Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "coingecko-price",
+      "target": "claude-analyze",
+      "label": "price feed"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "telegram-send",
+      "label": "trend alert"
+    }
+  ]
+}

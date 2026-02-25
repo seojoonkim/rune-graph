@@ -1,0 +1,119 @@
+{
+  "id": "rune-morning-brief",
+  "slug": "morning-brief",
+  "name": "Morning Brief",
+  "purpose": "Use when you want to wake up already informed — schedule conflicts, blocked PRs, headlines, and market moves synthesized into a 3-minute brief, delivered to Slack, Telegram, and Notion automatically.",
+  "category": "Productivity",
+  "emoji": "🌅",
+  "useCase": "Wake up to a 3-minute brief that already knows your schedule conflicts, blocked PRs, market moves, and relevant headlines — delivered to Slack, Telegram, and archived to Notion for future reference.",
+  "description": "Use when you want to wake up already informed — schedule conflicts, blocked PRs, headlines, and market moves synthesized into a 3-minute brief, delivered to Slack, Telegram, and Notion automatically.",
+  "nodes": [
+    {
+      "id": "gcal-list-events",
+      "label": "Google Calendar",
+      "category": "input"
+    },
+    {
+      "id": "gmail-fetch",
+      "label": "Gmail Inbox",
+      "category": "input"
+    },
+    {
+      "id": "github-issues",
+      "label": "GitHub Issues",
+      "category": "input"
+    },
+    {
+      "id": "claude-triage",
+      "label": "Claude Triage",
+      "category": "llm"
+    },
+    {
+      "id": "brave-search",
+      "label": "Brave News Search",
+      "category": "api"
+    },
+    {
+      "id": "openweather-fetch",
+      "label": "OpenWeatherMap",
+      "category": "api"
+    },
+    {
+      "id": "market-pulse",
+      "label": "Market Pulse",
+      "category": "api"
+    },
+    {
+      "id": "claude-compose",
+      "label": "Claude Compose",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post",
+      "category": "output"
+    },
+    {
+      "id": "telegram-send",
+      "label": "Telegram Send",
+      "category": "output"
+    },
+    {
+      "id": "notion-append",
+      "label": "Notion Archive",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "gcal-list-events",
+      "target": "claude-triage",
+      "label": "schedule"
+    },
+    {
+      "source": "gmail-fetch",
+      "target": "claude-triage",
+      "label": "emails"
+    },
+    {
+      "source": "github-issues",
+      "target": "claude-triage",
+      "label": "dev tasks"
+    },
+    {
+      "source": "claude-triage",
+      "target": "claude-compose",
+      "label": "priority matrix"
+    },
+    {
+      "source": "brave-search",
+      "target": "claude-compose",
+      "label": "headlines"
+    },
+    {
+      "source": "openweather-fetch",
+      "target": "claude-compose",
+      "label": "weather"
+    },
+    {
+      "source": "market-pulse",
+      "target": "claude-compose",
+      "label": "market"
+    },
+    {
+      "source": "claude-compose",
+      "target": "slack-post",
+      "label": "team brief"
+    },
+    {
+      "source": "claude-compose",
+      "target": "telegram-send",
+      "label": "mobile push"
+    },
+    {
+      "source": "claude-compose",
+      "target": "notion-append",
+      "label": "archive"
+    }
+  ]
+}

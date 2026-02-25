@@ -1,0 +1,49 @@
+{
+  "id": "rune-real-estate-deal-pipeline",
+  "slug": "real-estate-deal-pipeline",
+  "name": "Real Estate Deal Pipeline",
+  "purpose": "Use location intelligence for deal analysis and route documentation actions.",
+  "category": "Sales",
+  "emoji": "🏡",
+  "useCase": "Generate market analysis from place data, then trigger DocuSign and Wise handoff actions.",
+  "description": "Use location intelligence for deal analysis and route documentation actions.",
+  "nodes": [
+    {
+      "id": "gmaps-places",
+      "label": "Google Maps Places",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "docusign-send",
+      "label": "DocuSign Send Envelope",
+      "category": "output"
+    },
+    {
+      "id": "wise-transfer",
+      "label": "Wise Transfer",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "gmaps-places",
+      "target": "claude-analyze",
+      "label": "location context"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "docusign-send",
+      "label": "offer preparation"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "wise-transfer",
+      "label": "funding instruction"
+    }
+  ]
+}

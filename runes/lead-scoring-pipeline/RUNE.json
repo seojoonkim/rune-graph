@@ -1,0 +1,49 @@
+{
+  "id": "rune-lead-scoring-pipeline",
+  "slug": "lead-scoring-pipeline",
+  "name": "Lead Scoring Pipeline",
+  "purpose": "Fetch HubSpot leads, score with AI, and sync score updates into Salesforce.",
+  "category": "Sales",
+  "emoji": "🎯",
+  "useCase": "Improve pipeline quality by auto-scoring leads and flagging top leads in Slack.",
+  "description": "Fetch HubSpot leads, score with AI, and sync score updates into Salesforce.",
+  "nodes": [
+    {
+      "id": "hubspot-fetch",
+      "label": "HubSpot Fetch",
+      "category": "input"
+    },
+    {
+      "id": "claude-classify",
+      "label": "Claude Classify",
+      "category": "llm"
+    },
+    {
+      "id": "salesforce-update-record",
+      "label": "Salesforce Update Record",
+      "category": "api"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "hubspot-fetch",
+      "target": "claude-classify",
+      "label": "lead details"
+    },
+    {
+      "source": "claude-classify",
+      "target": "salesforce-update-record",
+      "label": "scoring metadata"
+    },
+    {
+      "source": "salesforce-update-record",
+      "target": "slack-post",
+      "label": "high-score alert"
+    }
+  ]
+}

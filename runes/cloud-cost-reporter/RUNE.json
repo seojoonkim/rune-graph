@@ -1,0 +1,49 @@
+{
+  "id": "rune-cloud-cost-reporter",
+  "slug": "cloud-cost-reporter",
+  "name": "Cloud Cost Reporter",
+  "purpose": "Compile Lambda invocation data and generate a weekly cost report.",
+  "category": "DevOps",
+  "emoji": "💰",
+  "useCase": "Poll Lambda, summarize cost trends with Claude, and post results to Slack and Sheets.",
+  "description": "Compile Lambda invocation data and generate a weekly cost report.",
+  "nodes": [
+    {
+      "id": "lambda-invoke",
+      "label": "Lambda Invoke",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    },
+    {
+      "id": "google-sheets-append",
+      "label": "Google Sheets Append",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "lambda-invoke",
+      "target": "claude-analyze",
+      "label": "cost data"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "weekly report"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "google-sheets-append",
+      "label": "cost log"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "rune-ecommerce-order-pipeline",
+  "slug": "ecommerce-order-pipeline",
+  "name": "E-commerce Order Pipeline",
+  "purpose": "Handle new Shopify orders through inventory checks, charging, and confirmation notifications.",
+  "category": "E-Commerce",
+  "emoji": "🛍️",
+  "useCase": "Automatically validate inventory, charge through PayPal, confirm by email, and log to Notion.",
+  "description": "Handle new Shopify orders through inventory checks, charging, and confirmation notifications.",
+  "nodes": [
+    {
+      "id": "shopify-order",
+      "label": "Shopify Order",
+      "category": "input"
+    },
+    {
+      "id": "shopify-inventory",
+      "label": "Shopify Check Inventory",
+      "category": "api"
+    },
+    {
+      "id": "paypal-create-order",
+      "label": "PayPal Create Order",
+      "category": "api"
+    },
+    {
+      "id": "sendgrid-send",
+      "label": "SendGrid Send Email",
+      "category": "output"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "shopify-order",
+      "target": "shopify-inventory",
+      "label": "check inventory"
+    },
+    {
+      "source": "shopify-inventory",
+      "target": "paypal-create-order",
+      "label": "create payment"
+    },
+    {
+      "source": "paypal-create-order",
+      "target": "sendgrid-send",
+      "label": "order confirmation"
+    },
+    {
+      "source": "shopify-order",
+      "target": "notion-create-page",
+      "label": "order record"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "rune-doc-forge",
+  "slug": "doc-forge",
+  "name": "Doc Forge",
+  "purpose": "Auto-generate documentation from a GitHub repository by scanning code and comments.",
+  "category": "Documentation",
+  "emoji": "📚",
+  "useCase": "Point at a GitHub repo, scan the codebase, and auto-generate a README and API documentation.",
+  "description": "Auto-generate documentation from a GitHub repository by scanning code and comments.",
+  "nodes": [
+    {
+      "id": "github-scan-repo",
+      "label": "GitHub Scan Repository",
+      "category": "input"
+    },
+    {
+      "id": "claude-extract",
+      "label": "Claude Extract Data",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "github-create-issue",
+      "label": "GitHub Create Issue",
+      "category": "output"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github-scan-repo",
+      "target": "claude-extract",
+      "label": "code files"
+    },
+    {
+      "source": "claude-extract",
+      "target": "claude-draft",
+      "label": "extracted docs"
+    },
+    {
+      "source": "claude-draft",
+      "target": "github-create-issue",
+      "label": "doc PR suggestion"
+    },
+    {
+      "source": "claude-draft",
+      "target": "notion-write",
+      "label": "API documentation"
+    }
+  ]
+}

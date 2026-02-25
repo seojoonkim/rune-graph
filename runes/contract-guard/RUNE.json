@@ -1,0 +1,59 @@
+{
+  "id": "rune-contract-guard",
+  "slug": "contract-guard",
+  "name": "Contract Guard",
+  "purpose": "Parse contracts, extract key clauses, flag risks, and prepare for signing.",
+  "category": "Legal",
+  "emoji": "⚖️",
+  "useCase": "Upload a PDF contract, get AI analysis of risky clauses and obligations, then send via DocuSign if approved.",
+  "description": "Parse contracts, extract key clauses, flag risks, and prepare for signing.",
+  "nodes": [
+    {
+      "id": "pdf-parse",
+      "label": "PDF Parse",
+      "category": "api"
+    },
+    {
+      "id": "claude-extract",
+      "label": "Claude Extract Data",
+      "category": "llm"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    },
+    {
+      "id": "docusign-send",
+      "label": "DocuSign Send Envelope",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pdf-parse",
+      "target": "claude-extract",
+      "label": "contract text"
+    },
+    {
+      "source": "claude-extract",
+      "target": "claude-analyze",
+      "label": "extracted clauses"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-write",
+      "label": "risk report"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "docusign-send",
+      "label": "approved contract"
+    }
+  ]
+}

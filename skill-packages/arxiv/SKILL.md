@@ -1,0 +1,22 @@
+---
+name: arxiv
+description: "arXiv API for searching academic papers by keyword, category, or author, and fetching abstracts and PDF links."
+displayName: "arXiv"
+vendor: "Cornell University"
+emoji: "📚"
+tagline: "Search and fetch research papers from arXiv."
+category: utility
+version: "1.0.0"
+verified: false
+docsUrl: "https://arxiv.org/help/api"
+downloads: 21000
+stars: 420
+skills:
+  - arxiv-search
+  - arxiv-fetch
+  - arxiv-category
+---
+
+# arXiv
+
+arXiv API for searching academic papers by keyword, category, or author, and fetching abstracts and PDF links.

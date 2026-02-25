@@ -1,0 +1,59 @@
+{
+  "id": "rune-rank-tracker",
+  "slug": "rank-tracker",
+  "name": "Rank Tracker",
+  "purpose": "Monitor SEO rankings and backlinks, identify content gaps, and generate improvement reports.",
+  "category": "SEO",
+  "emoji": "📈",
+  "useCase": "Combine SEMrush ranking data with Ahrefs backlink analysis to find content gaps and SEO opportunities.",
+  "description": "Monitor SEO rankings and backlinks, identify content gaps, and generate improvement reports.",
+  "nodes": [
+    {
+      "id": "semrush-fetch",
+      "label": "SEMrush Fetch Rankings",
+      "category": "input"
+    },
+    {
+      "id": "ahrefs-fetch",
+      "label": "Ahrefs Fetch Backlinks",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "gsheets-write",
+      "label": "Google Sheets Write",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "semrush-fetch",
+      "target": "claude-analyze",
+      "label": "ranking data"
+    },
+    {
+      "source": "ahrefs-fetch",
+      "target": "claude-analyze",
+      "label": "backlink data"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "claude-draft",
+      "label": "content gaps"
+    },
+    {
+      "source": "claude-draft",
+      "target": "gsheets-write",
+      "label": "SEO report"
+    }
+  ]
+}

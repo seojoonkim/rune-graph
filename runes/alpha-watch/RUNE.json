@@ -1,0 +1,59 @@
+{
+  "id": "rune-alpha-watch",
+  "slug": "alpha-watch",
+  "name": "Alpha Watch",
+  "purpose": "Use when you need real-time crypto intelligence — price moves, whale transactions, and DeFi yield shifts delivered as alerts the moment they happen.",
+  "category": "Finance",
+  "emoji": "🐺",
+  "useCase": "Get real-time alerts on crypto price movements, whale transactions, and DeFi yield opportunities.",
+  "description": "Use when you need real-time crypto intelligence — price moves, whale transactions, and DeFi yield shifts delivered as alerts the moment they happen.",
+  "nodes": [
+    {
+      "id": "coingecko-price",
+      "label": "CoinGecko Get Price",
+      "category": "api"
+    },
+    {
+      "id": "defillama-tvl",
+      "label": "DeFiLlama Get TVL",
+      "category": "api"
+    },
+    {
+      "id": "etherscan-txns",
+      "label": "Etherscan Get Transactions",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "telegram-send",
+      "label": "Telegram Send Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "coingecko-price",
+      "target": "claude-analyze",
+      "label": "price data"
+    },
+    {
+      "source": "defillama-tvl",
+      "target": "claude-analyze",
+      "label": "TVL changes"
+    },
+    {
+      "source": "etherscan-txns",
+      "target": "claude-analyze",
+      "label": "whale txns"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "telegram-send",
+      "label": "alpha alert"
+    }
+  ]
+}

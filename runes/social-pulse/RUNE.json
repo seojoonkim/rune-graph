@@ -1,0 +1,69 @@
+{
+  "id": "rune-social-pulse",
+  "slug": "social-pulse",
+  "name": "Social Pulse",
+  "purpose": "Monitor brand mentions and sentiment across Twitter, Reddit, and news sources.",
+  "category": "Marketing",
+  "emoji": "📡",
+  "useCase": "Track what people are saying about your brand across social media and get a daily sentiment report.",
+  "description": "Monitor brand mentions and sentiment across Twitter, Reddit, and news sources.",
+  "nodes": [
+    {
+      "id": "twitter-search",
+      "label": "Twitter/X Search",
+      "category": "input"
+    },
+    {
+      "id": "brave-search",
+      "label": "Brave Web Search",
+      "category": "api"
+    },
+    {
+      "id": "hackernews-fetch",
+      "label": "Hacker News Fetch",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "twitter-search",
+      "target": "claude-analyze",
+      "label": "tweets"
+    },
+    {
+      "source": "brave-search",
+      "target": "claude-analyze",
+      "label": "news mentions"
+    },
+    {
+      "source": "hackernews-fetch",
+      "target": "claude-analyze",
+      "label": "HN discussions"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-write",
+      "label": "sentiment report"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "pulse summary"
+    }
+  ]
+}

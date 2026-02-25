@@ -1,0 +1,79 @@
+{
+  "id": "rune-dev-team",
+  "slug": "dev-team",
+  "name": "Autonomous Dev Team",
+  "purpose": "Use when you want to describe a product in plain English and get a live deployed URL back — sub-agents handle architecture, coding, testing, and deployment.",
+  "category": "Engineering",
+  "emoji": "🤖",
+  "useCase": "\"Build a SaaS dashboard with Stripe billing\" → sub-agent picks boilerplate → builds → tests → deploys → sends live URL.",
+  "description": "Orchestrates Codex, Claude Code, and Cursor sub-agents with pre-loaded boilerplates for every project type. Reads errors, fixes bugs, redeploys automatically. Built for non-technical founders, indie hackers, and agencies.",
+  "nodes": [
+    {
+      "id": "spec-input",
+      "label": "Product Spec Input",
+      "category": "input"
+    },
+    {
+      "id": "claude-architect",
+      "label": "Claude Architect",
+      "category": "llm"
+    },
+    {
+      "id": "codex-agent",
+      "label": "Codex Sub-Agent",
+      "category": "api"
+    },
+    {
+      "id": "boilerplate-repo",
+      "label": "Boilerplate Repo",
+      "category": "api"
+    },
+    {
+      "id": "test-runner",
+      "label": "Test Runner",
+      "category": "api"
+    },
+    {
+      "id": "vercel-deploy",
+      "label": "Vercel Deploy",
+      "category": "output"
+    },
+    {
+      "id": "slack-live-url",
+      "label": "Slack Live URL",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "spec-input",
+      "target": "claude-architect",
+      "label": "requirements"
+    },
+    {
+      "source": "claude-architect",
+      "target": "boilerplate-repo",
+      "label": "template pick"
+    },
+    {
+      "source": "boilerplate-repo",
+      "target": "codex-agent",
+      "label": "starter code"
+    },
+    {
+      "source": "codex-agent",
+      "target": "test-runner",
+      "label": "built code"
+    },
+    {
+      "source": "test-runner",
+      "target": "vercel-deploy",
+      "label": "tests passed"
+    },
+    {
+      "source": "vercel-deploy",
+      "target": "slack-live-url",
+      "label": "live URL"
+    }
+  ]
+}

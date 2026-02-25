@@ -1,0 +1,59 @@
+{
+  "id": "rune-multilingual-support",
+  "slug": "multilingual-support",
+  "name": "Multilingual Support",
+  "purpose": "Translate tickets, draft AI responses, and send back localized replies.",
+  "category": "Customer Support",
+  "emoji": "🈯",
+  "useCase": "Auto-handle multilingual Zendesk tickets with detect, draft, and back-translate flow.",
+  "description": "Translate tickets, draft AI responses, and send back localized replies.",
+  "nodes": [
+    {
+      "id": "zendesk-get-ticket",
+      "label": "Zendesk Get Ticket",
+      "category": "input"
+    },
+    {
+      "id": "deepl-detect",
+      "label": "DeepL Detect Language",
+      "category": "api"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft",
+      "category": "llm"
+    },
+    {
+      "id": "deepl-translate",
+      "label": "DeepL Translate",
+      "category": "api"
+    },
+    {
+      "id": "zendesk-update-ticket",
+      "label": "Zendesk Update Ticket",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "zendesk-get-ticket",
+      "target": "deepl-detect",
+      "label": "ticket text"
+    },
+    {
+      "source": "deepl-detect",
+      "target": "claude-draft",
+      "label": "detected language"
+    },
+    {
+      "source": "claude-draft",
+      "target": "deepl-translate",
+      "label": "draft response"
+    },
+    {
+      "source": "deepl-translate",
+      "target": "zendesk-update-ticket",
+      "label": "localized response"
+    }
+  ]
+}

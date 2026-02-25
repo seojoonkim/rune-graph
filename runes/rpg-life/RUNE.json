@@ -1,0 +1,69 @@
+{
+  "id": "rune-rpg-life",
+  "slug": "rpg-life",
+  "name": "RPG Life System",
+  "purpose": "Use when you want life to feel like a game — log gym, reading, or deep work and watch your character level up with XP, streaks, and a shareable character sheet.",
+  "category": "Productivity",
+  "emoji": "🎮",
+  "useCase": "\"Done with gym\" → +30 Strength XP. Hit Level 20 Intelligence after a 6-month streak. Real life with a progress bar.",
+  "description": "Gamifies productivity with 5 life stats (Intelligence, Strength, Discipline, Social, Creativity). Daily quests, XP rewards, streak tracking, and a character dashboard. Insane viral potential — people screenshot their character sheets.",
+  "nodes": [
+    {
+      "id": "task-input",
+      "label": "Task / Message Input",
+      "category": "input"
+    },
+    {
+      "id": "streak-tracker",
+      "label": "Streak Tracker DB",
+      "category": "api"
+    },
+    {
+      "id": "claude-rpg",
+      "label": "Claude Quest Engine",
+      "category": "llm"
+    },
+    {
+      "id": "xp-calculator",
+      "label": "XP Calculator",
+      "category": "api"
+    },
+    {
+      "id": "dashboard-update",
+      "label": "Character Dashboard",
+      "category": "output"
+    },
+    {
+      "id": "telegram-quest",
+      "label": "Telegram Quest Notify",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "task-input",
+      "target": "claude-rpg",
+      "label": "completed task"
+    },
+    {
+      "source": "streak-tracker",
+      "target": "claude-rpg",
+      "label": "streak context"
+    },
+    {
+      "source": "claude-rpg",
+      "target": "xp-calculator",
+      "label": "task category"
+    },
+    {
+      "source": "xp-calculator",
+      "target": "dashboard-update",
+      "label": "XP delta"
+    },
+    {
+      "source": "xp-calculator",
+      "target": "telegram-quest",
+      "label": "level up alert"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "rune-trip-planner",
+  "slug": "trip-planner",
+  "name": "Trip Planner",
+  "purpose": "Plan a complete trip itinerary with flights, hotels, and local attractions.",
+  "category": "Travel",
+  "emoji": "✈️",
+  "useCase": "Enter a destination and dates, get flight options from Skyscanner, hotels from Booking.com, and a full AI itinerary.",
+  "description": "Plan a complete trip itinerary with flights, hotels, and local attractions.",
+  "nodes": [
+    {
+      "id": "user-input",
+      "label": "User Text Input",
+      "category": "input"
+    },
+    {
+      "id": "skyscanner-search",
+      "label": "Skyscanner Search Flights",
+      "category": "api"
+    },
+    {
+      "id": "booking-search",
+      "label": "Booking.com Search Hotels",
+      "category": "api"
+    },
+    {
+      "id": "google-maps-places",
+      "label": "Google Maps Places",
+      "category": "api"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "user-input",
+      "target": "skyscanner-search",
+      "label": "dates + destination"
+    },
+    {
+      "source": "user-input",
+      "target": "booking-search",
+      "label": "dates + destination"
+    },
+    {
+      "source": "user-input",
+      "target": "google-maps-places",
+      "label": "destination"
+    },
+    {
+      "source": "skyscanner-search",
+      "target": "claude-draft",
+      "label": "flight options"
+    },
+    {
+      "source": "booking-search",
+      "target": "claude-draft",
+      "label": "hotel options"
+    },
+    {
+      "source": "google-maps-places",
+      "target": "claude-draft",
+      "label": "attractions"
+    },
+    {
+      "source": "claude-draft",
+      "target": "notion-write",
+      "label": "trip itinerary"
+    }
+  ]
+}

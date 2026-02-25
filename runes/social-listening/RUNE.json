@@ -1,0 +1,59 @@
+{
+  "id": "rune-social-listening",
+  "slug": "social-listening",
+  "name": "Social Listening",
+  "purpose": "Track Twitter/X and Reddit signals and save sentiment analysis to PostHog and Slack.",
+  "category": "Marketing",
+  "emoji": "📡",
+  "useCase": "Collect social mentions from multiple sources, score sentiment with Claude, then store to PostHog.",
+  "description": "Track Twitter/X and Reddit signals and save sentiment analysis to PostHog and Slack.",
+  "nodes": [
+    {
+      "id": "twitter-x-search",
+      "label": "Twitter/X Search",
+      "category": "input"
+    },
+    {
+      "id": "reddit-fetch-top",
+      "label": "Reddit Fetch Top",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "posthog-capture",
+      "label": "PostHog Capture",
+      "category": "api"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "twitter-x-search",
+      "target": "claude-analyze",
+      "label": "tweet threads"
+    },
+    {
+      "source": "reddit-fetch-top",
+      "target": "claude-analyze",
+      "label": "reddit posts"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "posthog-capture",
+      "label": "sentiment metrics"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "social digest"
+    }
+  ]
+}

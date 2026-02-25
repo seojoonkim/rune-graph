@@ -1,0 +1,59 @@
+{
+  "id": "rune-support-sage",
+  "slug": "support-sage",
+  "name": "Support Sage",
+  "purpose": "Auto-classify and draft replies for customer support tickets using AI.",
+  "category": "Customer Support",
+  "emoji": "🧙",
+  "useCase": "Triage Zendesk tickets automatically — classify urgency, draft responses, and escalate critical issues.",
+  "description": "Auto-classify and draft replies for customer support tickets using AI.",
+  "nodes": [
+    {
+      "id": "zendesk-list-tickets",
+      "label": "Zendesk List Tickets",
+      "category": "input"
+    },
+    {
+      "id": "claude-classify",
+      "label": "Claude Classify",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "zendesk-reply",
+      "label": "Zendesk Reply Ticket",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "zendesk-list-tickets",
+      "target": "claude-classify",
+      "label": "tickets"
+    },
+    {
+      "source": "claude-classify",
+      "target": "claude-draft",
+      "label": "classified tickets"
+    },
+    {
+      "source": "claude-draft",
+      "target": "zendesk-reply",
+      "label": "draft reply"
+    },
+    {
+      "source": "claude-classify",
+      "target": "slack-post",
+      "label": "escalation alerts"
+    }
+  ]
+}

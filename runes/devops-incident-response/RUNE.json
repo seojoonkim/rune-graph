@@ -1,0 +1,49 @@
+{
+  "id": "rune-devops-incident-response",
+  "slug": "devops-incident-response",
+  "name": "DevOps Incident Response",
+  "purpose": "Detect Sentry errors, create PagerDuty alerts, and summarize context in Slack.",
+  "category": "DevOps",
+  "emoji": "🚨",
+  "useCase": "Automate incident triage from Sentry into PagerDuty and Slack with Claude analysis.",
+  "description": "Detect Sentry errors, create PagerDuty alerts, and summarize context in Slack.",
+  "nodes": [
+    {
+      "id": "sentry-get-issues",
+      "label": "Sentry Get Issues",
+      "category": "input"
+    },
+    {
+      "id": "pagerduty-trigger",
+      "label": "PagerDuty Trigger Incident",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "sentry-get-issues",
+      "target": "pagerduty-trigger",
+      "label": "incident alert"
+    },
+    {
+      "source": "sentry-get-issues",
+      "target": "claude-analyze",
+      "label": "error context"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "incident summary"
+    }
+  ]
+}

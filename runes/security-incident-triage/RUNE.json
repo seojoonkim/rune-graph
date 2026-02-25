@@ -1,0 +1,59 @@
+{
+  "id": "rune-security-incident-triage",
+  "slug": "security-incident-triage",
+  "name": "Security Incident Triage",
+  "purpose": "Combine monitoring signals and escalate critical issues automatically.",
+  "category": "Security",
+  "emoji": "🛡️",
+  "useCase": "Use Datadog and Sentry context to risk-score incidents and trigger PagerDuty/Slack.",
+  "description": "Combine monitoring signals and escalate critical issues automatically.",
+  "nodes": [
+    {
+      "id": "datadog-query-metric",
+      "label": "Datadog Query Metric",
+      "category": "input"
+    },
+    {
+      "id": "sentry-get-issues",
+      "label": "Sentry Get Issues",
+      "category": "input"
+    },
+    {
+      "id": "claude-classify",
+      "label": "Claude Classify",
+      "category": "llm"
+    },
+    {
+      "id": "pagerduty-trigger",
+      "label": "PagerDuty Trigger",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "datadog-query-metric",
+      "target": "claude-classify",
+      "label": "observability metrics"
+    },
+    {
+      "source": "sentry-get-issues",
+      "target": "claude-classify",
+      "label": "error context"
+    },
+    {
+      "source": "claude-classify",
+      "target": "pagerduty-trigger",
+      "label": "critical incidents"
+    },
+    {
+      "source": "claude-classify",
+      "target": "slack-post",
+      "label": "triage summary"
+    }
+  ]
+}

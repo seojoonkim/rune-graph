@@ -1,0 +1,49 @@
+{
+  "id": "rune-traffic-watch",
+  "slug": "traffic-watch",
+  "name": "Traffic Watch",
+  "purpose": "Detect anomalies in Google Analytics traffic and explain them with AI.",
+  "category": "Analytics",
+  "emoji": "🚦",
+  "useCase": "Automatically detect traffic spikes or drops in GA4, get AI explanations, and receive Slack alerts.",
+  "description": "Detect anomalies in Google Analytics traffic and explain them with AI.",
+  "nodes": [
+    {
+      "id": "ga4-fetch",
+      "label": "Google Analytics 4 Fetch",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    },
+    {
+      "id": "gsheets-write",
+      "label": "Google Sheets Write",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "ga4-fetch",
+      "target": "claude-analyze",
+      "label": "traffic data"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "anomaly alert"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "gsheets-write",
+      "label": "anomaly log"
+    }
+  ]
+}

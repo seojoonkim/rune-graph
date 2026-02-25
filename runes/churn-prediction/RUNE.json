@@ -1,0 +1,49 @@
+{
+  "id": "rune-churn-prediction",
+  "slug": "churn-prediction",
+  "name": "Churn Prediction",
+  "purpose": "Predict customer churn likelihood from usage events and update CRM flags.",
+  "category": "Analytics",
+  "emoji": "📉",
+  "useCase": "Score churn risk from Amplitude events and flag leads in Salesforce and Intercom.",
+  "description": "Predict customer churn likelihood from usage events and update CRM flags.",
+  "nodes": [
+    {
+      "id": "amplitude-events",
+      "label": "Amplitude Track",
+      "category": "input"
+    },
+    {
+      "id": "claude-classify",
+      "label": "Claude Classify",
+      "category": "llm"
+    },
+    {
+      "id": "salesforce-update-record",
+      "label": "Salesforce Update Record",
+      "category": "api"
+    },
+    {
+      "id": "intercom-send-message",
+      "label": "Intercom Send Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "amplitude-events",
+      "target": "claude-classify",
+      "label": "behavior signals"
+    },
+    {
+      "source": "claude-classify",
+      "target": "salesforce-update-record",
+      "label": "churn risk score"
+    },
+    {
+      "source": "claude-classify",
+      "target": "intercom-send-message",
+      "label": "retention outreach"
+    }
+  ]
+}

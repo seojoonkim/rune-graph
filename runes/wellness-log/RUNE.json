@@ -1,0 +1,49 @@
+{
+  "id": "rune-wellness-log",
+  "slug": "wellness-log",
+  "name": "Wellness Log",
+  "purpose": "Aggregate sleep and health data from wearables, generate insights, and log to a journal.",
+  "category": "Healthcare",
+  "emoji": "💚",
+  "useCase": "Combine Oura Ring sleep data with Apple Health metrics to get daily AI wellness insights in Notion.",
+  "description": "Aggregate sleep and health data from wearables, generate insights, and log to a journal.",
+  "nodes": [
+    {
+      "id": "oura-sleep",
+      "label": "Oura Ring Sleep Data",
+      "category": "input"
+    },
+    {
+      "id": "apple-health-fetch",
+      "label": "Apple Health Fetch",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "oura-sleep",
+      "target": "claude-analyze",
+      "label": "sleep data"
+    },
+    {
+      "source": "apple-health-fetch",
+      "target": "claude-analyze",
+      "label": "health metrics"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-write",
+      "label": "wellness journal"
+    }
+  ]
+}

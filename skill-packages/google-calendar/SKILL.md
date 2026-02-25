@@ -1,0 +1,22 @@
+---
+name: google-calendar
+description: "Read and write Google Calendar — list upcoming events, create new appointments, and check availability across multiple calendars."
+displayName: "Google Calendar"
+vendor: "Google"
+emoji: "📅"
+tagline: "List events, create new ones, and query free/busy slots."
+category: productivity
+version: "1.0.0"
+verified: true
+docsUrl: "https://developers.google.com/calendar/api"
+downloads: 98000
+stars: 2100
+skills:
+  - gcal-list-events
+  - gcal-create-event
+  - gcal-find-free
+---
+
+# Google Calendar
+
+Read and write Google Calendar — list upcoming events, create new appointments, and check availability across multiple calendars.

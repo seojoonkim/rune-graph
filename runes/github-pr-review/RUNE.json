@@ -1,0 +1,49 @@
+{
+  "id": "rune-github-pr-review",
+  "slug": "github-pr-review",
+  "name": "GitHub PR Review",
+  "purpose": "Run Claude over PRs, post AI review feedback, and notify via Slack.",
+  "category": "DevOps",
+  "emoji": "🧪",
+  "useCase": "Convert manual PR reviews into consistent AI-assisted quality checks.",
+  "description": "Run Claude over PRs, post AI review feedback, and notify via Slack.",
+  "nodes": [
+    {
+      "id": "github-pr-read",
+      "label": "GitHub PR Read",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "github-pr-comment",
+      "label": "GitHub Comment",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github-pr-read",
+      "target": "claude-analyze",
+      "label": "PR diff"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "github-pr-comment",
+      "label": "code feedback"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "review status"
+    }
+  ]
+}

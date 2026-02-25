@@ -1,0 +1,22 @@
+---
+name: todoist
+description: "Todoist API for adding tasks with due dates and priorities, completing tasks, and managing projects."
+displayName: "Todoist"
+vendor: "Doist"
+emoji: "✔️"
+tagline: "Add tasks, set priorities, and sync with Todoist."
+category: productivity
+version: "1.0.0"
+verified: false
+docsUrl: "https://developer.todoist.com/rest/v2"
+downloads: 18000
+stars: 360
+skills:
+  - todoist-add-task
+  - todoist-complete-task
+  - todoist-get-tasks
+---
+
+# Todoist
+
+Todoist API for adding tasks with due dates and priorities, completing tasks, and managing projects.

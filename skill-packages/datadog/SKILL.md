@@ -1,0 +1,22 @@
+---
+name: datadog
+description: "Datadog API for querying time-series metrics, sending custom events, creating monitors, and managing dashboards."
+displayName: "Datadog"
+vendor: "Datadog"
+emoji: "🐕"
+tagline: "Query metrics, send events, and manage monitors."
+category: dev
+version: "1.1.0"
+verified: true
+docsUrl: "https://docs.datadoghq.com/api"
+downloads: 34000
+stars: 680
+skills:
+  - datadog-query-metric
+  - datadog-send-event
+  - datadog-create-monitor
+---
+
+# Datadog
+
+Datadog API for querying time-series metrics, sending custom events, creating monitors, and managing dashboards.

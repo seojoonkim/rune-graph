@@ -1,0 +1,79 @@
+{
+  "id": "rune-deep-research",
+  "slug": "deep-research",
+  "name": "Deep Research",
+  "purpose": "Use when you need to go deep on any topic fast — web, arXiv, and semantic search synthesized into a structured report in under 60 seconds.",
+  "category": "Research",
+  "emoji": "🔬",
+  "useCase": "Research any topic thoroughly with sources from the web, arXiv, and Wikipedia, then get a structured report.",
+  "description": "Use when you need to go deep on any topic fast — web, arXiv, and semantic search synthesized into a structured report in under 60 seconds.",
+  "nodes": [
+    {
+      "id": "user-input",
+      "label": "User Text Input",
+      "category": "input"
+    },
+    {
+      "id": "perplexity-search",
+      "label": "Perplexity Search",
+      "category": "api"
+    },
+    {
+      "id": "arxiv-search",
+      "label": "arXiv Search Papers",
+      "category": "api"
+    },
+    {
+      "id": "exa-search",
+      "label": "Exa Semantic Search",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "user-input",
+      "target": "perplexity-search",
+      "label": "research query"
+    },
+    {
+      "source": "user-input",
+      "target": "arxiv-search",
+      "label": "research query"
+    },
+    {
+      "source": "user-input",
+      "target": "exa-search",
+      "label": "research query"
+    },
+    {
+      "source": "perplexity-search",
+      "target": "claude-analyze",
+      "label": "web results"
+    },
+    {
+      "source": "arxiv-search",
+      "target": "claude-analyze",
+      "label": "papers"
+    },
+    {
+      "source": "exa-search",
+      "target": "claude-analyze",
+      "label": "semantic results"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-write",
+      "label": "research report"
+    }
+  ]
+}

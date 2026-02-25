@@ -1,0 +1,23 @@
+---
+name: google-drive
+description: "Google Drive API for uploading and downloading files, managing permissions, creating folders, and searching Drive content."
+displayName: "Google Drive"
+vendor: "Google"
+emoji: "🗂️"
+tagline: "Upload, download, share, and manage Drive files."
+category: data
+version: "1.2.0"
+verified: true
+docsUrl: "https://developers.google.com/drive"
+downloads: 52000
+stars: 1040
+skills:
+  - gdrive-upload
+  - gdrive-download
+  - gdrive-share
+  - gdrive-list
+---
+
+# Google Drive
+
+Google Drive API for uploading and downloading files, managing permissions, creating folders, and searching Drive content.

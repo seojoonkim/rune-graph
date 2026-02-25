@@ -1,0 +1,59 @@
+{
+  "id": "rune-research-paper-digest",
+  "slug": "research-paper-digest",
+  "name": "Research Paper Digest",
+  "purpose": "Combine arXiv and Semantic Scholar into concise AI-generated summaries.",
+  "category": "Research",
+  "emoji": "🧪",
+  "useCase": "Pull papers by topic and produce digest entries in Notion with Slack alerts.",
+  "description": "Combine arXiv and Semantic Scholar into concise AI-generated summaries.",
+  "nodes": [
+    {
+      "id": "arxiv-search",
+      "label": "arXiv Search",
+      "category": "input"
+    },
+    {
+      "id": "s2-search",
+      "label": "Semantic Scholar Search",
+      "category": "api"
+    },
+    {
+      "id": "claude-summarize",
+      "label": "Claude Summarize",
+      "category": "llm"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "arxiv-search",
+      "target": "claude-summarize",
+      "label": "papers"
+    },
+    {
+      "source": "s2-search",
+      "target": "claude-summarize",
+      "label": "citations"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "notion-create-page",
+      "label": "research digest"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "slack-post",
+      "label": "digest alert"
+    }
+  ]
+}

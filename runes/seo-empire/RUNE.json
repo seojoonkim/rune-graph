@@ -1,0 +1,74 @@
+{
+  "id": "rune-seo-empire",
+  "slug": "seo-empire",
+  "name": "SEO Empire Builder",
+  "purpose": "Use when you want SEO running on autopilot 24/7 — keyword research, content publishing, backlink outreach, and performance reporting while you sleep.",
+  "category": "Marketing",
+  "emoji": "📈",
+  "useCase": "Wake up to: \"3 backlinks acquired. 12 keywords hit page 1. 4 articles published. Weekly report attached.\"",
+  "description": "Runs full-cycle SEO autonomously: keyword clustering, programmatic content, direct CMS publishing, personalized outreach emails, and performance tracking via Search Console. Built for SEO agencies and affiliate marketers who know SEO is a game of volume and consistency.",
+  "nodes": [
+    {
+      "id": "semrush-api",
+      "label": "SEMrush Keyword API",
+      "category": "input"
+    },
+    {
+      "id": "gsc-monitor",
+      "label": "Search Console Monitor",
+      "category": "input"
+    },
+    {
+      "id": "claude-seo",
+      "label": "Claude SEO Strategist",
+      "category": "llm"
+    },
+    {
+      "id": "cms-publish",
+      "label": "CMS Auto-Publish",
+      "category": "output"
+    },
+    {
+      "id": "outreach-email",
+      "label": "Backlink Outreach Email",
+      "category": "output"
+    },
+    {
+      "id": "slack-seo-report",
+      "label": "Slack Weekly Report",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "semrush-api",
+      "target": "claude-seo",
+      "label": "keyword data"
+    },
+    {
+      "source": "gsc-monitor",
+      "target": "claude-seo",
+      "label": "performance data"
+    },
+    {
+      "source": "claude-seo",
+      "target": "cms-publish",
+      "label": "content + strategy"
+    },
+    {
+      "source": "claude-seo",
+      "target": "outreach-email",
+      "label": "link targets"
+    },
+    {
+      "source": "cms-publish",
+      "target": "slack-seo-report",
+      "label": "published count"
+    },
+    {
+      "source": "outreach-email",
+      "target": "slack-seo-report",
+      "label": "links acquired"
+    }
+  ]
+}

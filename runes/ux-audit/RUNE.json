@@ -1,0 +1,49 @@
+{
+  "id": "rune-ux-audit",
+  "slug": "ux-audit",
+  "name": "UX Audit",
+  "purpose": "Capture screenshots of web pages, analyze UX and accessibility with AI vision, and report findings.",
+  "category": "Design",
+  "emoji": "🎨",
+  "useCase": "Screenshot any website, get GPT-4o Vision analysis for accessibility and UX issues, with a report saved to Notion.",
+  "description": "Capture screenshots of web pages, analyze UX and accessibility with AI vision, and report findings.",
+  "nodes": [
+    {
+      "id": "screenshot-capture",
+      "label": "Screenshot Capture",
+      "category": "input"
+    },
+    {
+      "id": "gpt4o-vision",
+      "label": "GPT-4o Vision",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "notion-write",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "screenshot-capture",
+      "target": "gpt4o-vision",
+      "label": "page screenshot"
+    },
+    {
+      "source": "gpt4o-vision",
+      "target": "claude-draft",
+      "label": "UX findings"
+    },
+    {
+      "source": "claude-draft",
+      "target": "notion-write",
+      "label": "audit report"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "rune-smart-home-briefing",
+  "slug": "smart-home-briefing",
+  "name": "Smart Home Briefing",
+  "purpose": "Create morning summaries from home and weather inputs and send by Telegram.",
+  "category": "IoT",
+  "emoji": "🏠",
+  "useCase": "Aggregate Home Assistant and weather signals into a concise briefing.",
+  "description": "Create morning summaries from home and weather inputs and send by Telegram.",
+  "nodes": [
+    {
+      "id": "home-assistant-state",
+      "label": "Home Assistant Sensor State",
+      "category": "input"
+    },
+    {
+      "id": "openweather-fetch",
+      "label": "OpenWeatherMap Fetch",
+      "category": "input"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft",
+      "category": "llm"
+    },
+    {
+      "id": "telegram-send",
+      "label": "Telegram Send Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "home-assistant-state",
+      "target": "claude-draft",
+      "label": "sensor data"
+    },
+    {
+      "source": "openweather-fetch",
+      "target": "claude-draft",
+      "label": "weather data"
+    },
+    {
+      "source": "claude-draft",
+      "target": "telegram-send",
+      "label": "morning brief"
+    }
+  ]
+}

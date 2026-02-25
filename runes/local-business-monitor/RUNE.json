@@ -1,0 +1,49 @@
+{
+  "id": "rune-local-business-monitor",
+  "slug": "local-business-monitor",
+  "name": "Local Business Monitor",
+  "purpose": "Analyze place reviews for sentiment and deliver summaries to Slack and Notion.",
+  "category": "Marketing",
+  "emoji": "🏙️",
+  "useCase": "Capture local sentiment from Google reviews and summarize trends for teams.",
+  "description": "Analyze place reviews for sentiment and deliver summaries to Slack and Notion.",
+  "nodes": [
+    {
+      "id": "places-reviews",
+      "label": "Google Places Reviews",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "places-reviews",
+      "target": "claude-analyze",
+      "label": "review text"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "sentiment summary"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-create-page",
+      "label": "weekly report"
+    }
+  ]
+}

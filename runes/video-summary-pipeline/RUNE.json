@@ -1,0 +1,59 @@
+{
+  "id": "rune-video-summary-pipeline",
+  "slug": "video-summary-pipeline",
+  "name": "Video Summary Pipeline",
+  "purpose": "Turn Loom recordings into concise summaries and distribute them internally.",
+  "category": "Media",
+  "emoji": "🎬",
+  "useCase": "Transcribe Loom videos with Whisper, summarize with Claude, then share in Slack and Notion.",
+  "description": "Turn Loom recordings into concise summaries and distribute them internally.",
+  "nodes": [
+    {
+      "id": "loom-get-video",
+      "label": "Loom Get Video",
+      "category": "input"
+    },
+    {
+      "id": "whisper-transcribe",
+      "label": "Whisper Transcribe",
+      "category": "api"
+    },
+    {
+      "id": "claude-summarize",
+      "label": "Claude Summarize",
+      "category": "llm"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "loom-get-video",
+      "target": "whisper-transcribe",
+      "label": "media input"
+    },
+    {
+      "source": "whisper-transcribe",
+      "target": "claude-summarize",
+      "label": "transcript"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "notion-create-page",
+      "label": "meeting notes"
+    },
+    {
+      "source": "claude-summarize",
+      "target": "slack-post",
+      "label": "team brief"
+    }
+  ]
+}

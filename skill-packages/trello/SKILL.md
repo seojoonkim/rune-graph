@@ -1,0 +1,22 @@
+---
+name: trello
+description: "Trello API for creating cards, moving items across lists, adding labels, and managing board workflows."
+displayName: "Trello"
+vendor: "Atlassian"
+emoji: "📌"
+tagline: "Create cards, move lists, and manage Trello boards."
+category: productivity
+version: "1.0.0"
+verified: true
+docsUrl: "https://developer.atlassian.com/cloud/trello"
+downloads: 29000
+stars: 580
+skills:
+  - trello-create-card
+  - trello-move-card
+  - trello-add-label
+---
+
+# Trello
+
+Trello API for creating cards, moving items across lists, adding labels, and managing board workflows.

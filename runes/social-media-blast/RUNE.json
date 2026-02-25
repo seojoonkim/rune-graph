@@ -1,0 +1,59 @@
+{
+  "id": "rune-social-media-blast",
+  "slug": "social-media-blast",
+  "name": "Social Media Blast",
+  "purpose": "Generate social posts with Claude and publish across multiple channels.",
+  "category": "Marketing",
+  "emoji": "🚀",
+  "useCase": "Draft campaign copy with Claude then publish to Instagram, LinkedIn, and Twitter.",
+  "description": "Generate social posts with Claude and publish across multiple channels.",
+  "nodes": [
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft",
+      "category": "llm"
+    },
+    {
+      "id": "instagram-post",
+      "label": "Instagram Post",
+      "category": "output"
+    },
+    {
+      "id": "linkedin-post",
+      "label": "LinkedIn Post",
+      "category": "output"
+    },
+    {
+      "id": "twitter-x-tweet",
+      "label": "Twitter/X Tweet",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "claude-draft",
+      "target": "instagram-post",
+      "label": "instagram copy"
+    },
+    {
+      "source": "claude-draft",
+      "target": "linkedin-post",
+      "label": "linkedin copy"
+    },
+    {
+      "source": "claude-draft",
+      "target": "twitter-x-tweet",
+      "label": "tweet copy"
+    },
+    {
+      "source": "claude-draft",
+      "target": "slack-post",
+      "label": "approval request"
+    }
+  ]
+}

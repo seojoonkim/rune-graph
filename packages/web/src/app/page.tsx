@@ -1,10 +1,13 @@
 import Link from 'next/link'
-import { RUNES, FULL_GRAPH } from '@/data/runes'
-import { SKILLS_REGISTRY, SKILL_PACKAGES } from '@/data/skills-registry'
+import { loadRunes, loadSkillPackages, loadSkills } from '@/lib/loader'
 import { RuneCard } from '@/components/ui/RuneCard'
 import { MorningBriefGraph } from '@/components/graph/MorningBriefGraph'
 
-export default function Home() {
+export default async function Home() {
+  const RUNES = await loadRunes()
+  const SKILL_PACKAGES = await loadSkillPackages()
+  const SKILLS_REGISTRY = await loadSkills()
+
   const stats = [
     { value: RUNES.length,              label: 'Verified Runes',     color: '#bb9af7' },
     { value: SKILL_PACKAGES.length,     label: 'Skill Packages',     color: '#c8a8ff' },

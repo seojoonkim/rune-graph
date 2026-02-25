@@ -1,0 +1,59 @@
+{
+  "id": "rune-campaign-pulse",
+  "slug": "campaign-pulse",
+  "name": "Campaign Pulse",
+  "purpose": "Aggregate ad performance from Google and Meta, analyze with AI, and generate optimization recommendations.",
+  "category": "Marketing",
+  "emoji": "📣",
+  "useCase": "Pull Google Ads and Meta Ads data together, get AI analysis of what is working, and export optimization tips.",
+  "description": "Aggregate ad performance from Google and Meta, analyze with AI, and generate optimization recommendations.",
+  "nodes": [
+    {
+      "id": "google-ads-fetch",
+      "label": "Google Ads Fetch Report",
+      "category": "input"
+    },
+    {
+      "id": "meta-ads-fetch",
+      "label": "Meta Ads Fetch Report",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "gsheets-write",
+      "label": "Google Sheets Write",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "google-ads-fetch",
+      "target": "claude-analyze",
+      "label": "Google Ads data"
+    },
+    {
+      "source": "meta-ads-fetch",
+      "target": "claude-analyze",
+      "label": "Meta Ads data"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "gsheets-write",
+      "label": "performance report"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "optimization tips"
+    }
+  ]
+}

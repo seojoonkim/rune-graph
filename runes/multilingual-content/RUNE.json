@@ -1,0 +1,64 @@
+{
+  "id": "rune-multilingual-content",
+  "slug": "multilingual-content",
+  "name": "Multilingual Content",
+  "purpose": "Translate and normalize content across translation engines, then dispatch for delivery.",
+  "category": "Localization",
+  "emoji": "🌍",
+  "useCase": "Run parallel translations through DeepL and Google then aggregate in Sheets for editors.",
+  "description": "Translate and normalize content across translation engines, then dispatch for delivery.",
+  "nodes": [
+    {
+      "id": "brave-search",
+      "label": "Brave Search",
+      "category": "input"
+    },
+    {
+      "id": "deepl-translate",
+      "label": "DeepL Translate",
+      "category": "api"
+    },
+    {
+      "id": "google-translate-text",
+      "label": "Google Translate Text",
+      "category": "api"
+    },
+    {
+      "id": "google-sheets-append",
+      "label": "Google Sheets Append",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "brave-search",
+      "target": "deepl-translate",
+      "label": "source content"
+    },
+    {
+      "source": "brave-search",
+      "target": "google-translate-text",
+      "label": "source content"
+    },
+    {
+      "source": "deepl-translate",
+      "target": "google-sheets-append",
+      "label": "deepl output"
+    },
+    {
+      "source": "google-translate-text",
+      "target": "google-sheets-append",
+      "label": "google output"
+    },
+    {
+      "source": "google-sheets-append",
+      "target": "slack-post",
+      "label": "delivery summary"
+    }
+  ]
+}

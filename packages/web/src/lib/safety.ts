@@ -1,4 +1,4 @@
-import type { Skill } from '@/data/skills-registry'
+import type { Skill } from '@/lib/loader'
 
 // Safety Score: 0-100 (higher = safer)
 // Breakdown: Provider Trust + Action Risk + Data Sensitivity + Reversibility

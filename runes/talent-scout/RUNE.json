@@ -1,0 +1,59 @@
+{
+  "id": "rune-talent-scout",
+  "slug": "talent-scout",
+  "name": "Talent Scout",
+  "purpose": "Source, enrich, and rank candidates from LinkedIn profiles for open positions.",
+  "category": "HR",
+  "emoji": "🔎",
+  "useCase": "Scrape LinkedIn profiles, parse resumes with AI, rank candidates by fit, and push top picks to HubSpot.",
+  "description": "Source, enrich, and rank candidates from LinkedIn profiles for open positions.",
+  "nodes": [
+    {
+      "id": "linkedin-scrape",
+      "label": "LinkedIn Profile Scrape",
+      "category": "api"
+    },
+    {
+      "id": "pdf-parse",
+      "label": "PDF Parse",
+      "category": "api"
+    },
+    {
+      "id": "claude-score",
+      "label": "Claude Score & Rank",
+      "category": "llm"
+    },
+    {
+      "id": "gsheets-write",
+      "label": "Google Sheets Write",
+      "category": "output"
+    },
+    {
+      "id": "hubspot-create-contact",
+      "label": "HubSpot Create Contact",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "linkedin-scrape",
+      "target": "claude-score",
+      "label": "profile data"
+    },
+    {
+      "source": "pdf-parse",
+      "target": "claude-score",
+      "label": "resume data"
+    },
+    {
+      "source": "claude-score",
+      "target": "gsheets-write",
+      "label": "ranked candidates"
+    },
+    {
+      "source": "claude-score",
+      "target": "hubspot-create-contact",
+      "label": "top candidates"
+    }
+  ]
+}

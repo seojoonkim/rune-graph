@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { RUNES, type Rune } from '@/data/runes'
-import { SKILLS_REGISTRY } from '@/data/skills-registry'
+import type { Rune, Skill } from '@/lib/loader'
+import { loadRunes, loadSkills, buildHubSkills, CATEGORY_COLORS as LOADER_CATEGORY_COLORS } from '@/lib/loader'
 import { PipelineGraph } from '@/components/graph/PipelineGraph'
 import { getSafetyScore, safetyColor, safetyLabel } from '@/lib/safety'
 
 type Params = Promise<{ slug: string }>
 
 export async function generateStaticParams() {
+  const RUNES = await loadRunes()
   return RUNES.map(r => ({ slug: r.slug }))
 }
 
@@ -46,7 +47,7 @@ function getRarity(trust: number): { label: string; count: number; color: string
 }
 
 // Compute overall rune trust score from node safety scores
-function getRuneTrust(rune: Rune): number {
+function getRuneTrust(rune: Rune, SKILLS_REGISTRY: Skill[]): number {
   const skillSafeties = rune.nodes.map(n => {
     const regSkill = SKILLS_REGISTRY.find(s => s.id === n.id)
     if (regSkill) return getSafetyScore(regSkill).total
@@ -59,11 +60,16 @@ function getRuneTrust(rune: Rune): number {
 }
 
 export default async function RuneDetailPage({ params }: { params: Params }) {
+  const RUNES = await loadRunes()
+  const SKILLS_REGISTRY = await loadSkills()
+
   const { slug } = await params
   const rune = RUNES.find((r: Rune) => r.slug === slug)
   if (!rune) notFound()
 
-  const trustScore = getRuneTrust(rune)
+  const hubSkills = buildHubSkills(RUNES)
+
+  const trustScore = getRuneTrust(rune, SKILLS_REGISTRY)
   const tColor = safetyColor(trustScore)
   const tLabel = safetyLabel(trustScore)
   const rarity = getRarity(trustScore)
@@ -199,7 +205,7 @@ export default async function RuneDetailPage({ params }: { params: Params }) {
         <div style={{ padding: '1rem 1rem 0.5rem' }}>
           <h2 style={{ margin: 0, color: '#dde4fc', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Pipeline Graph</h2>
         </div>
-        <PipelineGraph rune={rune} />
+        <PipelineGraph rune={rune} categoryColors={LOADER_CATEGORY_COLORS} hubSkills={hubSkills} />
       </section>
 
       {/* ── Cookbook Section ── */}

@@ -1,0 +1,49 @@
+{
+  "id": "rune-financial-reconciliation",
+  "slug": "financial-reconciliation",
+  "name": "Financial Reconciliation",
+  "purpose": "Match Stripe webhook events with QuickBooks and flag anomalies with AI.",
+  "category": "Finance",
+  "emoji": "🧾",
+  "useCase": "Detect billing mismatches and notify teams automatically in Slack.",
+  "description": "Match Stripe webhook events with QuickBooks and flag anomalies with AI.",
+  "nodes": [
+    {
+      "id": "stripe-webhook",
+      "label": "Stripe Webhook",
+      "category": "input"
+    },
+    {
+      "id": "quickbooks-create-invoice",
+      "label": "QuickBooks Create Invoice",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "stripe-webhook",
+      "target": "quickbooks-create-invoice",
+      "label": "invoice sync"
+    },
+    {
+      "source": "quickbooks-create-invoice",
+      "target": "claude-analyze",
+      "label": "reconciliation data"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "anomaly alert"
+    }
+  ]
+}

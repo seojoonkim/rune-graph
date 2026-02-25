@@ -1,0 +1,59 @@
+{
+  "id": "rune-churn-shield",
+  "slug": "churn-shield",
+  "name": "Churn Shield",
+  "purpose": "Predict customer churn by combining support interactions with billing data.",
+  "category": "Customer Success",
+  "emoji": "🛡️",
+  "useCase": "Combine Intercom engagement events with Stripe MRR data, predict churn risk, and flag at-risk accounts in CRM.",
+  "description": "Predict customer churn by combining support interactions with billing data.",
+  "nodes": [
+    {
+      "id": "intercom-fetch-events",
+      "label": "Intercom Fetch Events",
+      "category": "input"
+    },
+    {
+      "id": "stripe-get-mrr",
+      "label": "Stripe Get MRR",
+      "category": "input"
+    },
+    {
+      "id": "claude-predict",
+      "label": "Claude Predict",
+      "category": "llm"
+    },
+    {
+      "id": "hubspot-update-deal",
+      "label": "HubSpot Update Deal",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "intercom-fetch-events",
+      "target": "claude-predict",
+      "label": "user events"
+    },
+    {
+      "source": "stripe-get-mrr",
+      "target": "claude-predict",
+      "label": "MRR data"
+    },
+    {
+      "source": "claude-predict",
+      "target": "hubspot-update-deal",
+      "label": "churn risk flag"
+    },
+    {
+      "source": "claude-predict",
+      "target": "slack-post",
+      "label": "churn alert"
+    }
+  ]
+}

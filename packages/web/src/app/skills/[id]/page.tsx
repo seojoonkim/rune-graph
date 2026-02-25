@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { SKILLS_REGISTRY, SKILL_PACKAGES } from '@/data/skills-registry'
-import { RUNES } from '@/data/runes'
+import { loadSkillPackages, loadSkills, loadRunes } from '@/lib/loader'
 import OverallScoreCard from '@/components/OverallScoreCard'
 import { StatBar } from '@/components/StatBar'
 import { getOverallScore, getSafetyReasons, getSafetyScore, safetyColor } from '@/lib/safety'
@@ -9,7 +8,8 @@ import { getOverallScore, getSafetyReasons, getSafetyScore, safetyColor } from '
 type Params = Promise<{ id: string }>
 
 export async function generateStaticParams() {
-  return SKILLS_REGISTRY.map(s => ({ id: s.id }))
+  const skillsRegistry = await loadSkills()
+  return skillsRegistry.map(s => ({ id: s.id }))
 }
 
 const CAT_COLORS: Record<string, string> = {
@@ -45,16 +45,21 @@ function Corner({ pos, color }: { pos: 'tl'|'tr'|'bl'|'br'; color: string }) {
 
 export default async function SkillDetailPage({ params }: { params: Params }) {
   const { id } = await params
-  const skill = SKILLS_REGISTRY.find(s => s.id === id)
+  const [skillsRegistry, skillPackages, runes] = await Promise.all([
+    loadSkills(),
+    loadSkillPackages(),
+    loadRunes(),
+  ])
+
+  const skill = skillsRegistry.find(s => s.id === id)
   if (!skill) notFound()
 
   const color = CAT_COLORS[skill.category] || '#bb9af7'
-  const usedInRunes = RUNES.filter(r => r.nodes.some(n => n.id === skill.id))
+  const usedInRunes = runes.filter(r => r.nodes.some(n => n.id === skill.id))
   const overall = getOverallScore(skill, usedInRunes.length)
   const reasons = getSafetyReasons(skill)
-  const related = SKILLS_REGISTRY.filter(s => s.category === skill.category && s.id !== skill.id).slice(0, 8)
-  const parentSkill = SKILL_PACKAGES.find(p => p.actionIds.includes(skill.id))
-
+  const related = skillsRegistry.filter(s => s.category === skill.category && s.id !== skill.id).slice(0, 8)
+  const parentSkill = skillPackages.find(p => p.actionIds.includes(skill.id))
   return (
     <div className="rg-page" style={{ maxWidth: '1300px', margin: '0 auto' }}>
 

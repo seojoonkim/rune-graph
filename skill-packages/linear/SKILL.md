@@ -1,0 +1,21 @@
+---
+name: linear
+description: "Integrate with Linear for issue tracking — create new issues with labels and priorities, and fetch existing issues with filters for Rune-based automations."
+displayName: "Linear"
+vendor: "Linear"
+emoji: "📐"
+tagline: "Create and fetch issues in Linear project management."
+category: productivity
+version: "1.0.0"
+verified: false
+docsUrl: "https://developers.linear.app/docs/"
+downloads: 45000
+stars: 1020
+skills:
+  - linear-create-issue
+  - linear-fetch-issues
+---
+
+# Linear
+
+Integrate with Linear for issue tracking — create new issues with labels and priorities, and fetch existing issues with filters for Rune-based automations.

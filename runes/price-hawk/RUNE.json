@@ -1,0 +1,59 @@
+{
+  "id": "rune-price-hawk",
+  "slug": "price-hawk",
+  "name": "Price Hawk",
+  "purpose": "Monitor competitor prices against your Shopify catalog and alert on significant changes.",
+  "category": "E-Commerce",
+  "emoji": "🦅",
+  "useCase": "Track competitor pricing daily, compare against your Shopify products, and get alerts when prices shift.",
+  "description": "Monitor competitor prices against your Shopify catalog and alert on significant changes.",
+  "nodes": [
+    {
+      "id": "shopify-list-products",
+      "label": "Shopify List Products",
+      "category": "input"
+    },
+    {
+      "id": "apify-scraper",
+      "label": "Apify Web Scraper",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "gsheets-write",
+      "label": "Google Sheets Write",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "shopify-list-products",
+      "target": "claude-analyze",
+      "label": "your prices"
+    },
+    {
+      "source": "apify-scraper",
+      "target": "claude-analyze",
+      "label": "competitor prices"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "gsheets-write",
+      "label": "price comparison"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "price alerts"
+    }
+  ]
+}

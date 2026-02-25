@@ -1,0 +1,49 @@
+{
+  "id": "rune-influencer-roi",
+  "slug": "influencer-roi",
+  "name": "Influencer ROI",
+  "purpose": "Measure influencer campaign performance and sync lead updates.",
+  "category": "Marketing",
+  "emoji": "📈",
+  "useCase": "Analyze Instagram insights with Claude and push outcomes into HubSpot.",
+  "description": "Measure influencer campaign performance and sync lead updates.",
+  "nodes": [
+    {
+      "id": "instagram-insights",
+      "label": "Instagram Insights",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "hubspot-update",
+      "label": "HubSpot Update",
+      "category": "api"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "instagram-insights",
+      "target": "claude-analyze",
+      "label": "campaign performance"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "hubspot-update",
+      "label": "crm updates"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "roi report"
+    }
+  ]
+}

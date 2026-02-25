@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import ReactFlow, { Background, type Node, type Edge, type ReactFlowInstance } from 'reactflow'
 import { SkillNode } from './SkillNode'
-import { type Rune } from '@/data/runes'
+import { type Rune } from '@/lib/loader'
 
 const nodeTypes = { skill: SkillNode }
 
@@ -16,7 +16,7 @@ const ROW_STEP = 160
 // Max nodes per rendered row — keeps canvasW narrow enough to zoom in on mobile
 const MAX_COLS = 3
 
-export function PipelineGraph({ rune }: { rune: Rune }) {
+export function PipelineGraph({ rune, categoryColors, hubSkills }: { rune: Rune; categoryColors?: Record<string, string>; hubSkills?: string[] }) {
   // ── Step 1: Topological layer assignment (Kahn's BFS) ─────────────────
   // Assigns each node the LONGEST distance from any root (ensures all edges go down)
   const adj: Record<string, string[]> = {}
@@ -76,7 +76,7 @@ export function PipelineGraph({ rune }: { rune: Rune }) {
         id: rn.id,
         type: 'skill',
         position: { x: startX + colIdx * COL_STEP, y: rowIdx * ROW_STEP },
-        data: { label: rn.label, category: rn.category },
+        data: { label: rn.label, category: rn.category, categoryColors, hubSkills },
         style: { overflow: 'visible' },
       })
     })

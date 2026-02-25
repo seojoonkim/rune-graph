@@ -1,0 +1,22 @@
+---
+name: mistral
+description: "Mistral AI models including Mistral 7B, Mixtral MoE, and Mistral Large for efficient, high-quality text generation."
+displayName: "Mistral AI"
+vendor: "Mistral AI"
+emoji: "💨"
+tagline: "Fast, open-weight LLMs — Mistral 7B to Mixtral 8x22B."
+category: ai
+version: "1.0.0"
+verified: true
+docsUrl: "https://docs.mistral.ai"
+downloads: 41000
+stars: 860
+skills:
+  - mistral-generate
+  - mistral-chat
+  - mistral-embed
+---
+
+# Mistral AI
+
+Mistral AI models including Mistral 7B, Mixtral MoE, and Mistral Large for efficient, high-quality text generation.

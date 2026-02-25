@@ -1,16 +1,16 @@
 'use client'
 import { Handle, Position } from 'reactflow'
-import { CATEGORY_COLORS, HUB_SKILLS, type SkillCategory } from '@/data/runes'
+import type { NodeCategory } from '@/lib/loader'
 
 // Game-style category icons
-const CATEGORY_ICONS: Record<SkillCategory, string> = {
+const CATEGORY_ICONS: Record<NodeCategory, string> = {
   input:  '▼',
   api:    '⚡',
   llm:    '◈',
   output: '▲',
 }
 
-const CATEGORY_LABELS: Record<SkillCategory, string> = {
+const CATEGORY_LABELS: Record<NodeCategory, string> = {
   input:  'INPUT',
   api:    'API',
   llm:    'LLM',
@@ -22,12 +22,17 @@ const HUB_COLOR = '#ffd060'
 
 interface SkillNodeData {
   label: string
-  category: SkillCategory
+  category: NodeCategory
+  categoryColors?: Record<string, string>
+  hubSkills?: string[]
 }
 
+// Default colors match loader.ts CATEGORY_COLORS
+const DEFAULT_COLORS: Record<string, string> = { input: '#34d399', api: '#60a5fa', llm: '#a78bfa', output: '#f472b6' }
 export function SkillNode({ data, id }: { data: SkillNodeData; id: string }) {
-  const baseColor = CATEGORY_COLORS[data.category]
-  const isHub = HUB_SKILLS.includes(id)
+  const colors = data.categoryColors ?? DEFAULT_COLORS
+  const baseColor = colors[data.category] ?? '#60a5fa'
+  const isHub = data.hubSkills?.includes(id) ?? false
   const color = isHub ? HUB_COLOR : baseColor
 
   return (

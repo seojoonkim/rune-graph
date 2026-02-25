@@ -1,0 +1,84 @@
+{
+  "id": "rune-content-machine",
+  "slug": "content-machine",
+  "name": "Content Machine",
+  "purpose": "Use when you're spending 10+ hours/week on content production — wake up to a full week of posts, newsletters, and scripts generated overnight in your brand voice.",
+  "category": "Content",
+  "emoji": "✍️",
+  "useCase": "Wake up to a complete content calendar: 14 posts, 2 newsletters, 3 scripts — all in your voice. Review and publish.",
+  "description": "Monitors X, Reddit, and RSS for trending topics in your niche, generates content in a custom brand voice profile, creates visuals, and queues everything across platforms. Built for creators spending 10+ hours/week on production.",
+  "nodes": [
+    {
+      "id": "rss-scraper",
+      "label": "RSS / Reddit Scraper",
+      "category": "input"
+    },
+    {
+      "id": "x-trends",
+      "label": "X Trends Monitor",
+      "category": "input"
+    },
+    {
+      "id": "brand-voice",
+      "label": "Brand Voice Profile",
+      "category": "api"
+    },
+    {
+      "id": "claude-write",
+      "label": "Claude Write Content",
+      "category": "llm"
+    },
+    {
+      "id": "dalle-thumbnails",
+      "label": "DALL·E Thumbnails",
+      "category": "api"
+    },
+    {
+      "id": "buffer-schedule",
+      "label": "Buffer Schedule",
+      "category": "output"
+    },
+    {
+      "id": "telegram-preview",
+      "label": "Telegram Preview",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "rss-scraper",
+      "target": "claude-write",
+      "label": "trending topics"
+    },
+    {
+      "source": "x-trends",
+      "target": "claude-write",
+      "label": "viral signals"
+    },
+    {
+      "source": "brand-voice",
+      "target": "claude-write",
+      "label": "voice context"
+    },
+    {
+      "source": "claude-write",
+      "target": "dalle-thumbnails",
+      "label": "visual brief"
+    },
+    {
+      "source": "claude-write",
+      "target": "buffer-schedule",
+      "label": "posts queue"
+    },
+    {
+      "source": "dalle-thumbnails",
+      "target": "buffer-schedule",
+      "label": "visuals"
+    },
+    {
+      "source": "buffer-schedule",
+      "target": "telegram-preview",
+      "label": "weekly summary"
+    }
+  ]
+}

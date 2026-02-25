@@ -1,0 +1,49 @@
+{
+  "id": "rune-podcast-to-blog",
+  "slug": "podcast-to-blog",
+  "name": "Podcast To Blog",
+  "purpose": "Convert podcast episodes into drafted blog posts.",
+  "category": "Content",
+  "emoji": "🎙️",
+  "useCase": "Fetch podcast episodes, transcribe with Whisper, then draft blog content with Claude.",
+  "description": "Convert podcast episodes into drafted blog posts.",
+  "nodes": [
+    {
+      "id": "spotify-search",
+      "label": "Spotify Search",
+      "category": "input"
+    },
+    {
+      "id": "whisper-transcribe",
+      "label": "Whisper Transcribe",
+      "category": "api"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft",
+      "category": "llm"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "spotify-search",
+      "target": "whisper-transcribe",
+      "label": "episode audio"
+    },
+    {
+      "source": "whisper-transcribe",
+      "target": "claude-draft",
+      "label": "transcript"
+    },
+    {
+      "source": "claude-draft",
+      "target": "notion-create-page",
+      "label": "blog draft"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "rune-contract-signing-workflow",
+  "slug": "contract-signing-workflow",
+  "name": "Contract Signing Workflow",
+  "purpose": "Extract key terms from docusign statuses and publish legal log entries.",
+  "category": "Legal",
+  "emoji": "✍️",
+  "useCase": "Extract and summarize contract terms after DocuSign status updates.",
+  "description": "Extract key terms from docusign statuses and publish legal log entries.",
+  "nodes": [
+    {
+      "id": "docusign-status",
+      "label": "Docusign Status",
+      "category": "input"
+    },
+    {
+      "id": "claude-extract",
+      "label": "Claude Extract",
+      "category": "llm"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "docusign-status",
+      "target": "claude-extract",
+      "label": "signed docs"
+    },
+    {
+      "source": "claude-extract",
+      "target": "notion-create-page",
+      "label": "contract terms"
+    },
+    {
+      "source": "notion-create-page",
+      "target": "slack-post",
+      "label": "contract log update"
+    }
+  ]
+}

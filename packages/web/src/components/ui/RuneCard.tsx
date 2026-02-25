@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { type Rune } from '@/data/runes'
+import { type Rune } from '@/lib/loader'
 
 // ── SVG Star ─────────────────────────────────────────────────────────
 function StarSvg({ color, size = 10, delay = 0, bright = false }: {

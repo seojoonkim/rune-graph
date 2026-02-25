@@ -1,0 +1,49 @@
+{
+  "id": "rune-e-learning-quiz-gen",
+  "slug": "e-learning-quiz-gen",
+  "name": "E-learning Quiz Generator",
+  "purpose": "Generate quizzes from topic research and track generated items.",
+  "category": "Education",
+  "emoji": "🧩",
+  "useCase": "Search a topic, draft quiz content with Claude, share in Discord, and log in Airtable.",
+  "description": "Generate quizzes from topic research and track generated items.",
+  "nodes": [
+    {
+      "id": "brave-search",
+      "label": "Brave Search",
+      "category": "input"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft",
+      "category": "llm"
+    },
+    {
+      "id": "discord-post",
+      "label": "Discord Post Message",
+      "category": "output"
+    },
+    {
+      "id": "airtable-create-record",
+      "label": "Airtable Create Record",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "brave-search",
+      "target": "claude-draft",
+      "label": "quiz topic"
+    },
+    {
+      "source": "claude-draft",
+      "target": "discord-post",
+      "label": "quiz publish"
+    },
+    {
+      "source": "claude-draft",
+      "target": "airtable-create-record",
+      "label": "quiz tracking"
+    }
+  ]
+}

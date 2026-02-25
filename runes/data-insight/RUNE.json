@@ -1,0 +1,59 @@
+{
+  "id": "rune-data-insight",
+  "slug": "data-insight",
+  "name": "Data Insight",
+  "purpose": "Analyze spreadsheet or database data and generate visual insights with AI interpretation.",
+  "category": "Analytics",
+  "emoji": "📊",
+  "useCase": "Connect to Google Sheets or BigQuery, analyze trends, and get plain-English insights posted to Slack.",
+  "description": "Analyze spreadsheet or database data and generate visual insights with AI interpretation.",
+  "nodes": [
+    {
+      "id": "gsheets-read",
+      "label": "Google Sheets Read",
+      "category": "input"
+    },
+    {
+      "id": "bigquery-query",
+      "label": "BigQuery Run Query",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "gsheets-write",
+      "label": "Google Sheets Write",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "gsheets-read",
+      "target": "claude-analyze",
+      "label": "spreadsheet data"
+    },
+    {
+      "source": "bigquery-query",
+      "target": "claude-analyze",
+      "label": "query results"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "gsheets-write",
+      "label": "analysis tables"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "insight summary"
+    }
+  ]
+}

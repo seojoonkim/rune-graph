@@ -1,0 +1,22 @@
+---
+name: new-relic
+description: "New Relic observability platform API for querying NRQL data, creating alert conditions, and managing dashboards."
+displayName: "New Relic"
+vendor: "New Relic"
+emoji: "🔵"
+tagline: "Query APM metrics, create alerts, and manage dashboards."
+category: dev
+version: "1.0.0"
+verified: false
+docsUrl: "https://docs.newrelic.com/docs/apis"
+downloads: 19000
+stars: 380
+skills:
+  - newrelic-query
+  - newrelic-alert
+  - newrelic-deploy
+---
+
+# New Relic
+
+New Relic observability platform API for querying NRQL data, creating alert conditions, and managing dashboards.

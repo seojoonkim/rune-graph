@@ -1,0 +1,69 @@
+{
+  "id": "rune-vuln-sentinel",
+  "slug": "vuln-sentinel",
+  "name": "Vuln Sentinel",
+  "purpose": "Scan code for vulnerabilities across multiple security tools and generate a unified security report.",
+  "category": "Security",
+  "emoji": "🔐",
+  "useCase": "Run Snyk, SonarQube, and VirusTotal scans and get a single prioritized security report with remediation advice.",
+  "description": "Scan code for vulnerabilities across multiple security tools and generate a unified security report.",
+  "nodes": [
+    {
+      "id": "snyk-scan",
+      "label": "Snyk Vulnerability Scan",
+      "category": "api"
+    },
+    {
+      "id": "sonarqube-scan",
+      "label": "SonarQube Code Analysis",
+      "category": "api"
+    },
+    {
+      "id": "virustotal-scan",
+      "label": "VirusTotal Scan",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "github-create-issue",
+      "label": "GitHub Create Issue",
+      "category": "output"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "snyk-scan",
+      "target": "claude-analyze",
+      "label": "dependency vulns"
+    },
+    {
+      "source": "sonarqube-scan",
+      "target": "claude-analyze",
+      "label": "code issues"
+    },
+    {
+      "source": "virustotal-scan",
+      "target": "claude-analyze",
+      "label": "malware results"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "github-create-issue",
+      "label": "critical issues"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "slack-post",
+      "label": "security report"
+    }
+  ]
+}

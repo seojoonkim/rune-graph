@@ -1,0 +1,59 @@
+{
+  "id": "rune-meta-coach",
+  "slug": "meta-coach",
+  "name": "Meta Coach",
+  "purpose": "Analyze gaming performance stats and generate strategy improvement tips.",
+  "category": "Gaming",
+  "emoji": "🎮",
+  "useCase": "Pull your Steam or Riot Games stats, get AI-powered strategy advice, and share tips to Discord.",
+  "description": "Analyze gaming performance stats and generate strategy improvement tips.",
+  "nodes": [
+    {
+      "id": "steam-player-stats",
+      "label": "Steam Player Stats",
+      "category": "input"
+    },
+    {
+      "id": "riot-match-history",
+      "label": "Riot Games Match History",
+      "category": "input"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "claude-draft",
+      "label": "Claude Draft Text",
+      "category": "llm"
+    },
+    {
+      "id": "discord-post",
+      "label": "Discord Send Message",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "steam-player-stats",
+      "target": "claude-analyze",
+      "label": "game stats"
+    },
+    {
+      "source": "riot-match-history",
+      "target": "claude-analyze",
+      "label": "match data"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "claude-draft",
+      "label": "analysis"
+    },
+    {
+      "source": "claude-draft",
+      "target": "discord-post",
+      "label": "strategy tips"
+    }
+  ]
+}

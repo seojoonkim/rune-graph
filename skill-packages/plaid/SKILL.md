@@ -1,0 +1,22 @@
+---
+name: plaid
+description: "Plaid financial data API for linking bank accounts, fetching transaction history, checking balances, and verifying account ownership."
+displayName: "Plaid"
+vendor: "Plaid"
+emoji: "🏦"
+tagline: "Link bank accounts and access transaction data."
+category: finance
+version: "1.1.0"
+verified: true
+docsUrl: "https://plaid.com/docs"
+downloads: 33000
+stars: 660
+skills:
+  - plaid-link
+  - plaid-transactions
+  - plaid-balance
+---
+
+# Plaid
+
+Plaid financial data API for linking bank accounts, fetching transaction history, checking balances, and verifying account ownership.

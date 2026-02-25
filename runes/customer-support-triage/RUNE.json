@@ -1,0 +1,49 @@
+{
+  "id": "rune-customer-support-triage",
+  "slug": "customer-support-triage",
+  "name": "Customer Support Triage",
+  "purpose": "Classify Zendesk tickets with Claude and route responses to Slack and email.",
+  "category": "Customer Support",
+  "emoji": "🎧",
+  "useCase": "Automatically route Zendesk tickets based on intent, with Slack or email follow-up.",
+  "description": "Classify Zendesk tickets with Claude and route responses to Slack and email.",
+  "nodes": [
+    {
+      "id": "zendesk-get-ticket",
+      "label": "Zendesk Get Ticket",
+      "category": "input"
+    },
+    {
+      "id": "claude-classify",
+      "label": "Claude Classify",
+      "category": "llm"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    },
+    {
+      "id": "sendgrid-send",
+      "label": "SendGrid Send Email",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "zendesk-get-ticket",
+      "target": "claude-classify",
+      "label": "ticket content"
+    },
+    {
+      "source": "claude-classify",
+      "target": "slack-post",
+      "label": "route to Slack"
+    },
+    {
+      "source": "claude-classify",
+      "target": "sendgrid-send",
+      "label": "route to email"
+    }
+  ]
+}

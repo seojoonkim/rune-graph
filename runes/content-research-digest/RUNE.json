@@ -1,0 +1,59 @@
+{
+  "id": "rune-content-research-digest",
+  "slug": "content-research-digest",
+  "name": "Content Research Digest",
+  "purpose": "Pull research from news and academic sources, synthesize with AI, and save in Notion.",
+  "category": "Research",
+  "emoji": "🧠",
+  "useCase": "Generate a research digest from news headlines and papers in one Notion page.",
+  "description": "Pull research from news and academic sources, synthesize with AI, and save in Notion.",
+  "nodes": [
+    {
+      "id": "news-top-headlines",
+      "label": "NewsAPI Top Headlines",
+      "category": "input"
+    },
+    {
+      "id": "semantic-scholar-search",
+      "label": "Semantic Scholar Search",
+      "category": "api"
+    },
+    {
+      "id": "arxiv-search",
+      "label": "arXiv Search Papers",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "news-top-headlines",
+      "target": "claude-analyze",
+      "label": "headlines"
+    },
+    {
+      "source": "semantic-scholar-search",
+      "target": "claude-analyze",
+      "label": "academic results"
+    },
+    {
+      "source": "arxiv-search",
+      "target": "claude-analyze",
+      "label": "paper results"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "notion-create-page",
+      "label": "research digest"
+    }
+  ]
+}

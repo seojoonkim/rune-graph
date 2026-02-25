@@ -1,0 +1,22 @@
+---
+name: twitter-x
+description: "Twitter/X API v2 integration — search by query or hashtag, post tweets, and fetch user timelines for social monitoring Runes."
+displayName: "Twitter / X"
+vendor: "X Corp"
+emoji: "𝕏"
+tagline: "Search tweets, post updates, and monitor brand mentions."
+category: marketing
+version: "1.0.0"
+verified: false
+docsUrl: "https://developer.twitter.com/en/docs/twitter-api"
+downloads: 61000
+stars: 1280
+skills:
+  - twitter-search
+  - twitter-post
+  - twitter-user-tweets
+---
+
+# Twitter / X
+
+Twitter/X API v2 integration — search by query or hashtag, post tweets, and fetch user timelines for social monitoring Runes.

@@ -1,0 +1,59 @@
+{
+  "id": "rune-hr-onboarding",
+  "slug": "hr-onboarding",
+  "name": "HR Onboarding",
+  "purpose": "Trigger payroll setup, Slack notifications, calendar events, and handoff notes for new hires.",
+  "category": "HR",
+  "emoji": "🎉",
+  "useCase": "Onboard greenhouse hires by setting up Gusto payroll, Slack, calendar, and documentation.",
+  "description": "Trigger payroll setup, Slack notifications, calendar events, and handoff notes for new hires.",
+  "nodes": [
+    {
+      "id": "greenhouse-candidate",
+      "label": "Greenhouse Candidate",
+      "category": "input"
+    },
+    {
+      "id": "gusto-employee",
+      "label": "Gusto Create Employee",
+      "category": "api"
+    },
+    {
+      "id": "slack-post",
+      "label": "Slack Post Message",
+      "category": "output"
+    },
+    {
+      "id": "gcal-create-event",
+      "label": "Google Calendar Create Event",
+      "category": "output"
+    },
+    {
+      "id": "notion-create-page",
+      "label": "Notion Create Page",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "greenhouse-candidate",
+      "target": "gusto-employee",
+      "label": "onboard employee"
+    },
+    {
+      "source": "greenhouse-candidate",
+      "target": "slack-post",
+      "label": "welcome message"
+    },
+    {
+      "source": "greenhouse-candidate",
+      "target": "gcal-create-event",
+      "label": "orientation event"
+    },
+    {
+      "source": "greenhouse-candidate",
+      "target": "notion-create-page",
+      "label": "onboarding handbook"
+    }
+  ]
+}

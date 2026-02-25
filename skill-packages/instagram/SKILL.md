@@ -1,0 +1,22 @@
+---
+name: instagram
+description: "Instagram Graph API for publishing photos and reels, fetching account insights, managing comments, and monitoring hashtags."
+displayName: "Instagram"
+vendor: "Meta"
+emoji: "📸"
+tagline: "Publish posts, fetch insights, and manage comments."
+category: marketing
+version: "1.2.0"
+verified: true
+docsUrl: "https://developers.facebook.com/docs/instagram-api"
+downloads: 36000
+stars: 720
+skills:
+  - instagram-post
+  - instagram-insights
+  - instagram-comments
+---
+
+# Instagram
+
+Instagram Graph API for publishing photos and reels, fetching account insights, managing comments, and monitoring hashtags.

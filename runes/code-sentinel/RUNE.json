@@ -1,0 +1,64 @@
+{
+  "id": "rune-code-sentinel",
+  "slug": "code-sentinel",
+  "name": "Code Sentinel",
+  "purpose": "Use when you want AI code review on every GitHub PR — bugs, security holes, and style issues caught and posted as comments automatically.",
+  "category": "DevOps",
+  "emoji": "🛡️",
+  "useCase": "Get instant AI-powered code reviews on every GitHub PR with actionable feedback posted as comments.",
+  "description": "Use when you want AI code review on every GitHub PR — bugs, security holes, and style issues caught and posted as comments automatically.",
+  "nodes": [
+    {
+      "id": "github-list-prs",
+      "label": "GitHub List PRs",
+      "category": "input"
+    },
+    {
+      "id": "github-get-diff",
+      "label": "GitHub Get Diff",
+      "category": "input"
+    },
+    {
+      "id": "eslint-check",
+      "label": "ESLint Check",
+      "category": "api"
+    },
+    {
+      "id": "claude-analyze",
+      "label": "Claude Analyze",
+      "category": "llm"
+    },
+    {
+      "id": "github-post-comment",
+      "label": "GitHub Post PR Comment",
+      "category": "output"
+    }
+  ],
+  "edges": [
+    {
+      "source": "github-list-prs",
+      "target": "github-get-diff",
+      "label": "PR reference"
+    },
+    {
+      "source": "github-get-diff",
+      "target": "eslint-check",
+      "label": "code diff"
+    },
+    {
+      "source": "github-get-diff",
+      "target": "claude-analyze",
+      "label": "code diff"
+    },
+    {
+      "source": "eslint-check",
+      "target": "claude-analyze",
+      "label": "lint results"
+    },
+    {
+      "source": "claude-analyze",
+      "target": "github-post-comment",
+      "label": "review feedback"
+    }
+  ]
+}
